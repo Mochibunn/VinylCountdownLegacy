@@ -4,7 +4,7 @@
 Welcome to the Vinyl Countdown GitHub repo!
 </br>
 
-##Our story..
+## Our story..
 Now this is a story all about how we wrote this project ~~upside-down~~
 </br>
 
