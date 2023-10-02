@@ -16,7 +16,7 @@ This project is built using <a href="https://react.dev/"><img src="https://uploa
 ## Resources
 - The project's website🌐 can be accessed [here🔗](https://www.youtube.com/watch?v=tvkxupwbFLk)
 - The project's Trello board📋 is available [right here🔗](https://trello.com/b/Kk2NCBZz/music-shop)
-- The project's [wireframe🖼️](https://placehold.co/600x400?text=Under+Construction) is available <a href="#">here?🔗</a>
+- The project's [wireframe🖼️](https://imgur.com/a/erRyTSK) is available <a href="#">here?🔗</a>
   - No but it is available by clicking on the word itself😉
 - Wikipedia article about natural resources is available [here, for real this time🔗](https://en.wikipedia.org/wiki/Natural_resource)
 </br>
