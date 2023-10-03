@@ -1,10 +1,9 @@
 // import { useState } from "react";
+import TheNav from "./components/TheNav";
 
 function App() {
     return (
-        <>
-            <h1>Vinyl Countdown</h1>
-        </>
+            <TheNav />
     );
 }
 
