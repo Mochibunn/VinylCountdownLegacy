@@ -4,12 +4,16 @@ import { BrowserRouter } from "react-router-dom";
 import { NextUIProvider } from "@nextui-org/react";
 import App from "./App";
 import "./index.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter>
         <React.StrictMode>
             <NextUIProvider>
-                <App />
+                <main className="dark">
+                    <App />
+                </main>
             </NextUIProvider>
         </React.StrictMode>
     </BrowserRouter>

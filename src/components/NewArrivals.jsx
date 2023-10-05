@@ -1,18 +1,15 @@
-import { Card, CardBody, Button } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import AlbumCard from "./AlbumCard";
 
 export default function App({ newArrivals }) {
     console.log(newArrivals);
     return (
-        <div className="flex-column ">
-            <Card className="bg-slate-700">
-                <CardBody>
-                    <h3 className="text-white font-medium text-xl">
-                        New Arrivals
-                    </h3>
-                </CardBody>
-            </Card>
-            <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
+        <div className="p-8">
+            <h3 className="text-black font-medium text-6xl mb-6">
+                New Arrivals
+            </h3>
+
+            <div className="gap-4 grid grid-cols-2 sm:grid-cols-4">
                 {newArrivals.map((newArrival) => (
                     <AlbumCard
                         key={crypto.randomUUID()}
@@ -21,7 +18,8 @@ export default function App({ newArrivals }) {
                     />
                 ))}
             </div>
-            <Button color="default" variant="bordered">
+
+            <Button className="mt-4" color="default">
                 Browse more
             </Button>
         </div>
