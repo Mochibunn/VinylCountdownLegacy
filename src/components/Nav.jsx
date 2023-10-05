@@ -7,13 +7,16 @@ import { MoonIcon } from "../assets/MoonIcon.jsx";
 import { NavLink } from "react-router-dom/dist/index.js";
 
   const Nav = () => {
-
     const isDark = JSON.parse(localStorage.getItem("isDark"));
+    const isSignedIn = JSON.parse(localStorage.getItem("signedIn"))
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [signedIn, setSignedIn] = useState(false);
-    const [isSelected, setIsSelected] = useState( isDark );
+    const [signedIn, setSignedIn] = useState(isSignedIn);
+    const [isSelected, setIsSelected] = useState(isDark);
     
+    const userIcon = "https://i.pravatar.cc/150?u=a042581f4e29026704d";
+    const userEmail = "john.madden@nfl.gov";
+
     useEffect(() => {
       JSON.parse(localStorage.getItem("isDark")) === null && setIsSelected(false);
     }, []);
@@ -23,26 +26,30 @@ import { NavLink } from "react-router-dom/dist/index.js";
       setSignedIn(!signedIn);
     }
 
+    useEffect(() => {
+      localStorage.setItem("signedIn", signedIn); //!Mock sign in function, please replace with something more real!
+    }, [signedIn]);
+
     const handleSchemeToggle = () => {
       setIsSelected(!isSelected);
     }
 
     useEffect(() => {
       localStorage.setItem("isDark", isSelected);
-    }, [handleSchemeToggle]);
+    }, [isSelected]);
 
-    const menuItems = [
-      "Profile",
-      "Dashboard",
-      "Activity",
-      "Analytics",
-      "System",
-      "Deployments",
-      "My Settings",
-      "Team Settings",
-      "Help & Feedback",
-      "Log Out",
-    ];
+    // const menuItems = [
+    //   "Profile",
+    //   "Dashboard",
+    //   "Activity",
+    //   "Analytics",
+    //   "System",
+    //   "Deployments",
+    //   "My Settings",
+    //   "Team Settings",
+    //   "Help & Feedback",
+    //   "Log Out",
+    // ];
 
     return (
       <Navbar shouldHideOnScroll onMenuOpenChange={setIsMenuOpen}>
@@ -62,7 +69,7 @@ import { NavLink } from "react-router-dom/dist/index.js";
           </NavbarBrand>
           <NavbarContent className="hidden sm:flex gap-3">
             <NavbarItem>
-              <NavLink to="/" aria-current="page" color="foreground" >   {/* {({isActive}) => isActive ? "secondary" : "foreground" }  */}
+              <NavLink to="/" aria-current="page" color="foreground" >   {/*// {({isActive}) => isActive ? "secondary" : "foreground" } //? Not sure how to control color if link is the active one */}
                 Home
               </NavLink>
             </NavbarItem>
@@ -106,17 +113,17 @@ import { NavLink } from "react-router-dom/dist/index.js";
                 isBordered
                 as="button"
                 className="transition-transform"
-                color="secondary"
-                name="John Madden"
+                color="primary"
+                // name="John Madden"
                 size="sm"
-                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                src={signedIn ? userIcon : "https://media.discordapp.net/attachments/199274450011553792/1156984505408700417/de7834s-6515bd40-8b2c-4dc6-a843-5ac1a95a8b55.png"}
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat" disabledKeys={["forums", "settings", "help_and_feedback"]}> {/* Avatar menu items */}
               <DropdownItem key="profile" className="h-14 gap-2">
                 {signedIn ? <>
                     <p className="font-semibold">Signed in as:</p>
-                    <p className="font-normal">john.madden@nfl.gov</p> {/* //!Placeholder */}
+                    <p className="font-normal">{userEmail}</p>
                   </>
                   : "Not signed in"}
               </DropdownItem>
@@ -131,9 +138,56 @@ import { NavLink } from "react-router-dom/dist/index.js";
             </DropdownMenu>
           </Dropdown>
         </NavbarContent>
-
+{/* Mobile hamburger menu stuff below */}
         <NavbarMenu>
-          {menuItems.map((item, index) => ( //Hamburger menu items
+        <NavbarMenuItem>
+            <NavLink to="/" aria-current="page" color="foreground" className="w-full" size="lg">
+              Home
+            </NavLink>
+          </NavbarMenuItem>
+          <NavbarMenuItem>
+            <NavLink color="foreground" href="#" className="w-full" size="lg">
+              New
+            </NavLink>
+          </NavbarMenuItem>
+          <NavbarMenuItem>
+          <NavLink to="/search" aria-current="page" color="foreground" className="w-full" size="lg">
+              Browse
+            </NavLink>
+          </NavbarMenuItem>
+
+          <NavbarMenuItem>
+            <NavLink color="foreground" className="w-full" size="lg" href="#">
+              Orders
+            </NavLink>
+          </NavbarMenuItem>
+          <NavbarMenuItem>
+            <NavLink color="foreground" className="w-full" size="lg" href="#">
+              Lists
+            </NavLink>
+          </NavbarMenuItem>
+          <NavbarMenuItem>
+            <NavLink color="foreground" className="w-full" size="lg" href="#">
+              Forums
+            </NavLink>
+          </NavbarMenuItem>
+          <NavbarMenuItem>
+            <NavLink color="foreground" className="w-full" size="lg" href="#">
+              Settings
+            </NavLink>
+          </NavbarMenuItem>
+          <NavbarMenuItem>
+            <NavLink color="foreground" className="w-full" size="lg" href="#"> {/* //todo NavLink doesn't change the color but Link does, perhaps that's the active link fix */}
+              Help & Feedback
+            </NavLink>
+          </NavbarMenuItem>
+          <NavbarMenuItem>
+            <Link color={signedIn ? "danger" : "warning"} className="w-full" size="lg" onClick={handleClick}>
+              {signedIn ? "Sign Out" : "Sign In"}
+            </Link>
+          </NavbarMenuItem>
+
+          {/* {menuItems.map((item, index) => ( //Hamburger menu items
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link
                 color={
@@ -146,7 +200,7 @@ import { NavLink } from "react-router-dom/dist/index.js";
                 {item}
               </Link>
             </NavbarMenuItem>
-          ))}
+          ))} */}
         </NavbarMenu>
 
       </Navbar>
