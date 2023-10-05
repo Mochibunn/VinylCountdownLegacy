@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@nextui-org/react": "^2.1.13",
+    "contentful": "^10.6.1",
     "framer-motion": "^10.16.4",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.16.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
