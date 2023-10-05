@@ -1,7 +1,20 @@
+import Header from "../components/Header";
+import NewArrivals from "../components/NewArrivals";
+import { getNewArrivals } from "../lib/contentfulClient";
+import { useState, useEffect } from "react";
+
 export default function LandingPage() {
+    const [newArrivals, setNewArrivals] = useState([]);
+
+    useEffect(() => {
+        getNewArrivals()
+            .then((albumData) => setNewArrivals(albumData))
+            .catch((error) => console.error(error));
+    }, []);
     return (
         <>
-            <h1>Here is where our landing page is gonna go!</h1>
+            <Header />
+            <NewArrivals newArrivals={newArrivals} />
         </>
     );
 }
