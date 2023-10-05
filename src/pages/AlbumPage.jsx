@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { createClient } from "contentful";
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
+import AlbumCarousel from "../components/AlbumCarousel";
 
 const client = createClient({
     space: "mzz74ba5zfwb",
@@ -51,6 +52,7 @@ export default function AlbumPage() {
                     </CardFooter>
                 </Card>
             )}
+            <AlbumCarousel />
         </>
     );
 }
