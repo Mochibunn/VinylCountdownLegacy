@@ -4,18 +4,32 @@
   import { useState, useEffect } from "react";
 import { SunIcon } from "../assets/SunIcon.jsx";
 import { MoonIcon } from "../assets/MoonIcon.jsx";
+import { NavLink } from "react-router-dom/dist/index.js";
 
   const Nav = () => {
 
+    const isDark = JSON.parse(localStorage.getItem("isDark"));
+
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [signedIn, setSignedIn] = useState(false);
-    const [isSelected, setIsSelected] = useState(true);
+    const [isSelected, setIsSelected] = useState( isDark );
+    
+    useEffect(() => {
+      JSON.parse(localStorage.getItem("isDark")) === null && setIsSelected(false);
+    }, []);
 
-    useEffect (() => {}, []);
 
     const handleClick = () => {
       setSignedIn(!signedIn);
     }
+
+    const handleSchemeToggle = () => {
+      setIsSelected(!isSelected);
+    }
+
+    useEffect(() => {
+      localStorage.setItem("isDark", isSelected);
+    }, [handleSchemeToggle]);
 
     const menuItems = [
       "Profile",
@@ -44,10 +58,10 @@ import { MoonIcon } from "../assets/MoonIcon.jsx";
             <p className="hidden sm:block font-bold text-inherit">VINYL COUNTDOWN</p>
           </NavbarBrand>
           <NavbarContent className="hidden sm:flex gap-3">
-            <NavbarItem isActive>
-              <Link href="#" aria-current="page" color="secondary">
+            <NavbarItem>
+              <NavLink to="/" aria-current="page" color="foreground" >   {/* {({isActive}) => isActive ? "secondary" : "foreground" }  */}
                 Home
-              </Link>
+              </NavLink>
             </NavbarItem>
             <NavbarItem>
               <Link color="foreground" href="#">
@@ -55,9 +69,9 @@ import { MoonIcon } from "../assets/MoonIcon.jsx";
               </Link>
             </NavbarItem>
             <NavbarItem>
-              <Link color="foreground" href="#">
+            <NavLink to="/search" aria-current="page" color="foreground">
                 Browse
-              </Link>
+              </NavLink>
             </NavbarItem>
           </NavbarContent>
         </NavbarContent>
@@ -77,7 +91,7 @@ import { MoonIcon } from "../assets/MoonIcon.jsx";
           />
           <Switch
             isSelected={isSelected}
-            onValueChange={setIsSelected}
+            onValueChange={handleSchemeToggle}
             size="lg"
             color="warning"
             startContent={<SunIcon />}
@@ -98,7 +112,7 @@ import { MoonIcon } from "../assets/MoonIcon.jsx";
             <DropdownMenu aria-label="Profile Actions" variant="flat" disabledKeys={["forums", "settings", "help_and_feedback"]}> {/* Avatar menu items */}
               <DropdownItem key="profile" className="h-14 gap-2">
                 {signedIn ? <>
-                    <p className="font-semibold">Signed in as</p>
+                    <p className="font-semibold">Signed in as:</p>
                     <p className="font-normal">john.madden@nfl.gov</p> {/* //!Placeholder */}
                   </>
                   : "Not signed in"}

@@ -3,11 +3,10 @@ import { notFoundQuotes } from "../assets/NotFoundQuotes";
 
 export default function NotFound() {
     const navigate = useNavigate();
-    const quoteArr = notFoundQuotes;
     
     const randomQuote = () => {
-        const itm = Math.floor(Math.random() * quoteArr.length);
-        return quoteArr[itm];
+        const itm = Math.floor(Math.random() * notFoundQuotes.length);
+        return notFoundQuotes[itm];
     };
 
     return (
