@@ -5,17 +5,31 @@ const client = createClient({
     accessToken: "qip5rmOLyuFNm33Av0mWcV9volA1KAwFjfQvK4hmHdA",
 });
 
-const getAlbums = async () => {
+const getAllAlbums = async () => {
     try {
         const getAlbumEntries = await client.getEntries({
             content_type: "album",
         });
 
-        console.log(getAlbumEntries.items);
+        console.log(getAlbumEntries);
         return getAlbumEntries.items;
     } catch (error) {
         console.error(error.message);
     }
 };
 
-export { getAlbums };
+const getNewArrivals = async () => {
+    try {
+        const getAlbumEntries = await client.getEntries({
+            content_type: "album",
+            limit: 20,
+            order: "sys.createdAt",
+        });
+
+        return getAlbumEntries.items;
+    } catch (error) {
+        console.error(error.message);
+    }
+};
+
+export { getAllAlbums, getNewArrivals };

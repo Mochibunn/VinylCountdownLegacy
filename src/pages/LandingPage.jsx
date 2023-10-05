@@ -1,20 +1,20 @@
 import Header from "../components/Header";
 import NewArrivals from "../components/NewArrivals";
-import { getAlbums } from "../lib/contentfulClient";
+import { getNewArrivals } from "../lib/contentfulClient";
 import { useState, useEffect } from "react";
 
 export default function LandingPage() {
-    const [allAlbums, setAllAlbums] = useState([]);
+    const [newArrivals, setNewArrivals] = useState([]);
 
     useEffect(() => {
-        getAlbums()
-            .then((albumData) => setAllAlbums(albumData))
+        getNewArrivals()
+            .then((albumData) => setNewArrivals(albumData))
             .catch((error) => console.error(error));
     }, []);
     return (
         <>
             <Header />
-            <NewArrivals allAlbums={allAlbums} />
+            <NewArrivals newArrivals={newArrivals} />
         </>
     );
 }
