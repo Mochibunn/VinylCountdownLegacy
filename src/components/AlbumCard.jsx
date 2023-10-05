@@ -1,4 +1,5 @@
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
 
 export default function AlbumCard({
     artist,
@@ -10,12 +11,17 @@ export default function AlbumCard({
     spotifyUrl,
     title,
     year,
+    id,
 }) {
+    const navigate = useNavigate();
     return (
         <Card
             shadow="sm"
             isPressable
             onPress={() => console.log("item pressed")}
+            onClick={() => {
+                navigate(`/album/${id}`);
+            }}
         >
             <CardBody className="overflow-visible p-0">
                 <Image

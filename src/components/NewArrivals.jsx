@@ -13,8 +13,12 @@ export default function App({ newArrivals }) {
                 </CardBody>
             </Card>
             <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
-                {newArrivals.map(({ fields }) => (
-                    <AlbumCard key={crypto.randomUUID()} {...fields} />
+                {newArrivals.map((newArrival) => (
+                    <AlbumCard
+                        key={crypto.randomUUID()}
+                        {...newArrival.fields}
+                        id={newArrival.sys.id}
+                    />
                 ))}
             </div>
             <Button color="default" variant="bordered">
