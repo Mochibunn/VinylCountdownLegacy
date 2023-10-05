@@ -46,6 +46,7 @@ import { NavLink } from "react-router-dom/dist/index.js";
 
     return (
       <Navbar shouldHideOnScroll onMenuOpenChange={setIsMenuOpen}>
+        
         <NavbarContent justify="start">
 
         <NavbarMenuToggle
@@ -54,8 +55,10 @@ import { NavLink } from "react-router-dom/dist/index.js";
           />
 
           <NavbarBrand className="mr-4">
-            <AcmeLogo className="place-items-center" />
-            <p className="hidden sm:block font-bold text-inherit">VINYL COUNTDOWN</p>
+            <NavLink to="/" aria-current="page" color="foreground" className="flex items-center">
+              <AcmeLogo className="place-items-center" />
+              <p className="hidden sm:block font-bold text-inherit">VINYL COUNTDOWN</p>
+            </NavLink>
           </NavbarBrand>
           <NavbarContent className="hidden sm:flex gap-3">
             <NavbarItem>
@@ -79,12 +82,12 @@ import { NavLink } from "react-router-dom/dist/index.js";
         <NavbarContent as="div" className="items-center" justify="end">
           <Input
             classNames={{
-              base: "max-w-full sm:max-w-[10rem] h-10",
+              base: "max-w-[10rem] h-10",
               mainWrapper: "h-full",
               input: "text-small",
               inputWrapper: "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
             }}
-            placeholder="Type to search..."
+            placeholder="Search.."
             size="sm"
             startContent={<SearchIcon size={18} />}
             type="search"
