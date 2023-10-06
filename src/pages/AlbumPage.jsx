@@ -37,7 +37,7 @@ export default function AlbumPage() {
                         shadow="sm"
                         isPressable
                         onPress={() => console.log("item pressed")}
-                        className="mb-8 w-full"
+                        className="mb-8"
                         >
                         <CardBody className="overflow-visible p-0">
                             <Image
@@ -54,7 +54,7 @@ export default function AlbumPage() {
                             <p className="text-default-500">{singleAlbum.price}</p>
                         </CardFooter> */}
                     </Card>
-                    <div className="sm:ml-5 md:ml-8 lg:ml-10 sm:mt-12 w-full">
+                    <div className="sm:ml-5 md:ml-8 lg:ml-10 sm:mt-12 w-max">
                         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">{singleAlbum.title}</h1>
                         <h2 className="text-3xl sm:text-xl md:text-2xl lg:text-3xl font-semibold mt-2">{singleAlbum.artist}</h2>
                         <Divider className="my-4 sm:my-2" />
