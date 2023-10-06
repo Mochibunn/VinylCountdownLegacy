@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { createClient } from "contentful";
 import { Card, CardBody, CardFooter, Image, Divider, Textarea, Button } from "@nextui-org/react";
 import AlbumCarousel from "../components/AlbumCarousel";
+import { Spotify } from "react-spotify-embed";
 
 const client = createClient({
     space: "mzz74ba5zfwb",
@@ -53,34 +54,36 @@ export default function AlbumPage() {
                             <p className="text-default-500">{singleAlbum.price}</p>
                         </CardFooter> */}
                     </Card>
-                    <div className="sm:ml-5 md:ml-8 lg:ml-10 sm:mt-12">
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">{singleAlbum.title}</h1>
-                    <h2 className="text-3xl sm:text-xl md:text-2xl lg:text-3xl font-semibold mt-2">{singleAlbum.artist}</h2>
-                    <Divider className="my-4 sm:my-2" />
-                    <h1 className="text-4xl lg:text-6xl font-bold">${singleAlbum.price}</h1>
-                    <Divider className="my-2" />
-                    <h2 className="lg:text-3xl text-xl">Sleeve: <b className="font-semibold">{singleAlbum.sleeve}</b></h2>
-                    <h2 className="lg:text-3xl text-xl">Media: <b className="font-semibold">{singleAlbum.media}</b></h2>
-                    
-                    <div className="max-w-full sm:max-w-xs md:max-w-md lg:max-w-md">
-                    <Textarea
-                        isReadOnly
-                        label="Additional notes"
-                        variant="bordered"
-                        labelPlacement="inside"
-                        // placeholder="Additional notes"
-                        defaultValue={singleAlbum.comment}
-                        className="mt-3"
-                        />
-                        <div className="mt-4 flex gap-4 justify-center ">
-                            <Button color="primary" variant="ghost" endContent="" className="w-full">
-                            Add to cart
-                            </Button>    
-                            <Button color="primary" variant="ghost" startContent="" className="w-full">
-                            Add to list
-                            </Button>
+                    <div className="sm:ml-5 md:ml-8 lg:ml-10 sm:mt-12 w-max">
+                        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold">{singleAlbum.title}</h1>
+                        <h2 className="text-3xl sm:text-xl md:text-2xl lg:text-3xl font-semibold mt-2">{singleAlbum.artist}</h2>
+                        <Divider className="my-4 sm:my-2" />
+                        <h1 className="text-4xl lg:text-6xl font-bold">${singleAlbum.price}</h1>
+                        <Divider className="my-2" />
+                        <h2 className="lg:text-3xl text-xl">Sleeve: <b className="font-semibold">{singleAlbum.sleeve}</b></h2>
+                        <h2 className="lg:text-3xl text-xl">Media: <b className="font-semibold">{singleAlbum.media}</b></h2>
+                        
+                        <div className="w-full max-w-full sm:max-w-xs md:max-w-md lg:max-w-lg">
+                            <Textarea
+                                isReadOnly
+                                label="Additional notes"
+                                variant="bordered"
+                                labelPlacement="inside"
+                                // placeholder="Additional notes"
+                                defaultValue={singleAlbum.comment}
+                                className="mt-3"
+                            />
+                            <div className="mt-4 flex gap-4 justify-center ">
+                                <Button color="primary" variant="ghost" endContent="" className="w-full">
+                                Add to cart
+                                </Button>    
+                                <Button color="primary" variant="ghost" startContent="" className="w-full">
+                                Add to list
+                                </Button>
+                            </div>
+                            <Divider className="my-4"/>
+                            <Spotify link={singleAlbum.spotifyUrl} className="w-full"/>
                         </div>
-                    </div>
                     </div>
                 </div>
             )}
