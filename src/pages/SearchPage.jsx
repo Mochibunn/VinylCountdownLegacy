@@ -8,6 +8,8 @@ import {
     CurrentRefinements,
     RefinementList,
 } from "react-instantsearch";
+import "instantsearch.css/themes/satellite.css";
+
 import { useNavigate } from "react-router-dom";
 
 // import SearchCard from "../components/SearchCard";
