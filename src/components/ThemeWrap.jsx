@@ -13,7 +13,7 @@ export default function ThemeWrap(){
 
   useEffect(() => {
     JSON.parse(localStorage.getItem("isDark")) === null && setIsDarkMode(prefers);
-  }, []);
+  }, []); 
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
