@@ -5,6 +5,8 @@ import {
     Hits,
     Pagination,
     Configure,
+    CurrentRefinements,
+    RefinementList,
 } from "react-instantsearch";
 import { useNavigate } from "react-router-dom";
 
@@ -52,6 +54,27 @@ export default function SearchPage() {
             <InstantSearch searchClient={searchClient} indexName="albums">
                 <Configure hitsPerPage={10} />
                 <SearchBox />
+                <CurrentRefinements
+                    includedAttributes={["format", "genre", "price", "sleeve"]}
+                />
+                <div className="flex gap-4">
+                    <div>
+                        <h4>Genre</h4>
+                        <RefinementList attribute="genre" />
+                    </div>
+                    <div>
+                        <h4>Format</h4>
+                        <RefinementList attribute="format" />
+                    </div>
+                    <div>
+                        <h4>Price</h4>
+                        <RefinementList attribute="price" />
+                    </div>
+                    <div>
+                        <h4>Sleeve</h4>
+                        <RefinementList attribute="sleeve" />
+                    </div>
+                </div>
                 <Hits hitComponent={SearchCard} />
                 <Pagination />
             </InstantSearch>
