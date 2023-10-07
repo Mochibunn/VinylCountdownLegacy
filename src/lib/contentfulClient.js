@@ -11,7 +11,7 @@ const getAllAlbums = async () => {
             content_type: "album",
         });
 
-        console.log(getAlbumEntries);
+        // console.log(getAlbumEntries);
         return getAlbumEntries.items;
     } catch (error) {
         console.error(error.message);
