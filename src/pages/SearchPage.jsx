@@ -6,13 +6,9 @@ import {
     Pagination,
     Configure,
 } from "react-instantsearch";
+import { useNavigate } from "react-router-dom";
 
-import SearchCard from "../components/SearchCard";
-
-const searchClient = algoliasearch(
-    "P6CCZN45ER",
-    "cf814256b4cf855690036f02a8e267d0"
-);
+// import SearchCard from "../components/SearchCard";
 
 import {
     Card,
@@ -23,44 +19,50 @@ import {
     Link,
     Image,
 } from "@nextui-org/react";
+const searchClient = algoliasearch(
+    "P6CCZN45ER",
+    "cf814256b4cf855690036f02a8e267d0"
+);
 
-export function SearchCard() {
+export function SearchCard({ hit }) {
+    const navigate = useNavigate();
     return (
-        <Card className="max-w-[400px]">
-            <CardBody>
+        <Card
+            className="w-4/5 mx-auto my-2"
+            isPressable
+            onClick={() => {
+                navigate(`/album/${hit.objectID}`);
+            }}
+        >
+            <CardHeader className="flex gap-3">
                 <Image
                     alt="nextui logo"
-                    height={40}
+                    height={80}
                     radius="sm"
-                    src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-                    width={40}
+                    src={hit.fields.imgUrl["en-US"]}
+                    width={80}
                 />
-                <div className="flex flex-col">
-                    <p className="text-md">NextUI</p>
-                    <p className="text-small text-default-500">nextui.org</p>
+                <div className="flex flex-col gap-3">
+                    <p className="text-md">{hit.fields.title["en-US"]}</p>
+                    <p className="text-small text-default-500">
+                        from: {hit.fields.artist["en-US"]}
+                    </p>
+                    <p className="text-small text-default-500">
+                        ${hit.fields.price["en-US"]}
+                    </p>
                 </div>
-            </CardBody>
+            </CardHeader>
         </Card>
     );
 }
 
-function Hit({ hit }) {
-    return (
-        <article>
-            <img src={hit.fields.imgUrl["en-US"]} />
-            {/* <p>{hit.categories[0]}</p> */}
-            <h1>{hit.fields.title["en-US"]}</h1>
-            <p>${hit.fields.price["en-US"]}</p>
-        </article>
-    );
-}
 export default function SearchPage() {
     return (
         <>
             <InstantSearch searchClient={searchClient} indexName="albums">
                 <Configure hitsPerPage={10} />
                 <SearchBox />
-                <Hits hitComponent={Hit} />
+                <Hits hitComponent={SearchCard} />
                 <Pagination />
             </InstantSearch>
         </>
