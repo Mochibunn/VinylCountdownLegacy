@@ -7,13 +7,13 @@ import { useState, useEffect, createContext } from "react";
 export const ThemeContext = createContext();
 
 export default function ThemeWrap(){
-  const prefers = window.matchMedia('(prefers-color-scheme: dark)').matches; //boolean value, dark is true, light is false
   const isDark = JSON.parse(localStorage.getItem("isDark"));
   const [isDarkMode, setIsDarkMode] = useState(isDark);
-
+  
   useEffect(() => {
+    const prefers = window.matchMedia('(prefers-color-scheme: dark)').matches; //boolean value, dark is true, light is false
     JSON.parse(localStorage.getItem("isDark")) === null && setIsDarkMode(prefers);
-  }, []); 
+  }, []);
 
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
