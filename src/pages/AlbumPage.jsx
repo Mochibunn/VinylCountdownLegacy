@@ -32,12 +32,12 @@ export default function AlbumPage() {
     return (
         <>
             {singleAlbum && (
-                <div className="m-5 sm:m-10 md:m-[5em] flex flex-col sm:flex-row">
+                <div className="m-5 sm:m-10 md:m-[5em] flex flex-col sm:flex-row justify-center w-100">
                     <Card
                         shadow="sm"
                         isPressable
                         onPress={() => console.log("item pressed")}
-                        className="mb-8 h-full"
+                        className="mb-8 h-full sm:sticky sm:top-20"
                         >
                         <CardBody className=" p-0">
                             <Image
@@ -54,7 +54,7 @@ export default function AlbumPage() {
                             <p className="text-default-500">{singleAlbum.price}</p>
                         </CardFooter> */}
                     </Card>
-                    <div className="sm:ml-5 md:ml-8 lg:ml-10 sm:mt-12 w-1/2">
+                    <div className="sm:ml-5 md:ml-8 lg:ml-12 sm:mt-12 w-full sm:w-1/2">
                         <span className="text-3xl md:text-4xl lg:text-5xl font-bold">{singleAlbum.title}</span>
                         <h2 className="text-3xl sm:text-xl md:text-2xl lg:text-3xl font-semibold mt-2">{singleAlbum.artist}</h2>
                         <Divider className="my-4 sm:my-2" />
@@ -63,7 +63,7 @@ export default function AlbumPage() {
                         <h2 className="lg:text-3xl text-xl">Sleeve: <b className="font-semibold">{singleAlbum.sleeve}</b></h2>
                         <h2 className="lg:text-3xl text-xl">Media: <b className="font-semibold">{singleAlbum.media}</b></h2>
                         
-                        <div className="w-full max-w-full sm:max-w-xs md:max-w-md">
+                        <div className="w-full max-w-full sm:max-w-xs md:max-w-full">
                             <Textarea
                                 isReadOnly
                                 label="Additional notes"
@@ -73,7 +73,7 @@ export default function AlbumPage() {
                                 defaultValue={singleAlbum.comment}
                                 className="mt-3"
                             />
-                            <div className="mt-4 flex gap-4 justify-center ">
+                            <div className="mt-4 flex gap-4 justify-center">
                                 <Button color="primary" variant="ghost" endContent="" className="w-full">
                                 Add to cart
                                 </Button>    
@@ -82,7 +82,7 @@ export default function AlbumPage() {
                                 </Button>
                             </div>
                             <Divider className="my-4"/>
-                            <Spotify link={singleAlbum.spotifyUrl} className="w-full"/>
+                            <Spotify link={singleAlbum.spotifyUrl} className="w-full h-[600px]"/>
                         </div>
                     </div>
                 </div>
