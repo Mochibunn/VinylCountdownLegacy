@@ -57,11 +57,13 @@ export default function AlbumPage() {
                     <div className="sm:ml-5 md:ml-8 lg:ml-12 sm:mt-12 w-full sm:w-1/2">
                         <span className="text-3xl md:text-4xl lg:text-5xl font-bold">{singleAlbum.title}</span>
                         <h2 className="text-3xl sm:text-xl md:text-2xl lg:text-3xl font-semibold mt-2">{singleAlbum.artist}</h2>
+                        <h2 className="text-xl font-semibold mt-1 mb-2">{singleAlbum.year}</h2>
+                        <h2 className="text-l"><i className="font-normal">{singleAlbum.format}</i></h2>
+                        <h2 className="text-xl">Sleeve: <b className="font-semibold">{singleAlbum.sleeve}</b></h2>
+                        <h2 className="text-xl">Media: <b className="font-semibold">{singleAlbum.media}</b></h2>
                         <Divider className="my-4 sm:my-2" />
                         <h1 className="text-4xl lg:text-6xl font-bold">${singleAlbum.price}</h1>
                         <Divider className="my-2" />
-                        <h2 className="lg:text-3xl text-xl">Sleeve: <b className="font-semibold">{singleAlbum.sleeve}</b></h2>
-                        <h2 className="lg:text-3xl text-xl">Media: <b className="font-semibold">{singleAlbum.media}</b></h2>
                         
                         <div className="w-full max-w-full sm:max-w-xs md:max-w-full">
                             <Textarea

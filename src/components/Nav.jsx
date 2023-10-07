@@ -1,42 +1,29 @@
-  import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Link, Input, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar, Switch} from "@nextui-org/react";
-  import {AcmeLogo} from "../assets/AcmeLogo.jsx";
-  import {SearchIcon} from "../assets/SearchIcon.jsx";
-  import { useState, useEffect } from "react";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Link, Input, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar, Switch} from "@nextui-org/react";
+import {AcmeLogo} from "../assets/AcmeLogo.jsx";
+import {SearchIcon} from "../assets/SearchIcon.jsx";
+import { useState, useEffect, useContext } from "react";
 import { SunIcon } from "../assets/SunIcon.jsx";
 import { MoonIcon } from "../assets/MoonIcon.jsx";
 import { NavLink } from "react-router-dom/dist/index.js";
+import { ThemeContext } from "./ThemeWrap.jsx";
 
   const Nav = () => {
-    const isDark = JSON.parse(localStorage.getItem("isDark"));
+    const { isDarkMode, toggleDarkMode } = useContext(ThemeContext);
     const isSignedIn = JSON.parse(localStorage.getItem("signedIn"))
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [signedIn, setSignedIn] = useState(isSignedIn);
-    const [isSelected, setIsSelected] = useState(isDark);
+    // const [isSelected, setIsSelected] = useState(isDark);
     
-    const userIcon = "https://i.pravatar.cc/150?u=a042581f4e29026704d";
-    const userEmail = "john.madden@nfl.gov";
-
-    useEffect(() => {
-      JSON.parse(localStorage.getItem("isDark")) === null && setIsSelected(false);
-    }, []);
-
+    const userIcon = "https://i.pravatar.cc/150?u=a042581f4e29026704d"; //placeholder info
+    const userEmail = "john.madden@nfl.gov"; //placeholder info
 
     const handleClick = () => {
       setSignedIn(!signedIn);
     }
-
     useEffect(() => {
       localStorage.setItem("signedIn", signedIn); //!Mock sign in function, please replace with something more real!
     }, [signedIn]);
-
-    const handleSchemeToggle = () => {
-      setIsSelected(!isSelected);
-    }
-
-    useEffect(() => {
-      localStorage.setItem("isDark", isSelected);
-    }, [isSelected]);
 
     // const menuItems = [
     //   "Profile",
@@ -99,9 +86,9 @@ import { NavLink } from "react-router-dom/dist/index.js";
             startContent={<SearchIcon size={18} />}
             type="search"
           />
-          <Switch
-            isSelected={isSelected}
-            onValueChange={handleSchemeToggle}
+          <Switch //Dark mode toggle
+            isSelected={isDarkMode}
+            onValueChange={toggleDarkMode}
             size="lg"
             color="warning"
             startContent={<SunIcon />}
