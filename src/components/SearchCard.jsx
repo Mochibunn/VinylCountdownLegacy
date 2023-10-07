@@ -10,7 +10,7 @@ import {
 
 export default function SearchCard() {
     return (
-        <Card className="max-w-[400px]">
+        <Card className="max-w-[400px] min">
             <CardBody>
                 <Image
                     alt="nextui logo"
