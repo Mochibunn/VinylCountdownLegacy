@@ -10,15 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 // import SearchCard from "../components/SearchCard";
 
-import {
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    Divider,
-    Link,
-    Image,
-} from "@nextui-org/react";
+import { Card, CardHeader, Image } from "@nextui-org/react";
 const searchClient = algoliasearch(
     "P6CCZN45ER",
     "cf814256b4cf855690036f02a8e267d0"
@@ -39,17 +31,15 @@ export function SearchCard({ hit }) {
                     alt="nextui logo"
                     height={80}
                     radius="sm"
-                    src={hit.fields.imgUrl["en-US"]}
+                    src={hit.imgUrl}
                     width={80}
                 />
                 <div className="flex flex-col gap-3">
-                    <p className="text-md">{hit.fields.title["en-US"]}</p>
+                    <p className="text-md">{hit.title}</p>
                     <p className="text-small text-default-500">
-                        from: {hit.fields.artist["en-US"]}
+                        from: {hit.artist}
                     </p>
-                    <p className="text-small text-default-500">
-                        ${hit.fields.price["en-US"]}
-                    </p>
+                    <p className="text-small text-default-500">${hit.price}</p>
                 </div>
             </CardHeader>
         </Card>
