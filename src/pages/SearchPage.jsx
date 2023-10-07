@@ -57,25 +57,27 @@ export default function SearchPage() {
                 <CurrentRefinements
                     includedAttributes={["format", "genre", "price", "sleeve"]}
                 />
-                <div className="flex gap-4">
-                    <div>
-                        <h4>Genre</h4>
-                        <RefinementList attribute="genre" />
+                <div className="flex">
+                    <div className="flex-col gap-4">
+                        <div className="mb-4">
+                            <h4>Genre</h4>
+                            <RefinementList attribute="genre" />
+                        </div>
+                        <div className="mb-4">
+                            <h4>Format</h4>
+                            <RefinementList attribute="format" />
+                        </div>
+                        <div className="mb-4">
+                            <h4>Price</h4>
+                            <RefinementList attribute="price" />
+                        </div>
+                        <div>
+                            <h4>Sleeve</h4>
+                            <RefinementList attribute="sleeve" />
+                        </div>
                     </div>
-                    <div>
-                        <h4>Format</h4>
-                        <RefinementList attribute="format" />
-                    </div>
-                    <div>
-                        <h4>Price</h4>
-                        <RefinementList attribute="price" />
-                    </div>
-                    <div>
-                        <h4>Sleeve</h4>
-                        <RefinementList attribute="sleeve" />
-                    </div>
+                    <Hits hitComponent={SearchCard} />
                 </div>
-                <Hits hitComponent={SearchCard} />
                 <Pagination />
             </InstantSearch>
         </>
