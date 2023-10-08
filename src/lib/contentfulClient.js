@@ -32,4 +32,4 @@ const getNewArrivals = async () => {
     }
 };
 
-export { getAllAlbums, getNewArrivals };
+export { client, getAllAlbums, getNewArrivals };
