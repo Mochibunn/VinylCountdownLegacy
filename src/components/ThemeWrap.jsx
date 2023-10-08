@@ -3,7 +3,8 @@ import "../styles/index.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useState, useEffect } from "react";
-import { ThemeContext, UserContext } from "../Contexts"; //now imported instead of created here
+import { ThemeContext, UserContext, SignInModalContext } from "../Contexts"; //now imported instead of created here
+import { useDisclosure } from "@nextui-org/modal";
 
 // export const ThemeContext = createContext(); //moved this into separate file and updated import on Nav.jsx
 
@@ -13,6 +14,7 @@ export default function ThemeWrap() {
 
     const isSignedIn = JSON.parse(localStorage.getItem("signedIn"));
     const [user, setUser] = useState(isSignedIn);
+    const { isOpen, onOpen, onClose, onOpenChange} = useDisclosure();
 
     useEffect(() => {
         const prefers = window.matchMedia(
@@ -39,7 +41,9 @@ export default function ThemeWrap() {
         >
             <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
                 <UserContext.Provider value={{ user, setUser }}>
+                  <SignInModalContext.Provider value={{isOpen, onOpen, onClose, onOpenChange}}>
                     <App />
+                  </SignInModalContext.Provider>
                 </UserContext.Provider>
             </ThemeContext.Provider>
         </main>
