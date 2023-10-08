@@ -1,14 +1,16 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { createClient } from "contentful";
-import { Card, CardBody, Image, Divider, Textarea, Button } from "@nextui-org/react";
+import {
+    Card,
+    CardBody,
+    Image,
+    Divider,
+    Textarea,
+    Button,
+} from "@nextui-org/react";
 import AlbumCarousel from "../components/AlbumCarousel";
 import { Spotify } from "react-spotify-embed";
-
-const client = createClient({
-    space: "mzz74ba5zfwb",
-    accessToken: "qip5rmOLyuFNm33Av0mWcV9volA1KAwFjfQvK4hmHdA",
-});
+import { client } from "../lib/contentfulClient";
 
 export default function AlbumPage() {
     const [singleAlbum, setSingleAlbum] = useState();
@@ -38,7 +40,7 @@ export default function AlbumPage() {
                         isPressable
                         onPress={() => console.log("item pressed")}
                         className="mb-8 h-full sm:sticky sm:top-20"
-                        >
+                    >
                         <CardBody className=" p-0">
                             <Image
                                 shadow="sm"
@@ -47,7 +49,7 @@ export default function AlbumPage() {
                                 alt={singleAlbum.title}
                                 className="sm:max-h-[250px] md:max-h-[300px] lg:max-h-[450px] xl:max-h-[600px]"
                                 src={singleAlbum.imgUrl}
-                                />
+                            />
                         </CardBody>
                         {/* <CardFooter className="text-small justify-between">
                             <b>{singleAlbum.title}</b>
@@ -55,16 +57,34 @@ export default function AlbumPage() {
                         </CardFooter> */}
                     </Card>
                     <div className="sm:ml-5 md:ml-8 lg:ml-12 sm:mt-12 w-full sm:w-1/2">
-                        <span className="text-3xl md:text-4xl lg:text-5xl font-bold">{singleAlbum.title}</span>
-                        <h2 className="text-3xl sm:text-xl md:text-2xl lg:text-3xl font-semibold mt-2">{singleAlbum.artist}</h2>
-                        <h2 className="text-xl font-semibold mt-1 mb-2">{singleAlbum.year}</h2>
-                        <h2 className="text-l"><i className="font-normal">{singleAlbum.format}</i></h2>
-                        <h2 className="text-xl">Sleeve: <b className="font-semibold">{singleAlbum.sleeve}</b></h2>
-                        <h2 className="text-xl">Media: <b className="font-semibold">{singleAlbum.media}</b></h2>
+                        <span className="text-3xl md:text-4xl lg:text-5xl font-bold">
+                            {singleAlbum.title}
+                        </span>
+                        <h2 className="text-3xl sm:text-xl md:text-2xl lg:text-3xl font-semibold mt-2">
+                            {singleAlbum.artist}
+                        </h2>
+                        <h2 className="text-xl font-semibold mt-1 mb-2">
+                            {singleAlbum.year}
+                        </h2>
+                        <h2 className="text-l">
+                            <i className="font-normal">{singleAlbum.format}</i>
+                        </h2>
+                        <h2 className="text-xl">
+                            Sleeve:{" "}
+                            <b className="font-semibold">
+                                {singleAlbum.sleeve}
+                            </b>
+                        </h2>
+                        <h2 className="text-xl">
+                            Media:{" "}
+                            <b className="font-semibold">{singleAlbum.media}</b>
+                        </h2>
                         <Divider className="my-4 sm:my-2" />
-                        <h1 className="text-4xl lg:text-6xl font-bold">${singleAlbum.price}</h1>
+                        <h1 className="text-4xl lg:text-6xl font-bold">
+                            ${singleAlbum.price}
+                        </h1>
                         <Divider className="my-2" />
-                        
+
                         <div className="w-full max-w-full sm:max-w-xs md:max-w-full">
                             <Textarea
                                 isReadOnly
@@ -76,15 +96,28 @@ export default function AlbumPage() {
                                 className="mt-3"
                             />
                             <div className="mt-4 flex gap-4 justify-center">
-                                <Button color="primary" variant="ghost" endContent="" className="w-full">
-                                Add to cart
-                                </Button>    
-                                <Button color="primary" variant="ghost" startContent="" className="w-full">
-                                Add to list
+                                <Button
+                                    color="primary"
+                                    variant="ghost"
+                                    endContent=""
+                                    className="w-full"
+                                >
+                                    Add to cart
+                                </Button>
+                                <Button
+                                    color="primary"
+                                    variant="ghost"
+                                    startContent=""
+                                    className="w-full"
+                                >
+                                    Add to list
                                 </Button>
                             </div>
-                            <Divider className="my-4"/>
-                            <Spotify link={singleAlbum.spotifyUrl} className="w-full h-[600px]"/>
+                            <Divider className="my-4" />
+                            <Spotify
+                                link={singleAlbum.spotifyUrl}
+                                className="w-full h-[600px]"
+                            />
                         </div>
                     </div>
                 </div>
