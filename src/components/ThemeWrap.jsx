@@ -2,41 +2,52 @@ import App from "../App";
 import "../styles/index.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect } from "react";
+import { ThemeContext, UserContext } from "../Contexts"; //now imported instead of created here
 
-export const ThemeContext = createContext();
+// export const ThemeContext = createContext(); //moved this into separate file and updated import on Nav.jsx
 
-export default function ThemeWrap(){
-  const isDark = JSON.parse(localStorage.getItem("isDark"));
-  const [isDarkMode, setIsDarkMode] = useState(isDark);
-  
-  useEffect(() => {
-    const prefers = window.matchMedia('(prefers-color-scheme: dark)').matches; //boolean value, dark is true, light is false
-    JSON.parse(localStorage.getItem("isDark")) === null && setIsDarkMode(prefers);
-  }, []);
+export default function ThemeWrap() {
+    const isDark = JSON.parse(localStorage.getItem("isDark"));
+    const [isDarkMode, setIsDarkMode] = useState(isDark);
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
+    // const isSignedIn = JSON.parse(localStorage.getItem("signedIn"));
+    const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    localStorage.setItem(`isDark`, isDarkMode)
-  }, [isDarkMode]);
+    useEffect(() => {
+        const prefers = window.matchMedia(
+            "(prefers-color-scheme: dark)"
+        ).matches; //boolean value, dark is true, light is false
+        JSON.parse(localStorage.getItem("isDark")) === null &&
+            setIsDarkMode(prefers);
+    }, []);
 
-  return (
-  <main id="main" className={`${isDarkMode ? 'dark' : ''} text-foreground bg-background`}>
-    <ThemeContext.Provider value={ {isDarkMode, toggleDarkMode} }>
-      <App/>
-    </ThemeContext.Provider>
-  </main>
-        )
+    const toggleDarkMode = () => {
+        setIsDarkMode(!isDarkMode);
+    };
+
+    useEffect(() => {
+        localStorage.setItem(`isDark`, isDarkMode);
+    }, [isDarkMode]);
+
+    return (
+        <main
+            id="main"
+            className={`${
+                isDarkMode ? "dark" : ""
+            } text-foreground bg-background`}
+        >
+            <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
+                <UserContext.Provider value={{ user, setUser }}>
+                    <App />
+                </UserContext.Provider>
+            </ThemeContext.Provider>
+        </main>
+    );
 }
 
 //ThemeWrap - The very silly dark mode wrapper for React + Tailwind.
-//2023, github.com/Mochibunn 
-
-
-
+//2023, github.com/Mochibunn
 
 // const DarkModeContext = createContext();
 
@@ -48,7 +59,7 @@ export default function ThemeWrap(){
 //     const [isDarkMode, setIsDarkMode] = useState(
 //       localStorage.getItem('isDarkMode') === 'true'
 //     );
-  
+
 //     const toggleDarkMode = () => {
 //       setIsDarkMode((prev) => !prev);
 //     };

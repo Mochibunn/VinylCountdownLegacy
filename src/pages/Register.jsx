@@ -60,7 +60,7 @@ const Register = () => {
                 <br />
                 <div className="flex w-full">
                     <button className="w-1/2 bg-accent hover:bg-info-content hover:border-info-content rounded-none text-white font-normal text-lg p-4 transition-none uppercase">
-                        Log in
+                        Sign In
                     </button>
                     <button className="w-1/2 bg-success hover:bg-success-content hover:border-success-content rounded-none text-white font-normal text-lg py-4 transition-none uppercase">
                         Register
