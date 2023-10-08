@@ -63,11 +63,14 @@ export default function SearchPage() {
                     <div className="flex-col gap-4">
                         <div className="mb-4">
                             <h4>Genre</h4>
-                            <RefinementList attribute="genre" />
+                            <RefinementList attribute="genre" showMore={true} />
                         </div>
                         <div className="mb-4">
                             <h4>Format</h4>
-                            <RefinementList attribute="format" />
+                            <RefinementList
+                                attribute="format"
+                                showMore={true}
+                            />
                         </div>
                         <div className="mb-4">
                             <h4>Price</h4>

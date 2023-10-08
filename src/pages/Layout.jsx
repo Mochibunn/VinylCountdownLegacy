@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import Nav from "../components/Nav";
 //import TheFooter from "../components/TheFooter";
 
-export default function LandingPage() {
+export default function Layout() {
     return (
         <>
             <Nav />
