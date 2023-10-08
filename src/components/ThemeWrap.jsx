@@ -11,8 +11,8 @@ export default function ThemeWrap() {
     const isDark = JSON.parse(localStorage.getItem("isDark"));
     const [isDarkMode, setIsDarkMode] = useState(isDark);
 
-    // const isSignedIn = JSON.parse(localStorage.getItem("signedIn"));
-    const [user, setUser] = useState(null);
+    const isSignedIn = JSON.parse(localStorage.getItem("signedIn"));
+    const [user, setUser] = useState(isSignedIn);
 
     useEffect(() => {
         const prefers = window.matchMedia(

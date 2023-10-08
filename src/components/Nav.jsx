@@ -38,16 +38,13 @@ const Nav = () => {
 
     // const [isSelected, setIsSelected] = useState(isDark);
 
-    const userIcon = "https://i.pravatar.cc/150?u=a042581f4e29026704d"; //placeholder info
-    const userEmail = "john.madden@nfl.gov"; //placeholder info
-
     const navigate = useNavigate(); //to add navigation to login and register pages
 
     const handleClick = () => {
         setUser(!user);
     };
     useEffect(() => {
-        localStorage.setItem("signedIn", user); //!Mock sign in function, please replace with something more real!
+        localStorage.setItem("signedIn", JSON.stringify(user)); //!Mock sign in function, please replace with something more real!
     }, [user]);
 
     // const menuItems = [
