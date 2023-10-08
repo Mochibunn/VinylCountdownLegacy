@@ -12,18 +12,19 @@ import {
     DropdownTrigger,
     Dropdown,
     DropdownMenu,
-    Avatar, Divider,
+    Avatar, Divider, DropdownSection
 } from "@nextui-org/react";
 import { AcmeLogo } from "../assets/AcmeLogo.jsx";
 import { SearchIcon } from "../assets/SearchIcon.jsx";
 import { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom/dist/index.js";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../Contexts.jsx";
+import { ThemeContext, UserContext } from "../Contexts.jsx";
 import NavSwitch from "./NavSwitch.jsx";
 
 const Nav = () => {
     const { user, setUser } = useContext(UserContext);
+    const { isDarkMode } = useContext(ThemeContext)
 
     //Moved to ThemeWrap
     // const isSignedIn = JSON.parse(localStorage.getItem("signedIn"));
@@ -35,7 +36,7 @@ const Nav = () => {
 
     // const [isSelected, setIsSelected] = useState(isDark);
 
-    const navigate = useNavigate(); //to add navigation to login and register pages
+    const navigate = useNavigate(); //todo add navigation to login and register pages
 
     const handleClick = () => {
         setUser(!user);
@@ -60,7 +61,6 @@ const Nav = () => {
     if (user) console.log(user[0].fields.profilePic);
     return (
       <Navbar shouldHideOnScroll onMenuOpenChange={setIsMenuOpen}>
-        
         <NavbarContent justify="start">
 
         <NavbarMenuToggle
@@ -74,7 +74,7 @@ const Nav = () => {
               <p className="hidden sm:block font-bold text-inherit">VINYL COUNTDOWN</p>
             </NavLink>
           </NavbarBrand>
-          <NavbarContent className="hidden md:flex gap-3">
+          <NavbarContent className="hidden md:flex md:gap-3">
             <NavbarItem>
               <NavLink to="/" aria-current="page" color="foreground" >   {/*// {({isActive}) => isActive ? "secondary" : "foreground" } //? Not sure how to control color if link is the active one */}
                 Home
@@ -109,7 +109,11 @@ const Nav = () => {
           <div className="hidden md:block">
           <NavSwitch/>
           </div>
-          <Dropdown placement="bottom-end">
+
+          {/* Avatar menu items */}
+          <Dropdown placement="bottom-end" className={`${
+            isDarkMode ? "dark" : ""
+        } text-foreground bg-background`}> 
         <DropdownTrigger className="hidden md:block">
             <Avatar
                 isBordered
@@ -128,62 +132,67 @@ const Nav = () => {
                 "forums",
                 "settings",
                 "help_and_feedback",
-            ]}
-        >
+            ]}>
             {" "}
-            {/* Avatar menu items */}
-            <DropdownItem key="profile" className="h-14 gap-2">
-                {user ? (
+            <DropdownSection showDivider>
+              <DropdownItem key="profile" className="h-14 gap-2">
+                  {user ? (
                     <>
-                        <p className="font-semibold">
-                            Signed in as:
-                        </p>
-                        <p className="font-normal">
-                            {user && user[0].fields.firstName}{" "}
-                            {user && user[0].fields.lastName}
-                        </p>
-                    </>
-                ) : (
+                          <p className="font-semibold">
+                              Signed in as:
+                          </p>
+                          <p className="font-normal">
+                              {user && user[0].fields.firstName}{" "}
+                              {user && user[0].fields.lastName}
+                          </p>
+                      </>
+                  ) : (
                     "Not signed in"
-                )}
-            </DropdownItem>
-            <DropdownItem key="orders">Orders</DropdownItem>
-            <DropdownItem key="lists">Lists</DropdownItem>
-            <DropdownItem key="forums">Forums</DropdownItem>
-            <DropdownItem key="settings">Settings</DropdownItem>
-            <DropdownItem key="help_and_feedback">
-                Help & Feedback
-            </DropdownItem>
-            {!user && (
+                    )}
+              </DropdownItem>
+            </DropdownSection>
+            <DropdownSection showDivider>
+              <DropdownItem key="orders">Orders</DropdownItem>
+              <DropdownItem key="lists">Lists</DropdownItem>
+              <DropdownItem key="forums">Forums</DropdownItem>
+              <DropdownItem key="settings">Settings</DropdownItem>
+              <DropdownItem key="help_and_feedback">
+                  Help & Feedback
+              </DropdownItem>
+            </DropdownSection>
+            <DropdownSection showDivider>
+              {!user && (
                 <DropdownItem
-                    onClick={() => navigate("register")}
-                    key="register"
-                >
-                    Register
-                </DropdownItem>
-            )}
-            {user ? (
-                <DropdownItem
-                    key="logout"
-                    color="danger"
-                    onClick={handleClick}
-                >
-                    Sign Out
-                </DropdownItem>
-            ) : (
-                <DropdownItem
-                    key="login"
-                    color="warning"
-                    onClick={() => navigate("signin")}
-                >
-                    Sign In
-                </DropdownItem>
-            )}
+                onClick={() => navigate("register")}
+                key="register"
+                color="warning"
+                  >
+                      Register
+                  </DropdownItem>
+              )}
+              {user ? (
+                  <DropdownItem
+                      key="logout"
+                      color="danger"
+                      onClick={handleClick}
+                  >
+                      Sign Out
+                  </DropdownItem>
+              ) : (
+                  <DropdownItem
+                      key="login"
+                      color="warning"
+                      onClick={() => navigate("signin")}
+                  >
+                      Sign In
+                  </DropdownItem>
+              )}
+            </DropdownSection>
         </DropdownMenu>
     </Dropdown>
 </NavbarContent>
 {/* Mobile hamburger menu stuff below */}
-        <NavbarMenu>
+        <NavbarMenu className={isDarkMode && "dark text-foreground"}>
         <NavbarMenuItem className="my-3">
             <NavSwitch />
           </NavbarMenuItem>
@@ -202,8 +211,6 @@ const Nav = () => {
               Browse
             </NavLink>
           </NavbarMenuItem>
-
-
                 <NavbarMenuItem>
                     <NavLink
                         color="foreground"
@@ -258,14 +265,24 @@ const Nav = () => {
                 </NavbarMenuItem>
                 <Divider />
                 <NavbarMenuItem>
-                    <Link
-                        color={user ? "danger" : "warning"}
-                        className="w-full"
-                        size="lg"
-                        onClick={handleClick}
-                    >
-                        {user ? "Sign Out" : "Sign In"}
-                    </Link>
+                {user ? (
+                      <Link
+                          key="logout"
+                          color="danger"
+                          onClick={handleClick}
+                      >
+                          Sign Out
+                      </Link>
+                  ) : (
+                      <Link
+                          key="login"
+                          color="warning"
+                          className="text-xl font-semibold"
+                          onClick={() => navigate("signin")}
+                      >
+                          Sign In
+                      </Link>
+                  )}
                 </NavbarMenuItem>
 
                 {/* {menuItems.map((item, index) => ( //Hamburger menu items
