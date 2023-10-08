@@ -21,6 +21,7 @@ import { NavLink } from "react-router-dom/dist/index.js";
 import { useNavigate } from "react-router-dom";
 import { ThemeContext, UserContext } from "../Contexts.jsx";
 import NavSwitch from "./NavSwitch.jsx";
+import SignInModal from "./SignInModal.jsx";
 
 const Nav = () => {
     const { user, setUser } = useContext(UserContext);
@@ -111,7 +112,7 @@ const Nav = () => {
           </div>
 
           {/* Avatar menu items */}
-          <Dropdown placement="bottom-end" className={`${
+          <Dropdown  placement="bottom-end" className={`${
             isDarkMode ? "dark" : ""
         } text-foreground bg-background`}> 
         <DropdownTrigger className="hidden md:block">
@@ -133,7 +134,7 @@ const Nav = () => {
                 "settings",
                 "help_and_feedback",
             ]}>
-            {" "}
+            {/* {" "} */}
             <DropdownSection showDivider>
               <DropdownItem key="profile" className="h-14 gap-2">
                   {user ? (
@@ -182,9 +183,11 @@ const Nav = () => {
                   <DropdownItem
                       key="login"
                       color="warning"
-                      onClick={() => navigate("signin")}
-                  >
-                      Sign In
+                      // onClick={() => navigate("signin")}
+                      onClick={(e) => {
+                        e.preventDefault()}}
+                      >
+                      <SignInModal/>
                   </DropdownItem>
               )}
             </DropdownSection>
@@ -300,6 +303,7 @@ const Nav = () => {
             </NavbarMenuItem>
           ))} */}
             </NavbarMenu>
+            <div className="hidden"><SignInModal/></div> {/* I have no idea why but having this duplicated component keeps the modal from disappearing on dropdown menu close which is what we want */}
         </Navbar>
     );
 };
