@@ -12,7 +12,7 @@ import {
     DropdownTrigger,
     Dropdown,
     DropdownMenu,
-    Avatar,
+    Avatar, Divider,
 } from "@nextui-org/react";
 import { AcmeLogo } from "../assets/AcmeLogo.jsx";
 import { SearchIcon } from "../assets/SearchIcon.jsx";
@@ -59,55 +59,44 @@ const Nav = () => {
 
     if (user) console.log(user[0].fields.profilePic);
     return (
-        <Navbar shouldHideOnScroll onMenuOpenChange={setIsMenuOpen}>
-            <NavbarContent justify="start">
-                <NavbarMenuToggle
-                    aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                    className="sm:hidden"
-                />
+      <Navbar shouldHideOnScroll onMenuOpenChange={setIsMenuOpen}>
+        
+        <NavbarContent justify="start">
 
-                <NavbarBrand className="mr-4">
-                    <NavLink
-                        to="/"
-                        aria-current="page"
-                        color="foreground"
-                        className="flex items-center"
-                    >
-                        <AcmeLogo className="place-items-center" />
-                        <p className="hidden sm:block font-bold text-inherit">
-                            VINYL COUNTDOWN
-                        </p>
-                    </NavLink>
-                </NavbarBrand>
-                <NavbarContent className="hidden sm:flex gap-3">
-                    <NavbarItem>
-                        <NavLink to="/" aria-current="page" color="foreground">
-                            {" "}
-                            {/*// {({isActive}) => isActive ? "secondary" : "foreground" } //? Not sure how to control color if link is the active one */}
-                            Home
-                        </NavLink>
-                    </NavbarItem>
-                    <NavbarItem>
-                        <Link color="foreground" href="#">
-                            New
-                        </Link>
-                    </NavbarItem>
-                    <NavbarItem>
-                        <NavLink
-                            to="/search"
-                            aria-current="page"
-                            color="foreground"
-                        >
-                            Browse
-                        </NavLink>
-                    </NavbarItem>
-                </NavbarContent>
-            </NavbarContent>
+        <NavbarMenuToggle
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className="md:hidden"
+          />
+
+          <NavbarBrand className="mr-4">
+            <NavLink to="/" aria-current="page" color="foreground" className="flex items-center">
+              <AcmeLogo className="place-items-center" />
+              <p className="hidden sm:block font-bold text-inherit">VINYL COUNTDOWN</p>
+            </NavLink>
+          </NavbarBrand>
+          <NavbarContent className="hidden md:flex gap-3">
+            <NavbarItem>
+              <NavLink to="/" aria-current="page" color="foreground" >   {/*// {({isActive}) => isActive ? "secondary" : "foreground" } //? Not sure how to control color if link is the active one */}
+                Home
+              </NavLink>
+            </NavbarItem>
+            <NavbarItem>
+              <Link color="foreground" href="#">
+                New
+              </Link>
+            </NavbarItem>
+            <NavbarItem>
+            <NavLink to="/search" aria-current="page" color="foreground">
+                Browse
+              </NavLink>
+            </NavbarItem>
+          </NavbarContent>
+        </NavbarContent>
 
         <NavbarContent as="div" className="items-center max-w-full" justify="end">
           <Input
             classNames={{
-              base: "sm:max-w-[8rem] md:max-w-[12rem] lg:max-w-[20rem] h-10",
+              base: "sm:max-w-[22rem] md:max-w-[12rem] lg:max-w-[20rem] h-10",
               mainWrapper: "h-full",
               input: "text-small",
               inputWrapper: "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
@@ -117,9 +106,11 @@ const Nav = () => {
             startContent={<SearchIcon size={18} />}
             type="search"
           />
+          <div className="hidden md:block">
           <NavSwitch/>
+          </div>
           <Dropdown placement="bottom-end">
-        <DropdownTrigger>
+        <DropdownTrigger className="hidden md:block">
             <Avatar
                 isBordered
                 as="button"
@@ -193,6 +184,9 @@ const Nav = () => {
 </NavbarContent>
 {/* Mobile hamburger menu stuff below */}
         <NavbarMenu>
+        <NavbarMenuItem className="my-3">
+            <NavSwitch />
+          </NavbarMenuItem>
         <NavbarMenuItem>
             <NavLink to="/" aria-current="page" color="foreground" className="w-full" size="lg">
               Home
@@ -262,6 +256,7 @@ const Nav = () => {
                         Help & Feedback
                     </NavLink>
                 </NavbarMenuItem>
+                <Divider />
                 <NavbarMenuItem>
                     <Link
                         color={user ? "danger" : "warning"}
