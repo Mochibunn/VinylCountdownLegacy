@@ -1,4 +1,4 @@
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Link, Input, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar} from "@nextui-org/react";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Link, Input, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar, Divider} from "@nextui-org/react";
 import {AcmeLogo} from "../assets/AcmeLogo.jsx";
 import {SearchIcon} from "../assets/SearchIcon.jsx";
 import { useState, useEffect } from "react";
@@ -42,7 +42,7 @@ import NavSwitch from "./NavSwitch.jsx";
 
         <NavbarMenuToggle
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            className="sm:hidden"
+            className="md:hidden"
           />
 
           <NavbarBrand className="mr-4">
@@ -51,7 +51,7 @@ import NavSwitch from "./NavSwitch.jsx";
               <p className="hidden sm:block font-bold text-inherit">VINYL COUNTDOWN</p>
             </NavLink>
           </NavbarBrand>
-          <NavbarContent className="hidden sm:flex gap-3">
+          <NavbarContent className="hidden md:flex gap-3">
             <NavbarItem>
               <NavLink to="/" aria-current="page" color="foreground" >   {/*// {({isActive}) => isActive ? "secondary" : "foreground" } //? Not sure how to control color if link is the active one */}
                 Home
@@ -73,7 +73,7 @@ import NavSwitch from "./NavSwitch.jsx";
         <NavbarContent as="div" className="items-center max-w-full" justify="end">
           <Input
             classNames={{
-              base: "sm:max-w-[8rem] md:max-w-[12rem] lg:max-w-[20rem] h-10",
+              base: "sm:max-w-[22rem] md:max-w-[12rem] lg:max-w-[20rem] h-10",
               mainWrapper: "h-full",
               input: "text-small",
               inputWrapper: "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
@@ -83,9 +83,11 @@ import NavSwitch from "./NavSwitch.jsx";
             startContent={<SearchIcon size={18} />}
             type="search"
           />
+          <div className="hidden md:block">
           <NavSwitch/>
+          </div>
           <Dropdown placement="bottom-end">
-            <DropdownTrigger>
+            <DropdownTrigger className="hidden md:block">
               <Avatar
                 isBordered
                 as="button"
@@ -117,6 +119,9 @@ import NavSwitch from "./NavSwitch.jsx";
         </NavbarContent>
 {/* Mobile hamburger menu stuff below */}
         <NavbarMenu>
+        <NavbarMenuItem className="my-3">
+            <NavSwitch />
+          </NavbarMenuItem>
         <NavbarMenuItem>
             <NavLink to="/" aria-current="page" color="foreground" className="w-full" size="lg">
               Home
@@ -158,11 +163,22 @@ import NavSwitch from "./NavSwitch.jsx";
               Help & Feedback
             </NavLink>
           </NavbarMenuItem>
+          <Divider />
           <NavbarMenuItem>
             <Link color={signedIn ? "danger" : "warning"} className="w-full" size="lg" onClick={handleClick}>
               {signedIn ? "Sign Out" : "Sign In"}
             </Link>
           </NavbarMenuItem>
+
+        </NavbarMenu>
+
+      </Navbar>
+    );
+  }
+
+export default Nav;
+
+
 
           {/* {menuItems.map((item, index) => ( //Hamburger menu items
             <NavbarMenuItem key={`${item}-${index}`}>
@@ -178,10 +194,3 @@ import NavSwitch from "./NavSwitch.jsx";
               </Link>
             </NavbarMenuItem>
           ))} */}
-        </NavbarMenu>
-
-      </Navbar>
-    );
-  }
-
-export default Nav;
