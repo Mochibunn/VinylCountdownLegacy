@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { client } from "../lib/contentfulClient";
 import { UserContext } from "../Contexts";
-
+//! If you are changing any code in this block, please let Mochi know! 
 const SignIn = () => {
     const [form, setForm] = useState({
         email: "",
@@ -35,7 +35,7 @@ const SignIn = () => {
             .catch((error) => console.error(error));
         navigate("/");
     };
-
+//! End of code block
     return (
         <div className="mt-[-1px] w-full h-screen flex items-center justify-center">
             <form
