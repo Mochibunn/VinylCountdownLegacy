@@ -13,19 +13,16 @@ import {
     Dropdown,
     DropdownMenu,
     Avatar,
-    Switch,
 } from "@nextui-org/react";
 import { AcmeLogo } from "../assets/AcmeLogo.jsx";
 import { SearchIcon } from "../assets/SearchIcon.jsx";
 import { useState, useEffect, useContext } from "react";
-import { SunIcon } from "../assets/SunIcon.jsx";
-import { MoonIcon } from "../assets/MoonIcon.jsx";
 import { NavLink } from "react-router-dom/dist/index.js";
 import { useNavigate } from "react-router-dom";
-import { ThemeContext, UserContext } from "../Contexts.jsx";
+import { UserContext } from "../Contexts.jsx";
+import NavSwitch from "./NavSwitch.jsx";
 
 const Nav = () => {
-    const { isDarkMode, toggleDarkMode } = useContext(ThemeContext);
     const { user, setUser } = useContext(UserContext);
 
     //Moved to ThemeWrap
@@ -107,135 +104,111 @@ const Nav = () => {
                 </NavbarContent>
             </NavbarContent>
 
-            <NavbarContent as="div" className="items-center" justify="end">
-                <Input
-                    classNames={{
-                        base: "max-w-[10rem] h-10",
-                        mainWrapper: "h-full",
-                        input: "text-small",
-                        inputWrapper:
-                            "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
-                    }}
-                    placeholder="Search.."
-                    size="sm"
-                    startContent={<SearchIcon size={18} />}
-                    type="search"
-                />
-                <Switch //Dark mode toggle
-                    isSelected={isDarkMode}
-                    onValueChange={toggleDarkMode}
-                    size="lg"
+        <NavbarContent as="div" className="items-center max-w-full" justify="end">
+          <Input
+            classNames={{
+              base: "sm:max-w-[8rem] md:max-w-[12rem] lg:max-w-[20rem] h-10",
+              mainWrapper: "h-full",
+              input: "text-small",
+              inputWrapper: "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+            }}
+            placeholder="Search.."
+            size="sm"
+            startContent={<SearchIcon size={18} />}
+            type="search"
+          />
+          <NavSwitch/>
+          <Dropdown placement="bottom-end">
+        <DropdownTrigger>
+            <Avatar
+                isBordered
+                as="button"
+                className="transition-transform"
+                color="primary"
+                // name="John Madden"
+                size="sm"
+                src={user && user[0].fields.profilePic}
+            />
+        </DropdownTrigger>
+        <DropdownMenu
+            aria-label="Profile Actions"
+            variant="flat"
+            disabledKeys={[
+                "forums",
+                "settings",
+                "help_and_feedback",
+            ]}
+        >
+            {" "}
+            {/* Avatar menu items */}
+            <DropdownItem key="profile" className="h-14 gap-2">
+                {user ? (
+                    <>
+                        <p className="font-semibold">
+                            Signed in as:
+                        </p>
+                        <p className="font-normal">
+                            {user && user[0].fields.firstName}{" "}
+                            {user && user[0].fields.lastName}
+                        </p>
+                    </>
+                ) : (
+                    "Not signed in"
+                )}
+            </DropdownItem>
+            <DropdownItem key="orders">Orders</DropdownItem>
+            <DropdownItem key="lists">Lists</DropdownItem>
+            <DropdownItem key="forums">Forums</DropdownItem>
+            <DropdownItem key="settings">Settings</DropdownItem>
+            <DropdownItem key="help_and_feedback">
+                Help & Feedback
+            </DropdownItem>
+            {!user && (
+                <DropdownItem
+                    onClick={() => navigate("register")}
+                    key="register"
+                >
+                    Register
+                </DropdownItem>
+            )}
+            {user ? (
+                <DropdownItem
+                    key="logout"
+                    color="danger"
+                    onClick={handleClick}
+                >
+                    Sign Out
+                </DropdownItem>
+            ) : (
+                <DropdownItem
+                    key="login"
                     color="warning"
-                    startContent={<SunIcon />}
-                    endContent={<MoonIcon />}
-                ></Switch>
-                <Dropdown placement="bottom-end">
-                    <DropdownTrigger>
-                        <Avatar
-                            isBordered
-                            as="button"
-                            className="transition-transform"
-                            color="primary"
-                            // name="John Madden"
-                            size="sm"
-                            src={user && user[0].fields.profilePic}
-                        />
-                    </DropdownTrigger>
-                    <DropdownMenu
-                        aria-label="Profile Actions"
-                        variant="flat"
-                        disabledKeys={[
-                            "forums",
-                            "settings",
-                            "help_and_feedback",
-                        ]}
-                    >
-                        {" "}
-                        {/* Avatar menu items */}
-                        <DropdownItem key="profile" className="h-14 gap-2">
-                            {user ? (
-                                <>
-                                    <p className="font-semibold">
-                                        Signed in as:
-                                    </p>
-                                    <p className="font-normal">
-                                        {user && user[0].fields.firstName}{" "}
-                                        {user && user[0].fields.lastName}
-                                    </p>
-                                </>
-                            ) : (
-                                "Not signed in"
-                            )}
-                        </DropdownItem>
-                        <DropdownItem key="orders">Orders</DropdownItem>
-                        <DropdownItem key="lists">Lists</DropdownItem>
-                        <DropdownItem key="forums">Forums</DropdownItem>
-                        <DropdownItem key="settings">Settings</DropdownItem>
-                        <DropdownItem key="help_and_feedback">
-                            Help & Feedback
-                        </DropdownItem>
-                        {!user && (
-                            <DropdownItem
-                                onClick={() => navigate("register")}
-                                key="register"
-                            >
-                                Register
-                            </DropdownItem>
-                        )}
-                        {user ? (
-                            <DropdownItem
-                                key="logout"
-                                color="danger"
-                                onClick={handleClick}
-                            >
-                                Sign Out
-                            </DropdownItem>
-                        ) : (
-                            <DropdownItem
-                                key="login"
-                                color="warning"
-                                onClick={() => navigate("signin")}
-                            >
-                                Sign In
-                            </DropdownItem>
-                        )}
-                    </DropdownMenu>
-                </Dropdown>
-            </NavbarContent>
-            {/* Mobile hamburger menu stuff below */}
-            <NavbarMenu>
-                <NavbarMenuItem>
-                    <NavLink
-                        to="/"
-                        aria-current="page"
-                        color="foreground"
-                        className="w-full"
-                        size="lg"
-                    >
-                        Home
-                    </NavLink>
-                </NavbarMenuItem>
-                <NavbarMenuItem>
-                    <NavLink
-                        color="foreground"
-                        href="#"
-                        className="w-full"
-                        size="lg"
-                    >
-                        New
-                    </NavLink>
-                </NavbarMenuItem>
-                <NavbarMenuItem>
-                    <NavLink
-                        to="/search"
-                        aria-current="page"
-                        color="foreground"
-                        className="w-full"
-                        size="lg"
-                    >
-                        Browse
-                    </NavLink>
-                </NavbarMenuItem>
+                    onClick={() => navigate("signin")}
+                >
+                    Sign In
+                </DropdownItem>
+            )}
+        </DropdownMenu>
+    </Dropdown>
+</NavbarContent>
+{/* Mobile hamburger menu stuff below */}
+        <NavbarMenu>
+        <NavbarMenuItem>
+            <NavLink to="/" aria-current="page" color="foreground" className="w-full" size="lg">
+              Home
+            </NavLink>
+          </NavbarMenuItem>
+          <NavbarMenuItem>
+            <NavLink color="foreground" href="#" className="w-full" size="lg">
+              New
+            </NavLink>
+          </NavbarMenuItem>
+          <NavbarMenuItem>
+          <NavLink to="/search" aria-current="page" color="foreground" className="w-full" size="lg">
+              Browse
+            </NavLink>
+          </NavbarMenuItem>
+
 
                 <NavbarMenuItem>
                     <NavLink
