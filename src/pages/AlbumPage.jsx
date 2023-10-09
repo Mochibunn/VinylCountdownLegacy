@@ -98,7 +98,7 @@ export default function AlbumPage() {
                                     color="warning"
                                     variant="shadow"
                                     endContent=""
-                                    className="w-full h-14 text-xl font-bold" 
+                                    className="w-full h-14 text-lg font-semibold" 
                                 >
                                     Add to cart
                                 </Button>
@@ -106,13 +106,13 @@ export default function AlbumPage() {
                                     color="warning"
                                     variant="shadow"
                                     startContent=""
-                                    className="w-full h-14 text-xl font-bold"
+                                    className="w-full h-14 text-lg font-semibold"
                                 >
                                     Add to Wishlist
                                 </Button>
                             </div>
                             <Divider className="my-4" />
-                            <div className="rounded-xl overflow-hidden frametarget" aria-label="component wrapper"> {/* w/o this div, the Spotify player gets ugly white corners in dark mode */}
+                            <div className="rounded-xl overflow-hidden" aria-label="component wrapper"> {/* w/o this div, the Spotify player gets ugly white corners in dark mode */}
                             <Spotify
                                 link={singleAlbum.spotifyUrl}
                                 className="w-full h-[600px] shadow-2xl"
