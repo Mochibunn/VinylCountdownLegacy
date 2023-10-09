@@ -10,6 +10,7 @@ import {
 import "instantsearch.css/themes/satellite.css";
 import { useNavigate } from "react-router-dom";
 import { searchClient } from "../lib/algoliaClient";
+import CustomRefinementList from "../components/CustomRefinementList";
 
 // import SearchCard from "../components/SearchCard";
 
@@ -19,7 +20,7 @@ export function SearchCard({ hit }) {
     const navigate = useNavigate();
     return (
         <Card
-            className="w-4/5 mx-auto my-2"
+            className="w-full mx-auto my-2"
             isPressable
             onClick={() => {
                 navigate(`/album/${hit.objectID}`);
@@ -28,10 +29,10 @@ export function SearchCard({ hit }) {
             <CardHeader className="flex gap-3">
                 <Image
                     alt="nextui logo"
-                    height={80}
+                    height={100}
                     radius="sm"
                     src={hit.imgUrl}
-                    width={80}
+                    width={100}
                 />
                 <div className="flex flex-col gap-3">
                     <p className="text-md">{hit.title}</p>
@@ -54,26 +55,26 @@ export default function SearchPage() {
                 <CurrentRefinements
                     includedAttributes={["format", "genre", "price", "sleeve"]}
                 />
-                <div className="flex">
+                <div className="flex ml-3">
                     <div className="flex-col gap-4">
                         <div className="mb-4">
-                            <h4>Genre</h4>
-                            <RefinementList attribute="genre" showMore={true} />
+                            <h4 className="text-xl font-semibold">Genre</h4>
+                            <CustomRefinementList attribute="genre" showMore={true} />
                         </div>
                         <div className="mb-4">
-                            <h4>Format</h4>
-                            <RefinementList
+                            <h4 className="text-xl font-semibold"> Format</h4>
+                            <CustomRefinementList
                                 attribute="format"
                                 showMore={true}
                             />
                         </div>
                         <div className="mb-4">
-                            <h4>Price</h4>
-                            <RefinementList attribute="price" />
+                            <h4 className="text-xl font-semibold">Price</h4>
+                            <CustomRefinementList attribute="price" />
                         </div>
                         <div>
-                            <h4>Sleeve</h4>
-                            <RefinementList attribute="sleeve" />
+                            <h4 className="text-xl font-semibold">Sleeve</h4>
+                            <CustomRefinementList attribute="sleeve" />
                         </div>
                     </div>
                     <Hits hitComponent={SearchCard} />

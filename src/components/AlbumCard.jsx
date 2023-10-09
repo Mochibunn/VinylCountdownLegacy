@@ -7,6 +7,8 @@ import {
     Image, Divider
 } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
+import Tilt from "react-parallax-tilt";
+
 
 export default function AlbumCard({
     artist,
