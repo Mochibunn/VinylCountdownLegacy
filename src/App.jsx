@@ -6,6 +6,7 @@ import AlbumPage from "./pages/AlbumPage";
 import SearchPage from "./pages/SearchPage";
 import SignIn from "./pages/SignIn";
 import Register from "./pages/Register";
+import Wishlist from "./pages/Wishlist";
 import NotFound from "./pages/NotFound";
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
                 <Route path="search" element={<SearchPage />} />
                 <Route path="signin" element={<SignIn />} />
                 <Route path="register" element={<Register />} />
-
+                <Route path="wishlist" element={<Wishlist />} />
                 <Route path="*" element={<NotFound />} />
             </Route>
         </Routes>

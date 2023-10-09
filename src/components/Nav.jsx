@@ -61,7 +61,7 @@ const Nav = () => {
     //   "Log Out",
     // ];
 
-    if (user) console.log(user[0].fields.profilePic);
+    // if (user) console.log(user[0].fields.profilePic);
     return (
         <Navbar shouldHideOnScroll onMenuOpenChange={setIsMenuOpen}>
             <NavbarContent justify="start">
@@ -182,7 +182,12 @@ const Nav = () => {
                                 <DropdownItem key="cart">Cart</DropdownItem>
                             )}
                             {user && (
-                                <DropdownItem key="lists">Lists</DropdownItem>
+                                <DropdownItem
+                                    onClick={() => navigate("wishlist")}
+                                    key="wishlist"
+                                >
+                                    Wishlist
+                                </DropdownItem>
                             )}
 
                             <DropdownItem key="forums">Forums</DropdownItem>
