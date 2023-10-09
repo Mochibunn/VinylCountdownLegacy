@@ -1,8 +1,8 @@
 import { createClient } from "contentful";
 
 const client = createClient({
-    space: "mzz74ba5zfwb",
-    accessToken: "qip5rmOLyuFNm33Av0mWcV9volA1KAwFjfQvK4hmHdA",
+    space: import.meta.env.VITE_CONTENTFUL_SPACE_ID,
+    accessToken: import.meta.env.VITE_CONTENTFUL_ACCESS_TOKEN,
 });
 
 const getAllAlbums = async () => {

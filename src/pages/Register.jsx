@@ -5,10 +5,6 @@ import { getUser } from "../lib/contentfulClient";
 import { makeNewUser } from "../lib/contentfulMngClient";
 import { useNavigate } from "react-router-dom";
 
-// const mngClient = createClient({
-//     accessToken: "CFPAT-9FIovKgJafb_y5dqoSK0a3qRLNPaXZgH0pCZP6T7Ne4",
-// });
-
 const Register = () => {
     const [form, setForm] = useState({
         firstName: "",
