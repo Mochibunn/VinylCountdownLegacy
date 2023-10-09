@@ -42,6 +42,7 @@ const Nav = () => {
     const navigate = useNavigate(); //todo add navigation to login and register pages
 
     const handleClick = () => {
+        navigate("/");
         setUser(!user);
     };
     useEffect(() => {
