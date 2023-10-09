@@ -17,7 +17,7 @@ export default function AlbumCarousel() {
 
     const sliderSettings = {
         slidesToShow: 4,
-        slidesToScroll: 2,
+        slidesToScroll: 4,
         infinite: true,
         dots: true,
         arrows: false,
@@ -27,24 +27,28 @@ export default function AlbumCarousel() {
                 breakpoint: 1280,
                 settings: {
                     slidesToShow: 3,
+                    slidesToScroll: 3,
                 },
             },
             {
                 breakpoint: 1024,
                 settings: {
                     slidesToShow: 2,
+                    slidesToScroll: 2,
                 },
             },
             {
                 breakpoint: 800,
                 settings: {
                     slidesToShow: 2,
+                    slidesToScroll: 2,
                 },
             },
             {
                 breakpoint: 640,
                 settings: {
-                    slidesToShow: 3,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
                 },
             },
         ],
@@ -52,7 +56,7 @@ export default function AlbumCarousel() {
     return (
         <div className="w-11/12 mx-auto">
             <h4 className="text-2xl font-bold">You may also like...</h4>
-            <div className="flex justify-between relative z-10 top-48">
+            <div className=" flex justify-between relative z-10 top-48">
                 <button onClick={sliderRef?.slickPrev} className="">
                     <FaChevronLeft />
                 </button>

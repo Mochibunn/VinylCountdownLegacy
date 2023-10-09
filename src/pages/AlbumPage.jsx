@@ -98,7 +98,7 @@ export default function AlbumPage() {
                                     color="warning"
                                     variant="shadow"
                                     endContent=""
-                                    className="w-full h-14 text-xl font-bold" 
+                                    className="w-full h-14 text-lg font-semibold" 
                                 >
                                     Add to cart
                                 </Button>
@@ -106,7 +106,7 @@ export default function AlbumPage() {
                                     color="warning"
                                     variant="shadow"
                                     startContent=""
-                                    className="w-full h-14 text-xl font-bold"
+                                    className="w-full h-14 text-lg font-semibold"
                                 >
                                     Add to Wishlist
                                 </Button>
