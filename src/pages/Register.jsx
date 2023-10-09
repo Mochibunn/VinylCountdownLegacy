@@ -25,6 +25,8 @@ const Register = () => {
         setForm((prev) => ({ ...prev, [name]: value }));
     };
 
+    // makeNewUser(form);
+
     const makeNewUser = () => {
         mngClient
             .getSpace("mzz74ba5zfwb")

@@ -6,7 +6,7 @@ import AlbumCard from "./AlbumCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export default function Carousel() {
+export default function AlbumCarousel() {
     const [sliderRef, setSliderRef] = useState(null);
     const [albumRecs, setAlbumRecs] = useState();
     useEffect(() => {

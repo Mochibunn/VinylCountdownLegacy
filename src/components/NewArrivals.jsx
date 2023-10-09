@@ -1,7 +1,7 @@
 import { Button } from "@nextui-org/react";
 import AlbumCard from "./AlbumCard";
 
-export default function App({ newArrivals }) {
+export default function NewArrivals({ newArrivals }) {
     console.log(newArrivals);
     return (
         <div className="p-8">
