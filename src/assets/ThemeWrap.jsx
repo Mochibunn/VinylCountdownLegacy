@@ -36,14 +36,14 @@ export default function ThemeWrap() {
         <main
             id="main"
             className={`${
-                isDarkMode ? "dark" : ""
+                isDarkMode ? "dark bg-[#1a1e25]" : ""
             } text-foreground bg-background`}
         >
             <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
                 <UserContext.Provider value={{ user, setUser }}>
-                  <SignInModalContext.Provider value={{isOpen, onOpen, onClose, onOpenChange}}>
+                    <SignInModalContext.Provider value={{isOpen, onOpen, onClose, onOpenChange}}>
                     <App />
-                  </SignInModalContext.Provider>
+                    </SignInModalContext.Provider>
                 </UserContext.Provider>
             </ThemeContext.Provider>
         </main>

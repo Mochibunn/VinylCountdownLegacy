@@ -1,11 +1,11 @@
-import { Button, Input, Checkbox, Chip } from '@nextui-org/react';
+import { Button, Checkbox, Chip } from '@nextui-org/react';
 import { useRefinementList } from 'react-instantsearch';
 
 export default function CustomRefinementList(props) {
   const {
     items,
     refine,
-    searchForItems,
+    // searchForItems,
     canToggleShowMore,
     isShowingMore,
     toggleShowMore,
