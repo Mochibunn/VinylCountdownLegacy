@@ -1,4 +1,3 @@
-import algoliasearch from "algoliasearch/lite";
 import {
     InstantSearch,
     SearchBox,
@@ -9,16 +8,12 @@ import {
     RefinementList,
 } from "react-instantsearch";
 import "instantsearch.css/themes/satellite.css";
-
 import { useNavigate } from "react-router-dom";
+import { searchClient } from "../lib/algoliaClient";
 
 // import SearchCard from "../components/SearchCard";
 
 import { Card, CardHeader, Image } from "@nextui-org/react";
-const searchClient = algoliasearch(
-    "P6CCZN45ER",
-    "cf814256b4cf855690036f02a8e267d0"
-);
 
 export function SearchCard({ hit }) {
     const navigate = useNavigate();

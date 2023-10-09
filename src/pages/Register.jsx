@@ -1,12 +1,13 @@
-import { createClient } from "contentful-management";
+// import { createClient } from "contentful-management";
 import { useState, useContext } from "react";
 import { UserContext } from "../Contexts";
-import { client } from "../lib/contentfulClient";
+import { getUser } from "../lib/contentfulClient";
+import { makeNewUser } from "../lib/contentfulMngClient";
 import { useNavigate } from "react-router-dom";
 
-const mngClient = createClient({
-    accessToken: "CFPAT-9FIovKgJafb_y5dqoSK0a3qRLNPaXZgH0pCZP6T7Ne4",
-});
+// const mngClient = createClient({
+//     accessToken: "CFPAT-9FIovKgJafb_y5dqoSK0a3qRLNPaXZgH0pCZP6T7Ne4",
+// });
 
 const Register = () => {
     const [form, setForm] = useState({
@@ -25,54 +26,9 @@ const Register = () => {
         setForm((prev) => ({ ...prev, [name]: value }));
     };
 
-    // makeNewUser(form);
-
-    const makeNewUser = () => {
-        mngClient
-            .getSpace("mzz74ba5zfwb")
-            .then((space) => space.getEnvironment("master"))
-            .then((environment) =>
-                environment.createEntryWithId("user", crypto.randomUUID(), {
-                    fields: {
-                        firstName: {
-                            "en-US": form.firstName,
-                        },
-                        lastName: {
-                            "en-US": form.lastName,
-                        },
-                        email: {
-                            "en-US": form.email,
-                        },
-                        password: {
-                            "en-US": form.password,
-                        },
-                        profilePic: {
-                            "en-US": form.profilePic,
-                        },
-                    },
-                })
-            )
-            .then((entry) => entry.publish())
-            .catch(console.error);
-
-        setRegistered(true);
-    };
-
     const handleHomeClick = () => {
-        const getUser = async () => {
-            try {
-                const getUserEntry = await client.getEntries({
-                    content_type: "user",
-                    "fields.email": `${form.email}`,
-                    "fields.password": `${form.password}`,
-                });
-                return getUserEntry.items;
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        makeNewUser();
-        getUser()
+        //imported now :)
+        getUser(form)
             .then((userData) => setUser(userData))
             .catch((error) => console.error(error));
         navigate("/");
@@ -91,7 +47,9 @@ const Register = () => {
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
-                        makeNewUser();
+                        //imported now :)
+                        makeNewUser(form);
+                        setRegistered(true);
                     }}
                     autoComplete="off"
                     className="flex flex-col items-center justify-between bg-base-300 pt-4 rounded overflow-hidden mx-auto my-0 w-2/3 sm:w-1/2 2xl:w-1/3 transition-all"

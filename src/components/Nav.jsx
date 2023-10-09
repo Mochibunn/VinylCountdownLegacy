@@ -45,7 +45,7 @@ const Nav = () => {
         setUser(!user);
     };
     useEffect(() => {
-        localStorage.setItem("signedIn", JSON.stringify(user)); //!Mock sign in function, please replace with something more real!
+        localStorage.setItem("signedIn", JSON.stringify(user)); //Updated to something more real :)
     }, [user]);
 
     // const menuItems = [

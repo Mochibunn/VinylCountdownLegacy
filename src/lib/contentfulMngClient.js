@@ -37,3 +37,5 @@ const makeNewUser = (newUser) => {
         .then((entry) => entry.publish())
         .catch(console.error);
 };
+
+export { makeNewUser };
