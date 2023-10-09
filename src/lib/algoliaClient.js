@@ -2,8 +2,8 @@ import algoliasearch from "algoliasearch";
 import { getAllAlbums } from "./contentfulClient";
 
 const searchClient = algoliasearch(
-    "P6CCZN45ER",
-    "cf814256b4cf855690036f02a8e267d0"
+    import.meta.env.VITE_ALGOLIA_SPACE_ID,
+    import.meta.env.VITE_ALGOLIA_API_KEY
 );
 
 const index = searchClient.initIndex("albums");

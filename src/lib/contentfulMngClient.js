@@ -1,7 +1,7 @@
 import { createClient } from "contentful-management";
 
 const mngClient = createClient({
-    accessToken: "CFPAT-9FIovKgJafb_y5dqoSK0a3qRLNPaXZgH0pCZP6T7Ne4",
+    accessToken: import.meta.env.VITE_CONTENTFUL_MNG_ACCESS_TOKEN,
 });
 
 /**
@@ -11,7 +11,7 @@ const mngClient = createClient({
  */
 const makeNewUser = (newUser) => {
     mngClient
-        .getSpace("mzz74ba5zfwb")
+        .getSpace(import.meta.env.VITE_CONTENTFUL_SPACE_ID)
         .then((space) => space.getEnvironment("master"))
         .then((environment) =>
             environment.createEntryWithId("user", crypto.randomUUID(), {
