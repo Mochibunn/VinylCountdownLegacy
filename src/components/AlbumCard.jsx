@@ -4,7 +4,7 @@ import {
     CardFooter,
     CardHeader,
     Button,
-    Image,
+    Image, Divider
 } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 
@@ -25,23 +25,29 @@ export default function AlbumCard({
         <>
             <Card
                 isPressable
-                className="py-4"
+                className="py-0 mx-3"
                 onClick={() => {
                     navigate(`/album/${id}`);
                 }}
             >
-                <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                    <h4 className="font-bold text-large">{title}</h4>
-                    <p className="text-tiny uppercase font-bold">Daily Mix</p>
-                    <small className="text-default-500">12 Tracks</small>
-                </CardHeader>
-                <CardBody className="overflow-visible py-2">
-                    <Image
+                <CardHeader className="p-0">
+                <Image
                         alt="Card background"
                         className="object-cover rounded-xl"
                         src={imgUrl}
-                        width={270}
+                        width="100%"
+                        height="100%"
                     />
+                </CardHeader>
+                <CardBody className="pb-0 pt-2 px-4">
+                    <div className="flex mb-3">
+                        <div className="w-4/5">
+                            <h4 className="font-bold text-large truncate">{title}</h4>
+                            <p className="text-tiny uppercase font-bold truncate">{artist}</p>
+                            <small className="text-default-500 truncate">{format}</small>
+                        </div>
+                        <h4 className="font-bold text-large truncate w-1/5 flex justify-center items-end ">${price}</h4>
+                    </div>
                 </CardBody>
             </Card>
         </>

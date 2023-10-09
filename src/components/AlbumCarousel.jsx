@@ -16,11 +16,19 @@ export default function AlbumCarousel() {
     }, []);
 
     const sliderSettings = {
-        slidesToShow: 3,
-        slidesToScroll: 1,
+        slidesToShow: 4,
+        slidesToScroll: 2,
         infinite: true,
         dots: true,
+        arrows: false,
+        lazyLoad: 'ondemand',
         responsive: [
+            {
+                breakpoint: 1280,
+                settings: {
+                    slidesToShow: 3,
+                },
+            },
             {
                 breakpoint: 1024,
                 settings: {
@@ -30,15 +38,21 @@ export default function AlbumCarousel() {
             {
                 breakpoint: 800,
                 settings: {
-                    slidesToShow: 1,
+                    slidesToShow: 2,
+                },
+            },
+            {
+                breakpoint: 640,
+                settings: {
+                    slidesToShow: 3,
                 },
             },
         ],
     };
     return (
-        <div className="w-11/12 p-4 mx-auto">
+        <div className="w-11/12 mx-auto">
             <h4 className="text-2xl font-bold">You may also like...</h4>
-            <div className="w-full flex justify-between relative z-10 top-48 right-4">
+            <div className="w-full flex justify-between relative z-10 top-48">
                 <button onClick={sliderRef?.slickPrev}>
                     <FaChevronLeft />
                 </button>
@@ -46,7 +60,7 @@ export default function AlbumCarousel() {
                     <FaChevronRight />
                 </button>
             </div>
-            <Slider className="px-5" ref={setSliderRef} {...sliderSettings}>
+            <Slider className="pt-6 h-max flex justify-center w-full" ref={setSliderRef} {...sliderSettings}>
                 {albumRecs &&
                     albumRecs.map((rec) => (
                         <AlbumCard

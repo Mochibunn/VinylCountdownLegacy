@@ -28,6 +28,7 @@ export default function AlbumPage() {
             .catch((error) => console.error(error));
     }, [albumId]);
 
+
     return (
         <>
             {singleAlbum && (
@@ -37,20 +38,20 @@ export default function AlbumPage() {
                         isPressable
                         onPress={() => console.log("item pressed")}
                         className="mb-8 h-full sm:sticky sm:top-20 overflow-visible shadow-none bg-transparent"
-                    >
-                        <Tilt className="rounded-xl overflow-hidden">
-                            <div>
-                                <CardBody className="p-0 shadow-2xl bg-none rounded-xl">
-                                    <Image
-                                        shadow="sm"
-                                        radius="lg"
-                                        width="100%"
-                                        alt={singleAlbum.title}
-                                        className="sm:max-h-[250px] md:max-h-[300px] lg:max-h-[450px] xl:max-h-[600px] rounded-xl"
-                                        src={singleAlbum.imgUrl}
-                                    />
-                                </CardBody>
-                            </div>
+                        >
+                            <Tilt className="rounded-xl overflow-hidden">
+                                <div>
+                        <CardBody className="p-0 shadow-2xl rounded-xl">
+                            <Image
+                                shadow="sm"
+                                radius="lg"
+                                width="100%"
+                                alt={singleAlbum.title}
+                                className="sm:max-h-[250px] md:max-h-[300px] lg:max-h-[450px] xl:max-h-[600px] rounded-xl"
+                                src={singleAlbum.imgUrl}
+                                />
+                        </CardBody>
+                                </div>
                         </Tilt>
                     </Card>
                     <div className="sm:ml-5 md:ml-8 lg:ml-12 sm:mt-12 w-full sm:w-1/2">
@@ -94,24 +95,24 @@ export default function AlbumPage() {
                             />
                             <div className="mt-4 flex gap-4 justify-center">
                                 <Button
-                                    color="primary"
-                                    variant="ghost"
+                                    color="warning"
+                                    variant="shadow"
                                     endContent=""
-                                    className="w-full"
+                                    className="w-full h-14 text-xl font-bold" 
                                 >
                                     Add to cart
                                 </Button>
                                 <Button
-                                    color="primary"
-                                    variant="ghost"
+                                    color="warning"
+                                    variant="shadow"
                                     startContent=""
-                                    className="w-full"
+                                    className="w-full h-14 text-xl font-bold"
                                 >
                                     Add to Wishlist
                                 </Button>
                             </div>
                             <Divider className="my-4" />
-                            <div className="rounded-xl overflow-hidden" aria-label="component wrapper"> {/* w/o this div, the Spotify player gets ugly white corners in dark mode */}
+                            <div className="rounded-xl overflow-hidden frametarget" aria-label="component wrapper"> {/* w/o this div, the Spotify player gets ugly white corners in dark mode */}
                             <Spotify
                                 link={singleAlbum.spotifyUrl}
                                 className="w-full h-[600px] shadow-2xl"
