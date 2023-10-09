@@ -32,6 +32,7 @@ export default function AlbumPage() {
             .catch((error) => console.error(error));
     }, [albumId]);
 
+
     return (
         <>
             {singleAlbum && (
@@ -44,7 +45,7 @@ export default function AlbumPage() {
                         >
                             <Tilt className="rounded-xl overflow-hidden">
                                 <div>
-                        <CardBody className="p-0 shadow-2xl bg-none rounded-xl">
+                        <CardBody className="p-0 shadow-2xl rounded-xl">
                             <Image
                                 shadow="sm"
                                 radius="lg"
@@ -98,24 +99,24 @@ export default function AlbumPage() {
                             />
                             <div className="mt-4 flex gap-4 justify-center">
                                 <Button
-                                    color="primary"
-                                    variant="ghost"
+                                    color="warning"
+                                    variant="shadow"
                                     endContent=""
-                                    className="w-full"
+                                    className="w-full h-14 text-xl font-bold" 
                                 >
                                     Add to cart
                                 </Button>
                                 <Button
-                                    color="primary"
-                                    variant="ghost"
+                                    color="warning"
+                                    variant="shadow"
                                     startContent=""
-                                    className="w-full"
+                                    className="w-full h-14 text-xl font-bold"
                                 >
                                     Add to list
                                 </Button>
                             </div>
                             <Divider className="my-4" />
-                            <div className="rounded-xl overflow-hidden" aria-label="component wrapper"> {/* w/o this div, the Spotify player gets ugly white corners in dark mode */}
+                            <div className="rounded-xl overflow-hidden frametarget" aria-label="component wrapper"> {/* w/o this div, the Spotify player gets ugly white corners in dark mode */}
                             <Spotify
                                 link={singleAlbum.spotifyUrl}
                                 className="w-full h-[600px] shadow-2xl"
