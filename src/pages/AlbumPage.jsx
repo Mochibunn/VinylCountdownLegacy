@@ -10,7 +10,7 @@ import {
 } from "@nextui-org/react";
 import AlbumCarousel from "../components/AlbumCarousel";
 import { Spotify } from "react-spotify-embed";
-import { client } from "../lib/contentfulClient";
+import { getSingleAlbum } from "../lib/contentfulClient";
 // import { UserContext } from "../Contexts";
 import Tilt from "react-parallax-tilt";
 
@@ -22,21 +22,11 @@ export default function AlbumPage() {
     // console.log(myWishlist);
 
     useEffect(() => {
-        const getSingleAlbum = async () => {
-            try {
-                const getEntry = await client.getEntry(albumId);
-                // console.log(getEntry.fields);
-                return getEntry.fields;
-            } catch (error) {
-                console.error(error.message);
-            }
-        };
-        getSingleAlbum()
+        //imported now :)
+        getSingleAlbum(albumId)
             .then((albumData) => setSingleAlbum(albumData))
             .catch((error) => console.error(error));
     }, [albumId]);
-
-    //contenftulMng stuff, will hopefully be able to move into lib folder file
 
     return (
         <>

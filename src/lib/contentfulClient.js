@@ -32,4 +32,27 @@ const getNewArrivals = async () => {
     }
 };
 
-export { client, getAllAlbums, getNewArrivals };
+const getSingleAlbum = async (albumId) => {
+    try {
+        const getEntry = await client.getEntry(albumId);
+        // console.log(getEntry.fields);
+        return getEntry.fields;
+    } catch (error) {
+        console.error(error.message);
+    }
+};
+
+const getUser = async (form) => {
+    try {
+        const getUserEntry = await client.getEntries({
+            content_type: "user",
+            "fields.email": `${form.email}`,
+            "fields.password": `${form.password}`,
+        });
+        return getUserEntry.items;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export { client, getAllAlbums, getNewArrivals, getSingleAlbum, getUser };
