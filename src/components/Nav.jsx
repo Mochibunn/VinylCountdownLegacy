@@ -197,7 +197,6 @@ const Nav = () => {
                                 Help & Feedback
                             </DropdownItem>
                         </DropdownSection>
-                        <DropdownSection showDivider>
                             {!user && (
                                 <DropdownItem
                                     onClick={() => navigate("register")}
@@ -227,7 +226,6 @@ const Nav = () => {
                                     <SignInModal />
                                 </DropdownItem>
                             )}
-                        </DropdownSection>
                     </DropdownMenu>
                 </Dropdown>
             </NavbarContent>

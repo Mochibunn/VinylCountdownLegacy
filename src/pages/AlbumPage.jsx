@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
+import { FiPlus, FiShoppingCart } from "react-icons/fi";
 import {
     Card,
     CardBody,
@@ -97,7 +98,7 @@ export default function AlbumPage() {
                                 <Button
                                     color="warning"
                                     variant="shadow"
-                                    endContent=""
+                                    endContent={<FiShoppingCart/>}
                                     className="w-full h-14 text-lg font-semibold" 
                                 >
                                     Add to cart
@@ -105,7 +106,7 @@ export default function AlbumPage() {
                                 <Button
                                     color="warning"
                                     variant="shadow"
-                                    startContent=""
+                                    startContent={<FiPlus/>}
                                     className="w-full h-14 text-lg font-semibold"
                                 >
                                     Add to Wishlist

@@ -27,7 +27,7 @@ export default function AlbumCarousel() {
                 breakpoint: 1280,
                 settings: {
                     slidesToShow: 3,
-                    slidesToScroll: 3,
+                    slidesToScroll: 2,
                 },
             },
             {
