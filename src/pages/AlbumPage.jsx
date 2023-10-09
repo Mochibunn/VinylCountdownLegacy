@@ -11,6 +11,7 @@ import {
 import AlbumCarousel from "../components/AlbumCarousel";
 import { Spotify } from "react-spotify-embed";
 import { client } from "../lib/contentfulClient";
+import Tilt from 'react-parallax-tilt';
 
 export default function AlbumPage() {
     const [singleAlbum, setSingleAlbum] = useState();
@@ -39,22 +40,22 @@ export default function AlbumPage() {
                         shadow="sm"
                         isPressable
                         onPress={() => console.log("item pressed")}
-                        className="mb-8 h-full sm:sticky sm:top-20"
-                    >
-                        <CardBody className=" p-0">
+                        className="mb-8 h-full sm:sticky sm:top-20 overflow-visible shadow-none bg-transparent"
+                        >
+                            <Tilt className="rounded-xl overflow-hidden">
+                                <div>
+                        <CardBody className="p-0 shadow-2xl bg-none rounded-xl">
                             <Image
                                 shadow="sm"
                                 radius="lg"
                                 width="100%"
                                 alt={singleAlbum.title}
-                                className="sm:max-h-[250px] md:max-h-[300px] lg:max-h-[450px] xl:max-h-[600px]"
+                                className="sm:max-h-[250px] md:max-h-[300px] lg:max-h-[450px] xl:max-h-[600px] rounded-xl"
                                 src={singleAlbum.imgUrl}
-                            />
+                                />
                         </CardBody>
-                        {/* <CardFooter className="text-small justify-between">
-                            <b>{singleAlbum.title}</b>
-                            <p className="text-default-500">{singleAlbum.price}</p>
-                        </CardFooter> */}
+                                </div>
+                        </Tilt>
                     </Card>
                     <div className="sm:ml-5 md:ml-8 lg:ml-12 sm:mt-12 w-full sm:w-1/2">
                         <span className="text-3xl md:text-4xl lg:text-5xl font-bold">
@@ -116,7 +117,7 @@ export default function AlbumPage() {
                             <Divider className="my-4" />
                             <Spotify
                                 link={singleAlbum.spotifyUrl}
-                                className="w-full h-[600px]"
+                                className="w-full h-[600px] shadow-2xl"
                             />
                         </div>
                     </div>
