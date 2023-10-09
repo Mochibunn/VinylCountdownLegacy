@@ -115,7 +115,7 @@ export default function AlbumPage() {
                                 </Button>
                             </div>
                             <Divider className="my-4" />
-                            <div className="rounded-xl overflow-hidden" aria-label="component wrapper"> {/* w/o this div, the Spotifly player gets ugly white corners in dark mode */}
+                            <div className="rounded-xl overflow-hidden" aria-label="component wrapper"> {/* w/o this div, the Spotify player gets ugly white corners in dark mode */}
                             <Spotify
                                 link={singleAlbum.spotifyUrl}
                                 className="w-full h-[600px] shadow-2xl"
