@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
     Card,
     CardBody,
@@ -10,24 +10,20 @@ import {
 } from "@nextui-org/react";
 import AlbumCarousel from "../components/AlbumCarousel";
 import { Spotify } from "react-spotify-embed";
-import { client } from "../lib/contentfulClient";
-import Tilt from 'react-parallax-tilt';
+import { getSingleAlbum } from "../lib/contentfulClient";
+// import { UserContext } from "../Contexts";
+import Tilt from "react-parallax-tilt";
 
 export default function AlbumPage() {
     const [singleAlbum, setSingleAlbum] = useState();
     const { albumId } = useParams();
+    // const { user } = useContext(UserContext);
+    // const myWishlist = user[0].fields.wishlist;
+    // console.log(myWishlist);
 
     useEffect(() => {
-        const getSingleAlbum = async () => {
-            try {
-                const getEntry = await client.getEntry(albumId);
-                // console.log(getEntry.fields);
-                return getEntry.fields;
-            } catch (error) {
-                console.error(error.message);
-            }
-        };
-        getSingleAlbum()
+        //imported now :)
+        getSingleAlbum(albumId)
             .then((albumData) => setSingleAlbum(albumData))
             .catch((error) => console.error(error));
     }, [albumId]);
@@ -112,7 +108,7 @@ export default function AlbumPage() {
                                     startContent=""
                                     className="w-full h-14 text-xl font-bold"
                                 >
-                                    Add to list
+                                    Add to Wishlist
                                 </Button>
                             </div>
                             <Divider className="my-4" />
