@@ -52,10 +52,18 @@ export default function AlbumPage() {
                     <Card
                         shadow="sm"
                         isPressable
+                        disableRipple
                         onPress={() => console.log("item pressed")}
                         className="mb-8 h-full sm:sticky sm:top-20 overflow-visible shadow-none bg-transparent"
                     >
-                        <Tilt className="rounded-xl overflow-hidden">
+                        <Tilt
+                        glareEnable
+                        transitionSpeed={1000}
+                        glareBorderRadius="12px"
+                        glarePosition="top"
+                        glareMaxOpacity={0.1}
+                        glareReverse
+                        className="rounded-xl overflow-hidden">
                             <div>
                                 <CardBody className="p-0 shadow-2xl rounded-xl">
                                     <Image
@@ -63,7 +71,7 @@ export default function AlbumPage() {
                                         radius="lg"
                                         width="100%"
                                         alt={singleAlbum.fields.title}
-                                        className="sm:max-h-[250px] md:max-h-[300px] lg:max-h-[450px] xl:max-h-[600px] rounded-xl"
+                                        className="sm:max-h-[250px] md:max-h-[300px] lg:max-h-[450px] xl:max-h-[600px] rounded-xl -z-1"
                                         src={singleAlbum.fields.imgUrl}
                                     />
                                 </CardBody>
@@ -118,7 +126,7 @@ export default function AlbumPage() {
                                     color="warning"
                                     variant="shadow"
                                     endContent={<FiShoppingCart />}
-                                    className="w-full h-14 text-lg font-semibold"
+                                    className="w-full h-14 text-lg font-semibold active:bg-default-400 active:shadow-default-300 active:text-white "
                                 >
                                     Add to cart
                                 </Button>
@@ -126,7 +134,7 @@ export default function AlbumPage() {
                                     color="warning"
                                     variant="shadow"
                                     startContent={<FiPlus />}
-                                    className="w-full h-14 text-lg font-semibold"
+                                    className="w-full h-14 text-lg font-semibold hover:bg-default-400 hover:shadow-default-300 hover:text-white"
                                     onClick={handleAddToWishlist}
                                 >
                                     Add to Wishlist
