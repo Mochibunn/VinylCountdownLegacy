@@ -5,7 +5,7 @@ import {
     Pagination,
     Configure,
     CurrentRefinements,
-    RefinementList,
+    // RefinementList,
 } from "react-instantsearch";
 import "instantsearch.css/themes/satellite.css";
 import { useNavigate } from "react-router-dom";
@@ -59,7 +59,10 @@ export default function SearchPage() {
                     <div className="flex-col gap-4">
                         <div className="mb-4">
                             <h4 className="text-xl font-semibold">Genre</h4>
-                            <CustomRefinementList attribute="genre" showMore={true} />
+                            <CustomRefinementList
+                                attribute="genre"
+                                showMore={true}
+                            />
                         </div>
                         <div className="mb-4">
                             <h4 className="text-xl font-semibold"> Format</h4>
