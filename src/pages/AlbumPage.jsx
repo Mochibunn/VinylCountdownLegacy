@@ -48,6 +48,7 @@ export default function AlbumPage() {
 
     //check if album is in wishlist, and update state
     useEffect(() => {
+        if (!user) return;
         const testArray = user[0].fields.wishlist.filter(
             (album) => album.sys.id === albumId
         );
@@ -69,13 +70,14 @@ export default function AlbumPage() {
                         className="mb-8 h-full sm:sticky sm:top-20 overflow-visible shadow-none bg-transparent"
                     >
                         <Tilt
-                        glareEnable
-                        transitionSpeed={1000}
-                        glareBorderRadius="12px"
-                        glarePosition="top"
-                        glareMaxOpacity={0.1}
-                        glareReverse
-                        className="rounded-xl overflow-hidden">
+                            glareEnable
+                            transitionSpeed={1000}
+                            glareBorderRadius="12px"
+                            glarePosition="top"
+                            glareMaxOpacity={0.1}
+                            glareReverse
+                            className="rounded-xl overflow-hidden"
+                        >
                             <div>
                                 <CardBody className="p-0 shadow-2xl rounded-xl">
                                     <Image
