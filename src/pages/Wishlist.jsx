@@ -1,10 +1,18 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { getUserById } from "../lib/contentfulClient";
 import { UserContext } from "../Contexts";
 import AlbumCard from "../components/AlbumCard";
 
 export default function Wishlist() {
-    const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
 
+    // useEffect(() => {
+    //     getUserById()
+    //         .then((userData) => setUser(userData))
+    //         .catch((error) => console.error(error));
+    // }, [setUser]);
+
+    // console.log(user[0].sys.id);
     return (
         <div className="p-8 min-h-screen">
             <h3 className="text-white font-medium text-6xl mb-6">

@@ -49,10 +49,28 @@ const getUser = async (form) => {
             "fields.email": `${form.email}`,
             "fields.password": `${form.password}`,
         });
+        // console.log(getUserEntry.items[0]);
         return getUserEntry.items;
     } catch (error) {
         console.error(error);
     }
 };
 
-export { client, getAllAlbums, getNewArrivals, getSingleAlbum, getUser };
+const getUserById = async (userId) => {
+    try {
+        const getEntry = await client.getEntry(userId);
+        // console.log(getEntry.fields);
+        return getEntry;
+    } catch (error) {
+        console.error(error.message);
+    }
+};
+
+export {
+    client,
+    getAllAlbums,
+    getNewArrivals,
+    getSingleAlbum,
+    getUser,
+    getUserById,
+};

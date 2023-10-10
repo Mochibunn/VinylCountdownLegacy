@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { UserContext } from "../Contexts";
 import { FiPlus, FiShoppingCart } from "react-icons/fi";
 import {
     Card,
@@ -11,14 +12,15 @@ import {
 } from "@nextui-org/react";
 import AlbumCarousel from "../components/AlbumCarousel";
 import { Spotify } from "react-spotify-embed";
-import { getSingleAlbum } from "../lib/contentfulClient";
+import { getSingleAlbum, getUserById } from "../lib/contentfulClient";
+import { addToWishlist } from "../lib/contentfulMngClient";
 // import { UserContext } from "../Contexts";
 import Tilt from "react-parallax-tilt";
 
 export default function AlbumPage() {
     const [singleAlbum, setSingleAlbum] = useState();
     const { albumId } = useParams();
-    // const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
     // const myWishlist = user[0].fields.wishlist;
     // console.log(myWishlist);
 
@@ -29,7 +31,6 @@ export default function AlbumPage() {
             .catch((error) => console.error(error));
     }, [albumId]);
 
-
     return (
         <>
             {singleAlbum && (
@@ -39,20 +40,20 @@ export default function AlbumPage() {
                         isPressable
                         onPress={() => console.log("item pressed")}
                         className="mb-8 h-full sm:sticky sm:top-20 overflow-visible shadow-none bg-transparent"
-                        >
-                            <Tilt className="rounded-xl overflow-hidden">
-                                <div>
-                        <CardBody className="p-0 shadow-2xl rounded-xl">
-                            <Image
-                                shadow="sm"
-                                radius="lg"
-                                width="100%"
-                                alt={singleAlbum.title}
-                                className="sm:max-h-[250px] md:max-h-[300px] lg:max-h-[450px] xl:max-h-[600px] rounded-xl"
-                                src={singleAlbum.imgUrl}
-                                />
-                        </CardBody>
-                                </div>
+                    >
+                        <Tilt className="rounded-xl overflow-hidden">
+                            <div>
+                                <CardBody className="p-0 shadow-2xl rounded-xl">
+                                    <Image
+                                        shadow="sm"
+                                        radius="lg"
+                                        width="100%"
+                                        alt={singleAlbum.title}
+                                        className="sm:max-h-[250px] md:max-h-[300px] lg:max-h-[450px] xl:max-h-[600px] rounded-xl"
+                                        src={singleAlbum.imgUrl}
+                                    />
+                                </CardBody>
+                            </div>
                         </Tilt>
                     </Card>
                     <div className="sm:ml-5 md:ml-8 lg:ml-12 sm:mt-12 w-full sm:w-1/2">
@@ -98,27 +99,35 @@ export default function AlbumPage() {
                                 <Button
                                     color="warning"
                                     variant="shadow"
-                                    endContent={<FiShoppingCart/>}
-                                    className="w-full h-14 text-lg font-semibold" 
+                                    endContent={<FiShoppingCart />}
+                                    className="w-full h-14 text-lg font-semibold"
                                 >
                                     Add to cart
                                 </Button>
                                 <Button
                                     color="warning"
                                     variant="shadow"
-                                    startContent={<FiPlus/>}
+                                    startContent={<FiPlus />}
                                     className="w-full h-14 text-lg font-semibold"
+                                    onClick={() => {
+                                        addToWishlist(user[0].sys.id, albumId);
+                                    }}
                                 >
                                     Add to Wishlist
                                 </Button>
                             </div>
                             <Divider className="my-4" />
-                            <div className="rounded-xl overflow-hidden" aria-label="component wrapper"> {/* w/o this div, the Spotify player gets ugly white corners in dark mode */}
-                            <Spotify
-                                link={singleAlbum.spotifyUrl}
-                                className="w-full h-[600px] shadow-2xl"
+                            <div
+                                className="rounded-xl overflow-hidden"
+                                aria-label="component wrapper"
+                            >
+                                {" "}
+                                {/* w/o this div, the Spotify player gets ugly white corners in dark mode */}
+                                <Spotify
+                                    link={singleAlbum.spotifyUrl}
+                                    className="w-full h-[600px] shadow-2xl"
                                 />
-                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

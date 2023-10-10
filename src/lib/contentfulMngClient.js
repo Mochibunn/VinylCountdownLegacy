@@ -1,4 +1,5 @@
 import { createClient } from "contentful-management";
+// import { getUserById } from "./contentfulClient";
 
 const mngClient = createClient({
     accessToken: import.meta.env.VITE_CONTENTFUL_MNG_ACCESS_TOKEN,
@@ -38,4 +39,31 @@ const makeNewUser = (newUser) => {
         .catch(console.error);
 };
 
-export { makeNewUser };
+/**Function to add an album to wishlist in contentful
+ * @params userId-string that matches sys id of user, albumId-string that matches sys id of album
+ */
+const addToWishlist = (userId, albumId) => {
+    const newAlbum = {
+        sys: {
+            id: albumId,
+            linkType: "Entry",
+            type: "Link",
+        },
+    };
+    // Update entry
+    mngClient
+        .getSpace(import.meta.env.VITE_CONTENTFUL_SPACE_ID)
+        .then((space) => space.getEnvironment("master"))
+        .then((environment) => environment.getEntry(userId))
+        .then((entry) => {
+            entry.fields.wishlist["en-US"].push(newAlbum);
+            return entry.update();
+        })
+        .then((entry) => {
+            console.log(`Entry ${entry.sys.id} updated.`);
+            return entry.publish();
+        })
+        .catch(console.error);
+};
+
+export { makeNewUser, addToWishlist };
