@@ -1,16 +1,9 @@
-import { useContext, useEffect } from "react";
-// import { getUserById } from "../lib/contentfulClient";
+import { useContext } from "react";
 import { UserContext } from "../Contexts";
 import AlbumCard from "../components/AlbumCard";
 
 export default function Wishlist() {
-    const { user, setUser } = useContext(UserContext);
-
-    // useEffect(() => {
-    //     getUserById()
-    //         .then((userData) => setUser(userData))
-    //         .catch((error) => console.error(error));
-    // }, [setUser]);
+    const { user } = useContext(UserContext);
 
     // console.log(user[0]);
     return (

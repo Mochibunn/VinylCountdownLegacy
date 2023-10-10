@@ -56,15 +56,16 @@ const getUser = async (form) => {
     }
 };
 
-const getUserById = async (userId) => {
-    try {
-        const getEntry = await client.getEntry(userId);
-        // console.log(getEntry.fields);
-        return getEntry;
-    } catch (error) {
-        console.error(error.message);
-    }
-};
+//logic for getting single user-not currently needed, but could be useful
+// const getUserById = async (userId) => {
+//     try {
+//         const getEntry = await client.getEntry(userId);
+//         // console.log(getEntry.fields);
+//         return getEntry;
+//     } catch (error) {
+//         console.error(error.message);
+//     }
+// };
 
 export {
     client,
@@ -72,5 +73,5 @@ export {
     getNewArrivals,
     getSingleAlbum,
     getUser,
-    getUserById,
+    // getUserById,
 };

@@ -65,6 +65,7 @@ const addToWishlist = (userId, albumId) => {
         })
         .catch(console.error);
 
+    //logic for fetching user-ending up going a different route
     // mngClient
     //     .getSpace(import.meta.env.VITE_CONTENTFUL_SPACE_ID)
     //     .then((space) => space.getEnvironment("master"))
