@@ -58,15 +58,17 @@ export default function SignInModal() {
         //imported now-expects object as argument
         getUser(form)
             .then((userData) => {
-                // if (!userData.length) {
-                //     throw new Error(alert("Invalid email or password!"));
-                // } else {
-                //     return setUser(userData);
-                // }
-                userData.length ? setUser(userData) : setUser(false);
+                let test = userData;
+                if (userData.length) {
+                    setUser(userData);
+                } else {
+                    setUser(false);
+                }
+                return test;
+                // userData.length ? setUser(userData) : setUser(false);
             })
-            .then(() => {
-                if (!user) return alert("Invalid email or password!");
+            .then((test) => {
+                if (!test.length) return alert("Invalid email or password!");
                 setForm({
                     email: "",
                     password: "",
