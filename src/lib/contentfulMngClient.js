@@ -75,4 +75,35 @@ const addToWishlist = (userId, albumId) => {
     //     .catch(console.error);
 };
 
-export { makeNewUser, addToWishlist };
+/**
+ *
+ * @params user expects and object that has our user data-should use user[0]
+ * albumId expects the album sys id
+ */
+const removeFromWishlist = (user, albumId) => {
+    const updatedWishlist = user.fields.wishlist.filter(
+        (album) => album.sys.id !== albumId
+    );
+    const formattedWishlist = updatedWishlist.map((album) => ({
+        sys: {
+            id: album.sys.id,
+            linkType: "Entry",
+            type: "Link",
+        },
+    }));
+    mngClient
+        .getSpace(import.meta.env.VITE_CONTENTFUL_SPACE_ID)
+        .then((space) => space.getEnvironment("master"))
+        .then((environment) => environment.getEntry(user.sys.id))
+        .then((entry) => {
+            entry.fields.wishlist["en-US"] = formattedWishlist;
+            return entry.update();
+        })
+        .then((entry) => {
+            console.log(`Entry ${entry.sys.id} updated.`);
+            return entry.publish();
+        })
+        .catch(console.error);
+};
+
+export { makeNewUser, addToWishlist, removeFromWishlist };
