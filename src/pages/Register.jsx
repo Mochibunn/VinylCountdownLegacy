@@ -1,9 +1,11 @@
 // import { createClient } from "contentful-management";
-import { useState, useContext } from "react";
+import { useState, useContext, useMemo } from "react";
 import { UserContext } from "../Contexts";
 import { getUser } from "../lib/contentfulClient";
 import { makeNewUser } from "../lib/contentfulMngClient";
 import { useNavigate } from "react-router-dom";
+import { Input, Button } from "@nextui-org/react";
+import SignInModal from "../components/SignInModal";
 
 const Register = () => {
     const [form, setForm] = useState({
@@ -25,13 +27,29 @@ const Register = () => {
     const handleHomeClick = () => {
         //imported now :)
         getUser(form)
-            .then((userData) => setUser(userData))
+            .then((userData) => {
+                if (!userData.length)
+                    return alert("Sorry, an error occurred while logging in");
+                userData.length ? setUser(userData) : setUser(false);
+            })
             .catch((error) => console.error(error));
         navigate("/");
     };
 
+    //email and  password validation
+    const validateEmail = (value) =>
+        value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
+
+    const isInvalid = useMemo(() => {
+        if (form.email === "") return false;
+
+        return validateEmail(form.email) ? false : true;
+    }, [form.email]);
+    // console.log(form)
+    //end validation section
+
     return (
-        <div className="mt-[-1px] w-full h-screen flex items-center justify-center">
+        <div className="mt-[-1px] w-full min-h-screen flex items-center justify-center p-4">
             {registered ? (
                 <div>
                     <h3>You successfully registered!</h3>
@@ -54,58 +72,78 @@ const Register = () => {
                         Register
                     </h1>
                     <div className="flex flex-col items-center justify-around h-1/2 w-full text-white">
-                        <input
+                        <Input
+                            isRequired
                             type="text"
-                            placeholder="First Name"
+                            label="First Name"
+                            labelPlacement="outside"
                             name="firstName"
                             value={form.firstName}
                             onChange={handleChange}
-                            className="w-3/5 mb-2 sm:mb-4 lg:mb-8 p-2 outline-none border-b border-transparent focus:border-slate-100 bg-slate-500 rounded transition-all"
+                            className="w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2"
                         />
-                        <input
+                        <Input
+                            isRequired
                             type="text"
-                            placeholder="Last Name"
+                            label="Last Name"
+                            labelPlacement="outside"
                             name="lastName"
                             value={form.lastName}
                             onChange={handleChange}
-                            className="w-3/5 mb-2 sm:mb-4 lg:mb-8 p-2 outline-none border-b border-transparent focus:border-slate-100 bg-slate-500 rounded transition-all"
+                            className="w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2 "
                         />
-                        <input
+                        <Input
+                            isRequired
                             type="text"
-                            placeholder="E-mail"
+                            label="E-mail"
+                            labelPlacement="outside"
                             name="email"
+                            isInvalid={!form.email ? true : isInvalid}
+                            color={isInvalid ? "danger" : "success"}
+                            errorMessage={
+                                isInvalid && "Please enter a valid email"
+                            }
                             value={form.email}
                             onChange={handleChange}
-                            className="w-3/5 mb-2 sm:mb-4 lg:mb-8 p-2 outline-none border-b border-transparent focus:border-slate-100 bg-slate-500 rounded transition-all"
+                            className="w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2"
                         />
-                        <input
+                        <Input
+                            isRequired
                             type="password"
-                            placeholder="Password"
+                            label="Password"
+                            labelPlacement="outside"
+                            description="Password is not secure, do not use a password used on other sites."
                             name="password"
                             value={form.password}
                             onChange={handleChange}
-                            className="w-3/5 mb-2 sm:mb-4 lg:mb-8 p-2 outline-none border-b border-transparent focus:border-slate-100 bg-slate-500 rounded transition-all"
+                            className="w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2 "
                         />
-                        <input
+                        <Input
                             type="text"
-                            placeholder="Please use an image URL..."
+                            label="Please use an image URL..."
+                            labelPlacement="outside"
                             name="profilePic"
                             value={form.profilePic}
                             onChange={handleChange}
-                            className="w-3/5 mb-2 sm:mb-4 lg:mb-8 p-2 outline-none border-b border-transparent focus:border-slate-100 bg-slate-500 rounded transition-all"
+                            className="w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2"
                         />
                     </div>
                     <br />
                     <div className="flex w-full">
-                        <button className="w-1/2 bg-accent hover:bg-info-content hover:border-info-content rounded-none text-white font-normal text-lg p-4 transition-none uppercase">
-                            Sign In
-                        </button>
-                        <button
+                        <Button
+                            onClick={(e) => {
+                                e.preventDefault();
+                            }}
+                            className="w-1/2 bg-accent hover:bg-info-content hover:border-info-content rounded-none text-white font-normal text-lg p-4 transition-none uppercase"
+                        >
+                            <SignInModal />
+                        </Button>
+                        <Button
                             type="submit"
                             className="w-1/2 bg-success hover:bg-success-content hover:border-success-content rounded-none text-white font-normal text-lg py-4 transition-none uppercase"
                         >
                             Register
-                        </button>
+                        </Button>
                     </div>
                 </form>
             )}
