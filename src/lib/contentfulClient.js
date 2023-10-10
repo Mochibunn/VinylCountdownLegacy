@@ -36,7 +36,7 @@ const getSingleAlbum = async (albumId) => {
     try {
         const getEntry = await client.getEntry(albumId);
         // console.log(getEntry.fields);
-        return getEntry.fields;
+        return getEntry;
     } catch (error) {
         console.error(error.message);
     }
