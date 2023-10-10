@@ -16,6 +16,7 @@ import { getSingleAlbum, getUserById } from "../lib/contentfulClient";
 import { addToWishlist } from "../lib/contentfulMngClient";
 // import { UserContext } from "../Contexts";
 import Tilt from "react-parallax-tilt";
+import { error } from "jquery";
 
 export default function AlbumPage() {
     const [singleAlbum, setSingleAlbum] = useState();
@@ -110,7 +111,15 @@ export default function AlbumPage() {
                                     startContent={<FiPlus />}
                                     className="w-full h-14 text-lg font-semibold"
                                     onClick={() => {
+                                        if (!user) return;
                                         addToWishlist(user[0].sys.id, albumId);
+                                        // getUserById(user[0].sys.id)
+                                        //     .then((userData) =>
+                                        //         setUser(userData)
+                                        //     )
+                                        //     .catch((error) =>
+                                        //         console.error(error)
+                                        //     );
                                     }}
                                 >
                                     Add to Wishlist

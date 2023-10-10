@@ -64,6 +64,14 @@ const addToWishlist = (userId, albumId) => {
             return entry.publish();
         })
         .catch(console.error);
+
+    // mngClient
+    //     .getSpace(import.meta.env.VITE_CONTENTFUL_SPACE_ID)
+    //     .then((space) => space.getEnvironment("master"))
+    //     .then((environment) => environment.getEntry(userId))
+
+    //      .then((entry) => console.log(entry))
+    //     .catch(console.error);
 };
 
 export { makeNewUser, addToWishlist };
