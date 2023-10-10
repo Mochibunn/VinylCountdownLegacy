@@ -1,11 +1,13 @@
 import { useContext } from "react";
 import { UserContext } from "../Contexts";
+import { Card } from "@nextui-org/react";
 import AlbumCard from "../components/AlbumCard";
+import RemoveWishBtn from "../components/RemoveWishBtn";
 
 export default function Wishlist() {
     const { user } = useContext(UserContext);
 
-    // console.log(user[0]);
+    console.log(user[0].fields.wishlist);
     return (
         <div className="p-8 min-h-screen">
             <h3 className="text-white font-medium text-6xl mb-6">
@@ -15,11 +17,16 @@ export default function Wishlist() {
             <div className="gap-4 grid grid-cols-2 sm:grid-cols-4">
                 {user &&
                     user[0].fields.wishlist.map((item) => (
-                        <AlbumCard
-                            key={crypto.randomUUID()}
-                            {...item.fields}
-                            id={item.sys.id}
-                        />
+                        //wrapping in Card has much better results than wrapping in a div
+                        // not sure quickly how to get rid if the new padding
+                        <Card key={crypto.randomUUID()} className="px-0">
+                            <AlbumCard
+                                key={crypto.randomUUID()}
+                                {...item.fields}
+                                id={item.sys.id}
+                            />
+                            <RemoveWishBtn {...item.fields} id={item.sys.id} />
+                        </Card>
                     ))}
             </div>
         </div>
