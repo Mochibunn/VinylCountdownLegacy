@@ -352,7 +352,7 @@ const Nav = () => {
           ))} */}
             </NavbarMenu>
             <div className="hidden">
-                <SignInModal />
+                <SignInModal effect={blur} />
             </div>{" "}
             {/* I have no idea why but having this duplicated component keeps the modal from disappearing on dropdown menu close which is what we want */}
         </Navbar>
