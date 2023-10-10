@@ -1,23 +1,23 @@
 import {
     Card,
     CardBody,
-    CardFooter,
+    // CardFooter,
     CardHeader,
-    Button,
-    Image, Divider
+    // Button,
+    Image,
 } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
-import Tilt from "react-parallax-tilt";
+// import Tilt from "react-parallax-tilt";
 
 
 export default function AlbumCard({
     artist,
     format,
     imgUrl,
-    media,
+    // media,
     price,
-    sleeve,
-    spotifyUrl,
+    // sleeve,
+    // spotifyUrl,
     title,
     year,
     id,

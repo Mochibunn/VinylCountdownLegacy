@@ -157,7 +157,7 @@ export default function AlbumPage() {
                                         color="warning"
                                         variant="shadow"
                                         startContent={<FiPlus />}
-                                        className="w-full h-14 text-lg font-semibold hover:bg-default-400 hover:shadow-default-300 hover:text-white"
+                                        className="w-full h-14 text-lg font-semibold"
                                         onClick={handleAddToWishlist}
                                     >
                                         Add to Wishlist
