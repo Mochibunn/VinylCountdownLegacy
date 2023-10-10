@@ -27,7 +27,11 @@ const Register = () => {
     const handleHomeClick = () => {
         //imported now :)
         getUser(form)
-            .then((userData) => setUser(userData))
+            .then((userData) => {
+                if (!userData.length)
+                    return alert("Sorry, an error occurred while logging in");
+                userData.length ? setUser(userData) : setUser(false);
+            })
             .catch((error) => console.error(error));
         navigate("/");
     };
