@@ -19,7 +19,7 @@ export default function AlbumCarousel() {
         slidesToShow: 4,
         slidesToScroll: 4,
         infinite: true,
-        dots: true,
+        dots: false,
         arrows: false,
         lazyLoad: 'ondemand',
         responsive: [
@@ -65,7 +65,7 @@ export default function AlbumCarousel() {
                 </button>
             </div>
             <div className="px-10">
-            <Slider className="pt-6 h-max flex justify-center" ref={setSliderRef} {...sliderSettings}>
+            <Slider className="pt-6 flex justify-center" ref={setSliderRef} {...sliderSettings}>
                 {albumRecs &&
                     albumRecs.map((rec) => (
                         <AlbumCard
