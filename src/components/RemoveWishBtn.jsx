@@ -24,10 +24,10 @@ export default function RemoveWishBtn({ id }) {
     };
     return (
         <Button
-            color="warning"
+            color="success"
             variant="shadow"
             startContent={<FiMinus />}
-            className="w-full h-14 text-lg font-semibold"
+            className="w-full h-14 text-lg font-semibold active:bg-danger-300 active:shadow-danger-200 active:text-black hover:bg-danger-400 hover:shadow-danger-200 hover:text-black"
             onClick={() => {
                 handleRemoveFromWishlist(id);
             }}

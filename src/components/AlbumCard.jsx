@@ -1,23 +1,23 @@
 import {
     Card,
     CardBody,
-    CardFooter,
+    // CardFooter,
     CardHeader,
-    Button,
-    Image, Divider
+    // Button,
+    Image,
 } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
-import Tilt from "react-parallax-tilt";
+// import Tilt from "react-parallax-tilt";
 
 
 export default function AlbumCard({
     artist,
     format,
     imgUrl,
-    media,
+    // media,
     price,
-    sleeve,
-    spotifyUrl,
+    // sleeve,
+    // spotifyUrl,
     title,
     year,
     id,
@@ -41,7 +41,7 @@ export default function AlbumCard({
                         // height="100%"
                     />
                 </CardHeader>
-                <CardBody className="pb-0 pt-0 px-4 sm:px-2 lg:px-4">
+                <CardBody className="pb-0 pt-3 px-4 sm:px-2 lg:px-4">
                     <div className="flex whitespace-nowrap mb-3">
                         <div className="w-full truncate">
                             <h4 className="font-bold text-large sm:text-sm md:text-xl lg:text-l truncate">{title}</h4>
