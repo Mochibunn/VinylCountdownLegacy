@@ -36,7 +36,7 @@ export default function ThemeWrap() {
         <main
             id="main"
             className={`${
-                isDarkMode ? "dark bg-[#221f27]" : ""
+                isDarkMode ? "dark bg-[#282a36]" : ""
             } text-foreground bg-background`}
         >
             <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
