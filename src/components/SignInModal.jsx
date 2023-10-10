@@ -31,8 +31,8 @@ export default function SignInModal() {
         email: "",
         password: "",
     });
-    const { user, setUser } = useContext(UserContext);
-    user; //? Just so VS Code doesn't cry about user not being called anywhere
+  
+    const { setUser } = useContext(UserContext);
 
     const navigate = useNavigate();
 
