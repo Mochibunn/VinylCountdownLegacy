@@ -197,35 +197,35 @@ const Nav = () => {
                                 Help & Feedback
                             </DropdownItem>
                         </DropdownSection>
-                            {!user && (
-                                <DropdownItem
-                                    onClick={() => navigate("register")}
-                                    key="register"
-                                    color="warning"
-                                >
-                                    Register
-                                </DropdownItem>
-                            )}
-                            {user ? (
-                                <DropdownItem
-                                    key="logout"
-                                    color="danger"
-                                    onClick={handleClick}
-                                >
-                                    Sign Out
-                                </DropdownItem>
-                            ) : (
-                                <DropdownItem
-                                    key="login"
-                                    color="warning"
-                                    // onClick={() => navigate("signin")}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                    }}
-                                >
-                                    <SignInModal />
-                                </DropdownItem>
-                            )}
+                        {!user && (
+                            <DropdownItem
+                                onClick={() => navigate("register")}
+                                key="register"
+                                color="warning"
+                            >
+                                Register
+                            </DropdownItem>
+                        )}
+                        {user ? (
+                            <DropdownItem
+                                key="logout"
+                                color="danger"
+                                onClick={handleClick}
+                            >
+                                Sign Out
+                            </DropdownItem>
+                        ) : (
+                            <DropdownItem
+                                key="login"
+                                color="warning"
+                                // onClick={() => navigate("signin")}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                }}
+                            >
+                                <SignInModal />
+                            </DropdownItem>
+                        )}
                     </DropdownMenu>
                 </Dropdown>
             </NavbarContent>

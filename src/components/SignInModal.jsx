@@ -31,7 +31,7 @@ export default function SignInModal() {
         email: "",
         password: "",
     });
-    const { setUser } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
 
     const navigate = useNavigate();
 
@@ -44,7 +44,7 @@ export default function SignInModal() {
 
         return validateEmail(form.email) ? false : true;
     }, [form.email]);
-    console.log(form);
+    // console.log(form)
     //end validation section
 
     const handleChange = (e) => {
@@ -53,16 +53,28 @@ export default function SignInModal() {
     };
 
     const handleSubmit = () => {
+        if (!form.email || !form.password)
+            return alert("Please enter a valid email and password!");
         //imported now-expects object as argument
         getUser(form)
-            .then((userData) => (userData ? setUser(userData) : setUser(false)))
+            .then((userData) => {
+                // if (!userData.length) {
+                //     throw new Error(alert("Invalid email or password!"));
+                // } else {
+                //     return setUser(userData);
+                // }
+                userData.length ? setUser(userData) : setUser(false);
+            })
+            .then(() => {
+                if (!user) return alert("Invalid email or password!");
+                setForm({
+                    email: "",
+                    password: "",
+                });
+                navigate("/");
+                onOpenChange();
+            })
             .catch((error) => console.error(error));
-        setForm({
-            email: "",
-            password: "",
-        });
-        navigate("/");
-        onOpenChange();
     };
 
     const isDarkMode = JSON.parse(localStorage.getItem("isDark"));

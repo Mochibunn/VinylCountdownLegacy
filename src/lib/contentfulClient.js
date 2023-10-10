@@ -44,13 +44,15 @@ const getSingleAlbum = async (albumId) => {
 
 const getUser = async (form) => {
     try {
+        // if (!form.email || !form.password)
+        //     throw new Error(alert("Please enter a valid email and password!"));
         const getUserEntry = await client.getEntries({
             content_type: "user",
             "fields.email": `${form.email}`,
             "fields.password": `${form.password}`,
         });
-        if (!getUserEntry.ok)
-            throw new Error(alert("Invalid email or password!"));
+        // if (!getUserEntry.items.length)
+        //     throw new Error(alert("Invalid email or password!"));
         // console.log(getUserEntry.items[0]);
         return getUserEntry.items;
     } catch (error) {
