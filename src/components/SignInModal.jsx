@@ -31,6 +31,7 @@ export default function SignInModal() {
         email: "",
         password: "",
     });
+  
     const { setUser } = useContext(UserContext);
 
     const navigate = useNavigate();
