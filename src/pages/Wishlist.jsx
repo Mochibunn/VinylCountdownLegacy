@@ -7,7 +7,7 @@ import RemoveWishBtn from "../components/RemoveWishBtn";
 export default function Wishlist() {
     const { user } = useContext(UserContext);
 
-    // console.log(user[0]);
+    console.log(user[0].fields.wishlist);
     return (
         <div className="p-8 min-h-screen">
             <h3 className="text-white font-medium text-6xl mb-6">

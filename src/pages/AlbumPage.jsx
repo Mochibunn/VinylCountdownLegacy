@@ -15,16 +15,16 @@ import { Spotify } from "react-spotify-embed";
 import { getSingleAlbum } from "../lib/contentfulClient";
 import { addToWishlist } from "../lib/contentfulMngClient";
 import Tilt from "react-parallax-tilt";
-import { error } from "jquery";
+import RemoveWishBtn from "../components/RemoveWishBtn";
 
 export default function AlbumPage() {
+    const [inWishlist, setInWishlist] = useState(false);
     const [singleAlbum, setSingleAlbum] = useState();
     const { albumId } = useParams();
     const { user, setUser } = useContext(UserContext);
-    // const myWishlist = user[0].fields.wishlist;
 
-    console.log(singleAlbum);
-    console.log(user[0]);
+    // console.log(singleAlbum);
+    // console.log(user[0]);
 
     const handleAddToWishlist = () => {
         if (!user) return;
@@ -36,14 +36,26 @@ export default function AlbumPage() {
                 fields: { ...user.fields, wishlist: updatedWishlist },
             }))
         );
+        // setInWishlist(true);
     };
-
+    singleAlbum && console.log(singleAlbum.sys.id);
     useEffect(() => {
         //imported now :)
         getSingleAlbum(albumId)
             .then((albumData) => setSingleAlbum(albumData))
             .catch((error) => console.error(error));
     }, [albumId]);
+
+    //check if album is in wishlist, and update state
+    useEffect(() => {
+        const testArray = user[0].fields.wishlist.filter(
+            (album) => album.sys.id === albumId
+        );
+        console.log("testarray", testArray);
+        const wishlistStatus = testArray.length;
+        console.log("wishliststatus", wishlistStatus);
+        setInWishlist(wishlistStatus);
+    }, [user, albumId]);
 
     return (
         <>
@@ -122,15 +134,22 @@ export default function AlbumPage() {
                                 >
                                     Add to cart
                                 </Button>
-                                <Button
-                                    color="warning"
-                                    variant="shadow"
-                                    startContent={<FiPlus />}
-                                    className="w-full h-14 text-lg font-semibold"
-                                    onClick={handleAddToWishlist}
-                                >
-                                    Add to Wishlist
-                                </Button>
+                                {inWishlist ? (
+                                    <RemoveWishBtn
+                                        id={singleAlbum.sys.id}
+                                        setInWishlist={setInWishlist}
+                                    />
+                                ) : (
+                                    <Button
+                                        color="warning"
+                                        variant="shadow"
+                                        startContent={<FiPlus />}
+                                        className="w-full h-14 text-lg font-semibold"
+                                        onClick={handleAddToWishlist}
+                                    >
+                                        Add to Wishlist
+                                    </Button>
+                                )}
                             </div>
                             <Divider className="my-4" />
                             <div
