@@ -13,7 +13,7 @@ import { MailIcon } from "../assets/MailIcon.jsx";
 import { LockIcon } from "../assets/LockIcon.jsx";
 import { getUser } from "../lib/contentfulClient";
 import { SignInModalContext, UserContext } from "../Contexts";
-import { useState, useContext } from "react";
+import { useState, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function SignInModal() {
@@ -35,6 +35,18 @@ export default function SignInModal() {
 
     const navigate = useNavigate();
 
+    //email and  password validation
+    const validateEmail = (value) =>
+        value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
+
+    const isInvalid = useMemo(() => {
+        if (form.email === "") return false;
+
+        return validateEmail(form.email) ? false : true;
+    }, [form.email]);
+    console.log(form);
+    //end validation section
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setForm((prev) => ({ ...prev, [name]: value }));
@@ -43,8 +55,12 @@ export default function SignInModal() {
     const handleSubmit = () => {
         //imported now-expects object as argument
         getUser(form)
-            .then((userData) => setUser(userData))
+            .then((userData) => (userData ? setUser(userData) : setUser(false)))
             .catch((error) => console.error(error));
+        setForm({
+            email: "",
+            password: "",
+        });
         navigate("/");
         onOpenChange();
     };
@@ -76,6 +92,7 @@ export default function SignInModal() {
                                     autoComplete="off"
                                 >
                                     <Input
+                                        isRequired
                                         autoFocus
                                         endContent={
                                             <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
@@ -85,10 +102,19 @@ export default function SignInModal() {
                                         name="email"
                                         type="email"
                                         variant="bordered"
+                                        isInvalid={
+                                            !form.email ? true : isInvalid
+                                        }
+                                        color={isInvalid ? "danger" : "success"}
+                                        errorMessage={
+                                            isInvalid &&
+                                            "Please enter a valid email"
+                                        }
                                         value={form.email}
                                         onChange={handleChange}
                                     />
                                     <Input
+                                        isRequired
                                         endContent={
                                             <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                                         }

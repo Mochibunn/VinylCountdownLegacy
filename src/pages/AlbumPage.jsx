@@ -28,7 +28,10 @@ export default function AlbumPage() {
 
     const handleAddToWishlist = () => {
         if (!user) return;
-        const updatedWishlist = [...user[0].fields.wishlist, singleAlbum];
+        const updatedWishlist = [
+            ...(user[0].fields.wishlist || []),
+            singleAlbum,
+        ];
         addToWishlist(user[0].sys.id, albumId);
         setUser((prev) =>
             prev.map((user) => ({
@@ -48,7 +51,7 @@ export default function AlbumPage() {
 
     //check if album is in wishlist, and update state
     useEffect(() => {
-        if (!user) return;
+        if (!user || !user[0].fields.wishlist) return;
         const testArray = user[0].fields.wishlist.filter(
             (album) => album.sys.id === albumId
         );

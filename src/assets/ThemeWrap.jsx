@@ -14,7 +14,7 @@ export default function ThemeWrap() {
 
     const isSignedIn = JSON.parse(localStorage.getItem("signedIn"));
     const [user, setUser] = useState(isSignedIn);
-    const { isOpen, onOpen, onClose, onOpenChange} = useDisclosure();
+    const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
     useEffect(() => {
         const prefers = window.matchMedia(
@@ -41,8 +41,10 @@ export default function ThemeWrap() {
         >
             <ThemeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
                 <UserContext.Provider value={{ user, setUser }}>
-                    <SignInModalContext.Provider value={{isOpen, onOpen, onClose, onOpenChange}}>
-                    <App />
+                    <SignInModalContext.Provider
+                        value={{ isOpen, onOpen, onClose, onOpenChange }}
+                    >
+                        <App />
                     </SignInModalContext.Provider>
                 </UserContext.Provider>
             </ThemeContext.Provider>

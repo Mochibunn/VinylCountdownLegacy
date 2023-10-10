@@ -49,6 +49,8 @@ const getUser = async (form) => {
             "fields.email": `${form.email}`,
             "fields.password": `${form.password}`,
         });
+        if (!getUserEntry.ok)
+            throw new Error(alert("Invalid email or password!"));
         // console.log(getUserEntry.items[0]);
         return getUserEntry.items;
     } catch (error) {

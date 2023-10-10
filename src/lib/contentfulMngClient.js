@@ -56,7 +56,12 @@ const addToWishlist = (userId, albumId) => {
         .then((space) => space.getEnvironment("master"))
         .then((environment) => environment.getEntry(userId))
         .then((entry) => {
-            entry.fields.wishlist["en-US"].push(newAlbum);
+            if (!entry.fields.wishlist) {
+                entry.fields.wishlist = { "en-US": [] };
+                entry.fields.wishlist["en-US"].push(newAlbum);
+            } else {
+                entry.fields.wishlist["en-US"].push(newAlbum);
+            }
             return entry.update();
         })
         .then((entry) => {

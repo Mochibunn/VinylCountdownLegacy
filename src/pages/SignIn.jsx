@@ -22,6 +22,10 @@ const SignIn = () => {
         getUser(form)
             .then(({ userData }) => setUser({ ...userData }))
             .catch((error) => console.error(error));
+        setForm({
+            email: "",
+            password: "",
+        });
         navigate("/");
     };
     //! End of code block
