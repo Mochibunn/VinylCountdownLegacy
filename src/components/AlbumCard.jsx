@@ -27,7 +27,7 @@ export default function AlbumCard({
         <>
             <Card
                 isPressable
-                className="py-0 mx-3 sm:mx-0 md:mx-1 lg:mx-3"
+                className="py-0 mx-3 sm:mx-0 md:mx-1 lg:mx-3 w-11/12"
                 onClick={() => {
                     navigate(`/album/${id}`);
                 }}
@@ -35,16 +35,16 @@ export default function AlbumCard({
                 <CardHeader className="p-0">
                 <Image
                         alt="Card background"
-                        className="object-cover rounded-xl w-full"
+                        className="rounded-xl"
                         src={imgUrl}
                         // width="100%"
                         // height="100%"
                     />
                 </CardHeader>
                 <CardBody className="pb-0 pt-3 px-4 sm:px-2 lg:px-4">
-                    <div className="flex whitespace-nowrap mb-3">
+                    <div className="mb-3">
                         <div className="w-full truncate">
-                            <h4 className="font-bold text-large sm:text-sm md:text-xl lg:text-l truncate">{title}</h4>
+                            <h4 className="font-bold text-large sm:text-sm md:text-xl lg:text-l truncate break-all">{title}</h4>
                             <p className="text-tiny lg:xs xl:text-sm uppercase font-bold truncate">{artist}, {year}</p>
                             <small className="text-default-500 truncate">{format}</small>
                             <h4 className="font-bold text-large xl:text-xl truncate text-end">${price}</h4>
