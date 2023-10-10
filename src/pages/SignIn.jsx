@@ -20,7 +20,7 @@ const SignIn = () => {
     const handleSubmit = () => {
         //imported now :)
         getUser(form)
-            .then((userData) => setUser(userData))
+            .then(({ userData }) => setUser({ ...userData }))
             .catch((error) => console.error(error));
         navigate("/");
     };

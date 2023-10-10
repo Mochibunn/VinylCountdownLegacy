@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { UserContext } from "../Contexts";
 import { FiPlus, FiShoppingCart } from "react-icons/fi";
 import {
     Card,
@@ -12,15 +13,30 @@ import {
 import AlbumCarousel from "../components/AlbumCarousel";
 import { Spotify } from "react-spotify-embed";
 import { getSingleAlbum } from "../lib/contentfulClient";
-// import { UserContext } from "../Contexts";
+import { addToWishlist } from "../lib/contentfulMngClient";
 import Tilt from "react-parallax-tilt";
+import { error } from "jquery";
 
 export default function AlbumPage() {
     const [singleAlbum, setSingleAlbum] = useState();
     const { albumId } = useParams();
-    // const { user } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
     // const myWishlist = user[0].fields.wishlist;
-    // console.log(myWishlist);
+
+    console.log(singleAlbum);
+    console.log(user[0]);
+
+    const handleAddToWishlist = () => {
+        if (!user) return;
+        const updatedWishlist = [...user[0].fields.wishlist, singleAlbum];
+        addToWishlist(user[0].sys.id, albumId);
+        setUser((prev) =>
+            prev.map((user) => ({
+                ...user,
+                fields: { ...user.fields, wishlist: updatedWishlist },
+            }))
+        );
+    };
 
     useEffect(() => {
         //imported now :)
@@ -28,7 +44,6 @@ export default function AlbumPage() {
             .then((albumData) => setSingleAlbum(albumData))
             .catch((error) => console.error(error));
     }, [albumId]);
-
 
     return (
         <>
@@ -39,48 +54,52 @@ export default function AlbumPage() {
                         isPressable
                         onPress={() => console.log("item pressed")}
                         className="mb-8 h-full sm:sticky sm:top-20 overflow-visible shadow-none bg-transparent"
-                        >
-                            <Tilt className="rounded-xl overflow-hidden">
-                                <div>
-                        <CardBody className="p-0 shadow-2xl rounded-xl">
-                            <Image
-                                shadow="sm"
-                                radius="lg"
-                                width="100%"
-                                alt={singleAlbum.title}
-                                className="sm:max-h-[250px] md:max-h-[300px] lg:max-h-[450px] xl:max-h-[600px] rounded-xl"
-                                src={singleAlbum.imgUrl}
-                                />
-                        </CardBody>
-                                </div>
+                    >
+                        <Tilt className="rounded-xl overflow-hidden">
+                            <div>
+                                <CardBody className="p-0 shadow-2xl rounded-xl">
+                                    <Image
+                                        shadow="sm"
+                                        radius="lg"
+                                        width="100%"
+                                        alt={singleAlbum.fields.title}
+                                        className="sm:max-h-[250px] md:max-h-[300px] lg:max-h-[450px] xl:max-h-[600px] rounded-xl"
+                                        src={singleAlbum.fields.imgUrl}
+                                    />
+                                </CardBody>
+                            </div>
                         </Tilt>
                     </Card>
                     <div className="sm:ml-5 md:ml-8 lg:ml-12 sm:mt-12 w-full sm:w-1/2">
                         <span className="text-3xl md:text-4xl lg:text-5xl font-bold">
-                            {singleAlbum.title}
+                            {singleAlbum.fields.title}
                         </span>
                         <h2 className="text-3xl sm:text-xl md:text-2xl lg:text-3xl font-semibold mt-2">
-                            {singleAlbum.artist}
+                            {singleAlbum.fields.artist}
                         </h2>
                         <h2 className="text-xl font-semibold mt-1 mb-2">
-                            {singleAlbum.year}
+                            {singleAlbum.fields.year}
                         </h2>
                         <h2 className="text-l">
-                            <i className="font-normal">{singleAlbum.format}</i>
+                            <i className="font-normal">
+                                {singleAlbum.fields.format}
+                            </i>
                         </h2>
                         <h2 className="text-xl">
                             Sleeve:{" "}
                             <b className="font-semibold">
-                                {singleAlbum.sleeve}
+                                {singleAlbum.fields.sleeve}
                             </b>
                         </h2>
                         <h2 className="text-xl">
                             Media:{" "}
-                            <b className="font-semibold">{singleAlbum.media}</b>
+                            <b className="font-semibold">
+                                {singleAlbum.fields.media}
+                            </b>
                         </h2>
                         <Divider className="my-4 sm:my-2" />
                         <h1 className="text-4xl lg:text-6xl font-bold">
-                            ${singleAlbum.price}
+                            ${singleAlbum.fields.price}
                         </h1>
                         <Divider className="my-2" />
 
@@ -91,34 +110,40 @@ export default function AlbumPage() {
                                 variant="bordered"
                                 labelPlacement="inside"
                                 // placeholder="Additional notes"
-                                defaultValue={singleAlbum.comment}
+                                defaultValue={singleAlbum.fields.comment}
                                 className="mt-3"
                             />
                             <div className="mt-4 flex gap-4 justify-center">
                                 <Button
                                     color="warning"
                                     variant="shadow"
-                                    endContent={<FiShoppingCart/>}
-                                    className="w-full h-14 text-lg font-semibold" 
+                                    endContent={<FiShoppingCart />}
+                                    className="w-full h-14 text-lg font-semibold"
                                 >
                                     Add to cart
                                 </Button>
                                 <Button
                                     color="warning"
                                     variant="shadow"
-                                    startContent={<FiPlus/>}
+                                    startContent={<FiPlus />}
                                     className="w-full h-14 text-lg font-semibold"
+                                    onClick={handleAddToWishlist}
                                 >
                                     Add to Wishlist
                                 </Button>
                             </div>
                             <Divider className="my-4" />
-                            <div className="rounded-xl overflow-hidden" aria-label="component wrapper"> {/* w/o this div, the Spotify player gets ugly white corners in dark mode */}
-                            <Spotify
-                                link={singleAlbum.spotifyUrl}
-                                className="w-full h-[600px] shadow-2xl"
+                            <div
+                                className="rounded-xl overflow-hidden"
+                                aria-label="component wrapper"
+                            >
+                                {" "}
+                                {/* w/o this div, the Spotify player gets ugly white corners in dark mode */}
+                                <Spotify
+                                    link={singleAlbum.fields.spotifyUrl}
+                                    className="w-full h-[600px] shadow-2xl"
                                 />
-                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
