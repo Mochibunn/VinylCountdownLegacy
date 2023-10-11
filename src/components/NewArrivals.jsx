@@ -20,16 +20,17 @@ export default function NewArrivals({ newArrivals }) {
                     />
                 ))}
             </div>
-
-            <Button
-                onClick={() => {
-                    navigate("search");
-                }}
-                className="mt-4"
-                color="default"
-            >
-                Browse more
-            </Button>
+            <div className="w-full  flex justify-end">
+                <Button
+                    onClick={() => {
+                        navigate("search");
+                    }}
+                    className="mt-4"
+                    color="default"
+                >
+                    Browse more
+                </Button>
+            </div>
         </div>
     );
 }
