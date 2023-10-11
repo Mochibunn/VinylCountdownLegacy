@@ -77,7 +77,7 @@ export default function AlbumPage() {
                             transitionSpeed={1000}
                             glareBorderRadius="12px"
                             glarePosition="top"
-                            glareMaxOpacity={0.1}
+                            glareMaxOpacity={0.3}
                             glareReverse
                             className="rounded-xl overflow-hidden"
                         >
@@ -122,11 +122,9 @@ export default function AlbumPage() {
                                 {singleAlbum.fields.media}
                             </b>
                         </h2>
-                        <Divider className="my-4 sm:my-2" />
-                        <h1 className="text-4xl lg:text-6xl font-bold">
+                        <h1 className="text-4xl lg:text-6xl font-bold mt-2 mb-4">
                             ${singleAlbum.fields.price}
                         </h1>
-                        <Divider className="my-2" />
 
                         <div className="w-full max-w-full sm:max-w-xs md:max-w-full">
                             <Textarea
@@ -136,9 +134,8 @@ export default function AlbumPage() {
                                 labelPlacement="inside"
                                 // placeholder="Additional notes"
                                 defaultValue={singleAlbum.fields.comment}
-                                className="mt-3"
                             />
-                            <div className="mt-4 flex gap-4 justify-center">
+                            <div className="my-4 flex gap-4 justify-center">
                                 <Button
                                     color="warning"
                                     variant="shadow"
@@ -169,7 +166,6 @@ export default function AlbumPage() {
                                 className="rounded-xl overflow-hidden"
                                 aria-label="component wrapper"
                             >
-                                {" "}
                                 {/* w/o this div, the Spotify player gets ugly white corners in dark mode */}
                                 <Spotify
                                     link={singleAlbum.fields.spotifyUrl}

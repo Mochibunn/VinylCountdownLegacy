@@ -134,7 +134,7 @@ export default function SearchPage() {
 
 			{/* Wider screen filters */}
         <div className="flex flex-col md:flex-row justify-evenly">
-          <div className="hidden md:flex-row lg:flex-col w-full md:w-1/5 mr-2">
+          <div className="hidden md:block md:flex-row lg:flex-col w-full md:w-1/5 mr-2">
             <div className="mb-4">
               <h4 className="text-xl font-semibold">Genre</h4>
               <CustomRefinementList
