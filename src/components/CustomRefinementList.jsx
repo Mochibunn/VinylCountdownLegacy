@@ -38,7 +38,7 @@ export default function CustomRefinementList(props) {
         ))}
       </ul>
       <Button
-        className='mt-2'
+        className='my-2'
         color='primary'
         onPress={toggleShowMore}
         disabled={!canToggleShowMore}

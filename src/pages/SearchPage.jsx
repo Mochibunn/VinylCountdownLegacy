@@ -15,34 +15,48 @@ import CustomRefinementList from "../components/CustomRefinementList";
 
 // import SearchCard from "../components/SearchCard";
 
-import { Button, Card, CardHeader, Image, ScrollShadow, Accordion, AccordionItem } from "@nextui-org/react";
+import { Button, Card, CardHeader, Image, Accordion, AccordionItem, Chip } from "@nextui-org/react";
 import { useState } from "react";
 import { FiFilter } from "react-icons/fi";
-import { useEffect } from "react";
+
+const genreMap = (array) => {
+	const result = array.map((item) => {
+		return <Chip
+							className="mr-2 my-1"
+							key={item}>{item}</Chip>
+	})
+	return result;
+}
 
 export function SearchCard({ hit }) {
   const navigate = useNavigate();
   return (
     <Card
-      className="w-full mx-auto my-2"
+      className="w-full h-full my-0"
       isPressable
       onClick={() => {
         navigate(`/album/${hit.objectID}`);
       }}
     >
-      <CardHeader className="flex gap-3">
+      <CardHeader className="flex p-0">
         <Image
-          alt="nextui logo"
-          height={100}
+          alt={`${hit.title} album front cover`}
+          height="100%"
           radius="sm"
           src={hit.imgUrl}
-          width={100}
+          width="100%"
+					className="min-h-[100px] min-w-[100px] sm:h-[100px] sm:w-[100px] md:h-[150px] md:w-[150px] lg:h-[200px] lg:w-[200px]"
         />
-        <div className="flex flex-col gap-3">
-          <p className="text-md">{hit.title}</p>
-          <p className="text-small text-default-500">
-            from: {hit.artist}
+        <div className="flex text-left flex-col ml-3">
+          <p className="text-2xl font-bold ">{hit.title}</p>
+          <p className="text-lg text-default-500">
+            By: {hit.artist}
           </p>
+					<p>{hit.format}</p>
+					{/* {console.log(hit.genre)} */}
+					<div className="flex-row">
+					<p>{genreMap(hit.genre)}</p>
+					</div>
           <p className="text-small text-default-500">${hit.price}</p>
         </div>
       </CardHeader>
@@ -52,6 +66,7 @@ export function SearchCard({ hit }) {
 
 export default function SearchPage() {
   const [hits, setHits]   = useState(10);
+	setHits; //Purely so that VS Code shuts up about the function never getting called
   const [pressed, setPressed] = useState(false);
 
 	const handlePress = () => {setPressed(!pressed)};
@@ -61,8 +76,10 @@ export default function SearchPage() {
 	// }, [pressed])
 
   return (
-    <div className="p-6">
-      <InstantSearch searchClient={searchClient} indexName="albums">
+    <div className="">
+      <InstantSearch searchClient={searchClient} indexName="albums" classNames={{
+				root: ""
+			}}>
         <Configure hitsPerPage={hits} />
         <Card
           isFooterBlurred
@@ -96,20 +113,20 @@ export default function SearchPage() {
         />
 				{/* Mobile view filter drawer, for larger screens please scroll down */}
 						<Button
-						className="md:hidden mb-5"
+						className="md:hidden mb-0 ml-3"
 						onPress={handlePress}
 						color="primary"
 						startContent={<FiFilter/>}
 						>Filters</Button>
 						
-					<Accordion selectedKeys={pressed && "1"} keepContentMounted hideIndicator className={pressed ? "block" : "hidden"}> 
-						<AccordionItem key="1">
-							
+					<Accordion selectedKeys={pressed && "1"} keepContentMounted hideIndicator className="px-3 overflow-visible" aria-label="hidden"> 
+						<AccordionItem key="1" className="overflow-visible">
 							<Accordion
 								isCompact
 								variant="splitted"
-								keepContentMounted>
-								<AccordionItem className="text-xl font-semibold" title="Genre">
+								keepContentMounted
+								className="px-0 overflow-visible">
+								<AccordionItem className="text-xl font-semibold overflow-visible" title="Genre">
 									<CustomRefinementList
 										attribute="genre"
 										showMore={true}
@@ -134,7 +151,7 @@ export default function SearchPage() {
 
 			{/* Wider screen filters */}
         <div className="flex flex-col md:flex-row justify-evenly">
-          <div className="hidden md:block md:flex-row lg:flex-col w-full md:w-1/5 mr-2">
+          <div className="hidden md:block md:flex-row lg:flex-col w-full md:w-1/5 mr-2 pl-4">
             <div className="mb-4">
               <h4 className="text-xl font-semibold">Genre</h4>
               <CustomRefinementList
@@ -169,7 +186,7 @@ export default function SearchPage() {
         <Pagination
           classNames={{
             root     : "flex justify-center mt-4 w-11/12",
-            pageItem : "bg-background text-foreground",
+            pageItem : "bg-black text-foreground",
           }}
         />
       </InstantSearch>
