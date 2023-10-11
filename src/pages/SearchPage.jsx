@@ -50,9 +50,9 @@ export function SearchCard({ hit }) {
           radius="sm"
           src={hit.imgUrl}
           width="100%"
-					className="h-[100px] w-[100px] sm:h-[100px] sm:w-[100px] md:h-[150px] md:w-[150px] lg:h-[200px] lg:w-[200px] ml-3 md:ml-0"
+					className="h-[100px] w-[100px] sm:h-[100px] sm:w-[100px] md:h-[150px] md:w-[150px] lg:h-[200px] lg:w-[200px] m-2 md:m-0"
         />
-        <div className="flex text-left flex-col ml-3 w-8/12 overflow-clip gap-0 md:gap-1 lg:gap-3">
+        <div className="flex text-left flex-col ml-3 w-8/12 overflow-clip gap-0 lg:gap-3">
           <p className="text-base md:text-2xl font-bold truncate">{hit.title}</p>
           <p className="text-xs md:text-lg font-semibold text-default-500 truncate">
             By: {hit.artist}
