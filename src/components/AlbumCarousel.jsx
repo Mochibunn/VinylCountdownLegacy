@@ -1,19 +1,27 @@
 import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { getNewArrivals } from "../lib/contentfulClient";
+import { getRecs } from "../lib/contentfulClient";
 import AlbumCard from "./AlbumCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export default function AlbumCarousel() {
+export default function AlbumCarousel({ singleAlbum }) {
     const [sliderRef, setSliderRef] = useState(null);
     const [albumRecs, setAlbumRecs] = useState();
     useEffect(() => {
-        getNewArrivals()
+        // getNewArrivals()
+        //     .then((albumData) => {
+        //         // console.log("singleAlbum", singleAlbum.fields.genre);
+        //         console.log("arrivalsdata", albumData);
+        //         setAlbumRecs(albumData);
+        //     })
+        //     .catch((error) => console.error(error));
+        if (!singleAlbum) return;
+        getRecs(singleAlbum.fields.genre)
             .then((albumData) => setAlbumRecs(albumData))
             .catch((error) => console.error(error));
-    }, []);
+    }, [singleAlbum]);
 
     const sliderSettings = {
         slidesToShow: 4,
@@ -21,7 +29,7 @@ export default function AlbumCarousel() {
         infinite: true,
         dots: false,
         arrows: false,
-        lazyLoad: 'ondemand',
+        lazyLoad: "ondemand",
         responsive: [
             {
                 breakpoint: 1280,
@@ -65,15 +73,20 @@ export default function AlbumCarousel() {
                 </button>
             </div>
             <div className="px-10">
-            <Slider className="pt-6 flex justify-center" ref={setSliderRef} {...sliderSettings}>
-                {albumRecs &&
-                    albumRecs.map((rec) => (
-                        <AlbumCard
-                        key={crypto.randomUUID()}
-                        {...rec.fields}
-                        id={rec.sys.id}
-                        />))}
-            </Slider>
+                <Slider
+                    className="pt-6 flex justify-center"
+                    ref={setSliderRef}
+                    {...sliderSettings}
+                >
+                    {albumRecs &&
+                        albumRecs.map((rec) => (
+                            <AlbumCard
+                                key={crypto.randomUUID()}
+                                {...rec.fields}
+                                id={rec.sys.id}
+                            />
+                        ))}
+                </Slider>
             </div>
         </div>
     );
