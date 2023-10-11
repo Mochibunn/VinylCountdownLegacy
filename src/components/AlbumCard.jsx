@@ -28,6 +28,7 @@ export default function AlbumCard({
     // const [isLoaded, setIsLoaded] = useState(true);
     const navigate = useNavigate();
     const [isLoaded, setIsLoaded] = useState(true);
+    setIsLoaded; //Purely so that VS Code shuts up about the function never getting called
     return (
         <>
             <Card
