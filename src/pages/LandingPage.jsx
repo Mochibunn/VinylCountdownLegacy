@@ -31,7 +31,7 @@ export default function LandingPage() {
                     {" "}
                     <Header />
                     <NewArrivals
-                        isLoaded={isLoaded}
+                        // isLoaded={isLoaded}
                         newArrivals={newArrivals}
                     />{" "}
                 </>
