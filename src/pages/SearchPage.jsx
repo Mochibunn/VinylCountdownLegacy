@@ -124,7 +124,7 @@ export default function SearchPage() {
 						startContent={<FiFilter/>}
 						>Filters</Button>
 						
-					<Accordion selectedKeys={pressed && "1"} keepContentMounted hideIndicator className="px-3 overflow-visible" aria-label="hidden"> 
+					<Accordion selectedKeys={pressed && "1"} keepContentMounted hideIndicator className="px-3 overflow-visible md:hidden" aria-label="hidden"> 
 						<AccordionItem key="1" className="overflow-visible">
 							<Accordion
 								isCompact
