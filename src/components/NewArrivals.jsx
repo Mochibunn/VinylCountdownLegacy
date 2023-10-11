@@ -1,11 +1,13 @@
 import { Button } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
 import AlbumCard from "./AlbumCard";
 
 export default function NewArrivals({ newArrivals }) {
     // console.log(newArrivals);
+    const navigate = useNavigate();
     return (
         <div className="p-8">
-            <h3 className="text-black font-medium text-6xl mb-6">
+            <h3 className="text-black dark:text-white font-medium text-6xl mb-6">
                 New Arrivals
             </h3>
 
@@ -19,7 +21,13 @@ export default function NewArrivals({ newArrivals }) {
                 ))}
             </div>
 
-            <Button className="mt-4" color="default">
+            <Button
+                onClick={() => {
+                    navigate("search");
+                }}
+                className="mt-4"
+                color="default"
+            >
                 Browse more
             </Button>
         </div>
