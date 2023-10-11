@@ -7,11 +7,11 @@ export default function NewArrivals({ newArrivals }) {
     const navigate = useNavigate();
     return (
         <div className="p-8">
-            <h3 className="text-black dark:text-white font-medium text-6xl mb-6">
+            <h3 className="font-medium text-6xl mb-6">
                 New Arrivals
             </h3>
 
-            <div className="gap-4 grid grid-cols-2 sm:grid-cols-4">
+            <div className="gap-y-8 grid grid-cols-2 sm:grid-cols-5">
                 {newArrivals.map((newArrival) => (
                     <AlbumCard
                         key={crypto.randomUUID()}
