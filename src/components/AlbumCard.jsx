@@ -7,6 +7,7 @@ import {
     Image,
     Skeleton,
 } from "@nextui-org/react";
+import { useState } from "react";
 // import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import Tilt from "react-parallax-tilt";
@@ -22,10 +23,11 @@ export default function AlbumCard({
     title,
     year,
     id,
-    isLoaded,
+    // isLoaded,
 }) {
     // const [isLoaded, setIsLoaded] = useState(true);
     const navigate = useNavigate();
+    const [isLoaded, setIsLoaded] = useState(true);
     return (
         <>
             <Card
