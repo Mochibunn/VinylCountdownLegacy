@@ -22,7 +22,7 @@ const getNewArrivals = async () => {
     try {
         const getAlbumEntries = await client.getEntries({
             content_type: "album",
-            limit: 8,
+            limit: 10,
             order: "sys.createdAt",
         });
 
