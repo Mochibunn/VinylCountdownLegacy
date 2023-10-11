@@ -5,6 +5,7 @@ import {
     Pagination,
     Configure,
     CurrentRefinements,
+    PoweredBy,
     // RefinementList,
 } from "react-instantsearch";
 import "instantsearch.css/themes/satellite.css";
@@ -48,14 +49,40 @@ export function SearchCard({ hit }) {
 
 export default function SearchPage() {
     return (
-        <>
+        <div className="p-6">
             <InstantSearch searchClient={searchClient} indexName="albums">
                 <Configure hitsPerPage={10} />
-                <SearchBox />
+                <Card
+                    isFooterBlurred
+                    className="w-full h-[20dvh] col-span-12 sm:col-span-7 relative"
+                >
+                    <CardHeader className="absolute inset-0 flex justify-center">
+                        <SearchBox
+                            placeholder="Search..."
+                            classNames={{
+                                root: "w-11/12",
+                                // form: "bg-default-400/20 dark:bg-slate-800 rounded-full",
+                                input: "font-normal text-default-500 bg-default-400/20 dark:bg-stone-900",
+                            }}
+                        />
+                    </CardHeader>
+                    <Image
+                        removeWrapper
+                        alt="vinyl record player"
+                        className="z-0 w-full h-full object-cover"
+                        src="src/assets/vinylbg.jpg"
+                    />
+                </Card>
+
+                <PoweredBy />
                 <CurrentRefinements
                     includedAttributes={["format", "genre", "price", "sleeve"]}
+                    classNames={{
+                        root: "mt-2 mb-4",
+                        item: "bg-white dark:bg-stone-800",
+                    }}
                 />
-                <div className="flex ml-3">
+                <div className="flex ml-3 w-full">
                     <div className="flex-col gap-4">
                         <div className="mb-4">
                             <h4 className="text-xl font-semibold">Genre</h4>
@@ -80,10 +107,21 @@ export default function SearchPage() {
                             <CustomRefinementList attribute="sleeve" />
                         </div>
                     </div>
-                    <Hits hitComponent={SearchCard} />
+                    <Hits
+                        hitComponent={SearchCard}
+                        classNames={{
+                            root: "w-3/4",
+                            item: "bg-white dark:bg-stone-900",
+                        }}
+                    />
                 </div>
-                <Pagination />
+                <Pagination
+                    classNames={{
+                        root: "flex justify-center mt-4",
+                        pageItem: "dark:bg-stone-900",
+                    }}
+                />
             </InstantSearch>
-        </>
+        </div>
     );
 }
