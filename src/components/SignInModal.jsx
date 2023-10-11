@@ -10,10 +10,12 @@ import {
     Link,
 } from "@nextui-org/react";
 import { MailIcon } from "../assets/MailIcon.jsx";
-import { LockIcon } from "../assets/LockIcon.jsx";
+// import { LockIcon } from "../assets/LockIcon.jsx";
+import { EyeFilledIcon } from "../assets/EyeFilledIcon.jsx";
+import { EyeSlashFilledIcon } from "../assets/EyeSlashFilledIcon.jsx";
 import { getUser } from "../lib/contentfulClient";
 import { SignInModalContext, UserContext } from "../Contexts";
-import { useState, useContext, useMemo } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function SignInModal() {
@@ -31,22 +33,13 @@ export default function SignInModal() {
         email: "",
         password: "",
     });
-  
+    const [isVisible, setIsVisible] = useState(false);
+
+    const toggleVisibility = () => setIsVisible(!isVisible);
+
     const { setUser } = useContext(UserContext);
 
     const navigate = useNavigate();
-
-    //email and  password validation
-    const validateEmail = (value) =>
-        value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
-
-    const isInvalid = useMemo(() => {
-        if (form.email === "") return false;
-
-        return validateEmail(form.email) ? false : true;
-    }, [form.email]);
-    // console.log(form)
-    //end validation section
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -117,26 +110,38 @@ export default function SignInModal() {
                                         name="email"
                                         type="email"
                                         variant="bordered"
-                                        isInvalid={
-                                            !form.email ? true : isInvalid
-                                        }
-                                        color={isInvalid ? "danger" : "success"}
-                                        errorMessage={
-                                            isInvalid &&
-                                            "Please enter a valid email"
-                                        }
+                                        // isInvalid={
+                                        //     !form.email ? true : isInvalid
+                                        // }
+                                        // color={isInvalid ? "danger" : "success"}
+                                        // errorMessage={
+                                        //     isInvalid &&
+                                        //     "Please enter a valid email"
+                                        // }
                                         value={form.email}
                                         onChange={handleChange}
                                     />
                                     <Input
                                         isRequired
                                         endContent={
-                                            <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                                            <button
+                                                className="focus:outline-none"
+                                                type="button"
+                                                onClick={toggleVisibility}
+                                            >
+                                                {isVisible ? (
+                                                    <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                                                ) : (
+                                                    <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                                                )}
+                                            </button>
+
+                                            // <LockIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
                                         }
                                         placeholder="Enter your password"
                                         label="Password"
                                         name="password"
-                                        type="password"
+                                        type={isVisible ? "text" : "password"}
                                         variant="bordered"
                                         value={form.password}
                                         onChange={handleChange}
