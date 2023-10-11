@@ -23,7 +23,12 @@ const genreMap = (array) => {
 	const result = array.map((item) => {
 		return <Chip
 							className="mr-2 my-1"
-							key={item}>{item}</Chip>
+							isCompact
+							key={item}
+							size="sm"
+						>
+							{item}
+						</Chip>
 	})
 	return result;
 }
@@ -45,19 +50,19 @@ export function SearchCard({ hit }) {
           radius="sm"
           src={hit.imgUrl}
           width="100%"
-					className="min-h-[100px] min-w-[100px] sm:h-[100px] sm:w-[100px] md:h-[150px] md:w-[150px] lg:h-[200px] lg:w-[200px]"
+					className="h-[100px] w-[100px] sm:h-[100px] sm:w-[100px] md:h-[150px] md:w-[150px] lg:h-[200px] lg:w-[200px]"
         />
-        <div className="flex text-left flex-col ml-3">
-          <p className="text-2xl font-bold ">{hit.title}</p>
-          <p className="text-lg text-default-500">
+        <div className="flex text-left flex-col ml-3 w-8/12 overflow-clip">
+          <p className="text-base md:text-2xl font-bold truncate">{hit.title}</p>
+          <p className="text-xs md:text-lg font-semibold text-default-500 truncate">
             By: {hit.artist}
           </p>
-					<p>{hit.format}</p>
+					<p className="text-xs italic">{hit.format}</p>
 					{/* {console.log(hit.genre)} */}
-					<div className="flex-row">
+					<div className="flex">
 					<p>{genreMap(hit.genre)}</p>
 					</div>
-          <p className="text-small text-default-500">${hit.price}</p>
+          <p className="text-base text-semibold">${hit.price}</p>
         </div>
       </CardHeader>
     </Card>
@@ -83,11 +88,11 @@ export default function SearchPage() {
         <Configure hitsPerPage={hits} />
         <Card
           isFooterBlurred
-          className="w-full h-[20dvh] col-span-12 sm:col-span-7 relative"
+          className="w-full h-[20vh] col-span-12 sm:col-span-7 relative"
         >
           <CardHeader className="absolute inset-0 flex justify-center">
             <SearchBox
-              placeholder="Search..."
+              placeholder="Search.."
               classNames={{
                 root  : "w-11/12",
                 // form  : "bg-default-400/20 dark:bg-slate-800 rounded-full",
@@ -123,25 +128,25 @@ export default function SearchPage() {
 						<AccordionItem key="1" className="overflow-visible">
 							<Accordion
 								isCompact
-								variant="splitted"
+								variant="bordered"
 								keepContentMounted
 								className="px-0 overflow-visible">
-								<AccordionItem className="text-xl font-semibold overflow-visible" title="Genre">
+								<AccordionItem className="ml-2 text-xl font-semibold overflow-visible" title="Genre">
 									<CustomRefinementList
 										attribute="genre"
 										showMore={true}
 									/>
 								</AccordionItem>
-								<AccordionItem className="text-xl font-semibold" title="Format">
+								<AccordionItem className="ml-2 text-xl font-semibold" title="Format">
 									<CustomRefinementList
 										attribute="format"
 										showMore={true}
 									/>
 								</AccordionItem>
-								<AccordionItem className="text-xl font-semibold" title="Price">
+								<AccordionItem className="ml-2 text-xl font-semibold" title="Price">
 									<CustomRefinementList attribute="price" />
 								</AccordionItem>
-								<AccordionItem className="mb-4 text-xl font-semibold" title="Sleeve">
+								<AccordionItem className="ml-2 text-xl font-semibold" title="Sleeve">
 									<CustomRefinementList attribute="sleeve" />
 								</AccordionItem>
 							</Accordion>

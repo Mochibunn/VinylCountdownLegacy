@@ -39,7 +39,7 @@ export default function AlbumCard({
                 }}
             >
                 <CardHeader className="p-0">
-                    <Skeleton isLoaded={isLoaded}>
+                    <Skeleton isLoaded={isLoaded} className="rounded-xl">
                         <Image
                             alt="Card background"
                             className="rounded-xl"
