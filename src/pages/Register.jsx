@@ -51,11 +51,11 @@ const Register = () => {
     return (
         <div className="mt-[-1px] w-full min-h-screen flex items-center justify-center p-4">
             {registered ? (
-                <div>
-                    <h3>You successfully registered!</h3>
-                    <button onClick={handleHomeClick}>
-                        Return to home
-                    </button>{" "}
+                <div className=" flex flex-col gap-6 justify-center items-center">
+                    <h3 className="text-4xl">You successfully registered!</h3>
+                    <Button className="w-1/2" onClick={handleHomeClick}>
+                        Return to Home
+                    </Button>
                 </div>
             ) : (
                 <form

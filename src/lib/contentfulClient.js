@@ -23,7 +23,7 @@ const getNewArrivals = async () => {
         const getAlbumEntries = await client.getEntries({
             content_type: "album",
             limit: 8,
-            order: "sys.createdAt",
+            order: "-sys.updatedAt",
         });
 
         return getAlbumEntries.items;
@@ -37,6 +37,24 @@ const getSingleAlbum = async (albumId) => {
         const getEntry = await client.getEntry(albumId);
         // console.log(getEntry.fields);
         return getEntry;
+    } catch (error) {
+        console.error(error.message);
+    }
+};
+
+/**
+ * function for getting relevant recs based on genre
+ * @param {*} albumGenre should be an array
+ */
+const getRecs = async (albumGenre) => {
+    const genreString = albumGenre.toString();
+    try {
+        const getAlbumRecs = await client.getEntries({
+            content_type: "album",
+            limit: 10,
+            "fields.genre[in]": genreString,
+        });
+        return getAlbumRecs.items;
     } catch (error) {
         console.error(error.message);
     }
@@ -77,5 +95,6 @@ export {
     getNewArrivals,
     getSingleAlbum,
     getUser,
+    getRecs,
     // getUserById,
 };

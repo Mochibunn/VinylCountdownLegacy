@@ -180,7 +180,7 @@ export default function AlbumPage() {
                     </div>
                 </div>
             )}
-            <AlbumCarousel />
+            <AlbumCarousel singleAlbum={singleAlbum} />
         </>
     );
 }
