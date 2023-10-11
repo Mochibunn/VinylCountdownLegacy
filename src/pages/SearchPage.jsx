@@ -62,7 +62,7 @@ export function SearchCard({ hit }) {
 					<div className="flex">
 					<p>{genreMap(hit.genre)}</p>
 					</div>
-          <p className="text-base md:text-lg font-semibold">${hit.price}</p>
+          <p className="text-base md:text-xl font-semibold">${hit.price}</p>
         </div>
       </CardHeader>
     </Card>
