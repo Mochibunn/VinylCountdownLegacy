@@ -2,7 +2,7 @@ import { Button } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import AlbumCard from "./AlbumCard";
 
-export default function NewArrivals({ newArrivals }) {
+export default function NewArrivals({ newArrivals, isLoaded }) {
     // console.log(newArrivals);
     const navigate = useNavigate();
     return (
@@ -17,6 +17,7 @@ export default function NewArrivals({ newArrivals }) {
                         key={crypto.randomUUID()}
                         {...newArrival.fields}
                         id={newArrival.sys.id}
+                        isLoaded={isLoaded}
                     />
                 ))}
             </div>

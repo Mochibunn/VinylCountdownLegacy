@@ -11,7 +11,7 @@ export default function Footer() {
     return (
         <Navbar
             position="static"
-            className="py-1 border-t-black dark:border-t-white border-t-1"
+            className="py-1 mt-4 border-t-black dark:border-t-white border-t-1"
         >
             <NavbarContent className="hidden sm:flex gap-4" justify="start">
                 <NavbarItem>
