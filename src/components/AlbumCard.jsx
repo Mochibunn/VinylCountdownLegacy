@@ -40,11 +40,11 @@ export default function AlbumCard({
                 className="py-0 mx-3 sm:mx-0 md:mx-1 lg:mx-3 w-11/12"
                 onClick={handleClick}
             >
-                <CardHeader className="p-0">
+                <CardHeader className="p-0 object-cover">
                     <Skeleton isLoaded={isLoaded} className="rounded-xl">
                         <Image
                             alt="Card background"
-                            className="rounded-xl"
+                            className="rounded-x aspect-square"
                             src={imgUrl}
                             // width="100%"
                             // height="100%"
