@@ -36,6 +36,21 @@ const Register = () => {
         navigate("/");
     };
 
+    const handleUpload = (e) => {
+        if (!e.target.files[0]) return;
+
+        // console.dir(e.target.files[0]);
+
+        const uploadedImgUrl = URL.createObjectURL(e.target.files[0]);
+
+        setForm((prev) => ({ ...prev, profilePic: uploadedImgUrl }));
+        // setDisplayedMeme((prev) => ({
+        //     ...prev,
+        //     name: e.target.files[0].name,
+        //     url: uploadedImgUrl,
+        // }));
+    };
+
     //email and  password validation
     const validateEmail = (value) =>
         value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
@@ -62,6 +77,7 @@ const Register = () => {
                     onSubmit={(e) => {
                         e.preventDefault();
                         //imported now :)
+                        console.log(form);
                         makeNewUser(form);
                         setRegistered(true);
                     }}
@@ -118,14 +134,14 @@ const Register = () => {
                             onChange={handleChange}
                             className="w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2 "
                         />
-                        <Input
-                            type="text"
-                            label="Please use an image URL..."
-                            labelPlacement="outside"
+                        <input
+                            type="file"
+                            // label="Please use an image URL..."
+                            // labelPlacement="outside"
                             name="profilePic"
-                            value={form.profilePic}
-                            onChange={handleChange}
-                            className="w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2"
+                            // value={form.profilePic}
+                            onChange={handleUpload}
+                            className="file-input file-input-bordered w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2"
                         />
                     </div>
                     <br />
