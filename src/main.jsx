@@ -5,7 +5,7 @@ import { NextUIProvider } from "@nextui-org/react";
 import "./styles/index.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import ThemeWrap from "./assets/ThemeWrap";
+import ThemeWrap from "./components/ThemeWrap";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter>
