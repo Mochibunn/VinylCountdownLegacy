@@ -41,7 +41,7 @@ export default function AlbumPage() {
         );
         // setInWishlist(true);
     };
-    singleAlbum && console.log(singleAlbum.sys.id);
+    // singleAlbum && console.log(singleAlbum.sys.id);
     useEffect(() => {
         //imported now :)
         getSingleAlbum(albumId)
@@ -176,7 +176,7 @@ export default function AlbumPage() {
                     </div>
                 </div>
             )}
-            <AlbumCarousel singleAlbum={singleAlbum} />
+            <AlbumCarousel singleAlbum={singleAlbum} albumId={albumId} />
         </>
     );
 }

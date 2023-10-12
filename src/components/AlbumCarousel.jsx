@@ -6,7 +6,7 @@ import AlbumCard from "./AlbumCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export default function AlbumCarousel({ singleAlbum }) {
+export default function AlbumCarousel({ singleAlbum, albumId }) {
     const [sliderRef, setSliderRef] = useState(null);
     const [albumRecs, setAlbumRecs] = useState();
     useEffect(() => {
@@ -18,10 +18,10 @@ export default function AlbumCarousel({ singleAlbum }) {
         //     })
         //     .catch((error) => console.error(error));
         if (!singleAlbum) return;
-        getRecs(singleAlbum.fields.genre)
+        getRecs(singleAlbum.fields.genre, albumId)
             .then((albumData) => setAlbumRecs(albumData))
             .catch((error) => console.error(error));
-    }, [singleAlbum]);
+    }, [singleAlbum, albumId]);
 
     const sliderSettings = {
         slidesToShow: 4,
