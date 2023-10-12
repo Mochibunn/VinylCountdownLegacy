@@ -111,29 +111,29 @@ export default function SearchPage() {
 						startContent={<FiFilter/>}
 						>Filters</Button>
 						
-					<Accordion selectedKeys={pressed && "1"} keepContentMounted hideIndicator textValue="" className="px-3 overflow-visible md:hidden" aria-label="hidden"> 
-						<AccordionItem key="1" className="overflow-visible">
+					<Accordion selectedKeys={pressed ? "1" : "0"} keepContentMounted hideIndicator className="px-3 overflow-visible md:hidden"> 
+						<AccordionItem key="1" className="overflow-visible" textValue="Filters">
 							<Accordion
 								isCompact
 								variant="bordered"
 								keepContentMounted
-								className="px-0 overflow-visible">
-								<AccordionItem className="ml-2 text-xl font-semibold overflow-visible" title="Genre">
+								className="overflow-visible">
+								<AccordionItem className="text-xl font-semibold overflow-visible" title="Genre">
 									<CustomRefinementList
 										attribute="genre"
 										showMore={true}
 									/>
 								</AccordionItem>
-								<AccordionItem className="ml-2 text-xl font-semibold" title="Format">
+								<AccordionItem className="text-xl font-semibold" title="Format">
 									<CustomRefinementList
 										attribute="format"
 										showMore={true}
 									/>
 								</AccordionItem>
-								<AccordionItem className="ml-2 text-xl font-semibold" title="Price">
+								<AccordionItem className="text-xl font-semibold" title="Price">
 									<CustomRefinementList attribute="price" />
 								</AccordionItem>
-								<AccordionItem className="ml-2 text-xl font-semibold" title="Sleeve">
+								<AccordionItem className="text-xl font-semibold" title="Sleeve">
 									<CustomRefinementList attribute="sleeve" />
 								</AccordionItem>
 							</Accordion>
