@@ -29,14 +29,16 @@ export default function AlbumCard({
     const navigate = useNavigate();
     const [isLoaded, setIsLoaded] = useState(true);
     setIsLoaded; //Purely so that VS Code shuts up about the function never getting called
+    const handleClick = () => {
+        navigate(`/album/${id}`);
+        window.scrollTo(0, 0);
+    };
     return (
         <>
             <Card
                 isPressable
                 className="py-0 mx-3 sm:mx-0 md:mx-1 lg:mx-3 w-11/12"
-                onClick={() => {
-                    navigate(`/album/${id}`);
-                }}
+                onClick={handleClick}
             >
                 <CardHeader className="p-0">
                     <Skeleton isLoaded={isLoaded} className="rounded-xl">

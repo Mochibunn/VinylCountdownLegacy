@@ -44,15 +44,17 @@ const getSingleAlbum = async (albumId) => {
 
 /**
  * function for getting relevant recs based on genre
- * @param {*} albumGenre should be an array
+ * @param  albumGenre should be an array
+ * @param albumId keeps the album on the page from the rec list, should be the sys id of the album
  */
-const getRecs = async (albumGenre) => {
+const getRecs = async (albumGenre, albumId) => {
     const genreString = albumGenre.toString();
     try {
         const getAlbumRecs = await client.getEntries({
             content_type: "album",
             limit: 10,
             "fields.genre[in]": genreString,
+            "sys.id[ne]": albumId,
         });
         return getAlbumRecs.items;
     } catch (error) {
