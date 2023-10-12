@@ -53,6 +53,7 @@ export default function AlbumPage() {
                 setValue(albumData.fields.comment);
             })
             .catch((error) => console.error(error));
+        // window.scrollTo(0, 0);
     }, [albumId]);
 
     //check if album is in wishlist, and update state
