@@ -4,7 +4,8 @@ import { useState } from "react";
 import Layout from "./pages/Layout";
 import LandingPage from "./pages/LandingPage";
 import AlbumPage from "./pages/AlbumPage";
-import SearchPage from "./pages/SearchPage";
+// import SearchPage from "./pages/SearchPage";
+import ExampleSearch from "./pages/ExampleSearch";
 import SignIn from "./pages/SignIn";
 import Register from "./pages/Register";
 import Wishlist from "./pages/Wishlist";
@@ -28,7 +29,7 @@ function App() {
                 <Route path="album/:albumId" element={<AlbumPage />} />
                 <Route
                     path="search"
-                    element={<SearchPage searchValue={searchValue} />}
+                    element={<ExampleSearch searchValue={searchValue} />}
                 />
                 <Route path="signin" element={<SignIn />} />
                 <Route path="register" element={<Register />} />
