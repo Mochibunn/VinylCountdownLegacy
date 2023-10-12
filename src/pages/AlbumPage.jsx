@@ -11,6 +11,7 @@ import {
     Button,
 } from "@nextui-org/react";
 import AlbumCarousel from "../components/AlbumCarousel";
+import LoadingPage from "./LoadingPage";
 import { Spotify } from "react-spotify-embed";
 import { getSingleAlbum } from "../lib/contentfulClient";
 import { addToWishlist } from "../lib/contentfulMngClient";
@@ -19,6 +20,7 @@ import RemoveWishBtn from "../components/RemoveWishBtn";
 import { GenreMap } from "../components/GenreMap";
 
 export default function AlbumPage() {
+    const [isLoaded, setIsLoaded] = useState(false);
     const [inWishlist, setInWishlist] = useState(false);
     const [singleAlbum, setSingleAlbum] = useState();
     const [value, setValue] = useState(
@@ -48,10 +50,12 @@ export default function AlbumPage() {
     // singleAlbum && console.log(singleAlbum.sys.id);
     useEffect(() => {
         //imported now :)
+        setIsLoaded(false);
         getSingleAlbum(albumId)
             .then((albumData) => {
                 setSingleAlbum(albumData);
                 setValue(albumData.fields.comment);
+                setIsLoaded(true);
             })
             .catch((error) => console.error(error));
         // window.scrollTo(0, 0);
@@ -71,7 +75,9 @@ export default function AlbumPage() {
 
     return (
         <>
-            {singleAlbum && (
+            {!isLoaded ? (
+                <LoadingPage />
+            ) : (
                 <div className="m-5 sm:m-10 md:m-[5em] flex flex-col sm:flex-row justify-center w-100">
                     <Card
                         shadow="sm"

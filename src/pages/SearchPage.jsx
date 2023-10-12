@@ -1,12 +1,12 @@
 import {
-  InstantSearch,
-  SearchBox,
-  Hits,
-  Pagination,
-  Configure,
-  CurrentRefinements,
-  PoweredBy,
-  // RefinementList,
+    InstantSearch,
+    SearchBox,
+    Hits,
+    Pagination,
+    Configure,
+    CurrentRefinements,
+    PoweredBy,
+    // RefinementList,
 } from "react-instantsearch";
 import "instantsearch.css/themes/satellite.css";
 import { useNavigate } from "react-router-dom";
@@ -57,15 +57,17 @@ export function SearchCard({ hit }) {
 }
 
 export default function SearchPage() {
-  const [hits, setHits]   = useState(10);
-	setHits; //Purely so that VS Code shuts up about the function never getting called
-  const [pressed, setPressed] = useState(false);
+    const [hits, setHits] = useState(10);
+    setHits; //Purely so that VS Code shuts up about the function never getting called
+    const [pressed, setPressed] = useState(false);
 
-	const handlePress = () => {setPressed(!pressed)};
-	// useEffect(() => {
-	// 	console.log(`Is it looping?`);
-	// 	setPressed(!pressed)
-	// }, [pressed])
+    const handlePress = () => {
+        setPressed(!pressed);
+    };
+    // useEffect(() => {
+    // 	console.log(`Is it looping?`);
+    // 	setPressed(!pressed)
+    // }, [pressed])
 
   return (
     <div className="">
@@ -141,47 +143,47 @@ export default function SearchPage() {
 							</AccordionItem>
 						</Accordion>
 
-			{/* Wider screen filters */}
-        <div className="flex flex-col md:flex-row justify-evenly">
-          <div className="hidden md:block md:flex-row lg:flex-col w-full md:w-1/5 mr-2 pl-4">
-            <div className="mb-4">
-              <h4 className="text-xl font-semibold">Genre</h4>
-              <CustomRefinementList
-                attribute="genre"
-                showMore={true}
-              />
-            </div>
-            <div className="mb-4">
-              <h4 className="text-xl font-semibold"> Format</h4>
-              <CustomRefinementList
-                attribute="format"
-                showMore={true}
-              />
-            </div>
-            <div className="mb-4">
-              <h4 className="text-xl font-semibold">Price</h4>
-              <CustomRefinementList attribute="price" />
-            </div>
-            <div>
-              <h4 className="text-xl font-semibold">Sleeve</h4>
-              <CustomRefinementList attribute="sleeve" />
-            </div>
-          </div>
-          <Hits
-            hitComponent={SearchCard}
-            classNames={{
-              root : "w-full md:w-4/5",
-              item : "bg-white dark:bg-stone-900",
-            }}
-          />
+                {/* Wider screen filters */}
+                <div className="flex flex-col md:flex-row justify-evenly">
+                    <div className="hidden md:block md:flex-row lg:flex-col w-full md:w-1/5 mr-2 pl-4">
+                        <div className="mb-4">
+                            <h4 className="text-xl font-semibold">Genre</h4>
+                            <CustomRefinementList
+                                attribute="genre"
+                                showMore={true}
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <h4 className="text-xl font-semibold"> Format</h4>
+                            <CustomRefinementList
+                                attribute="format"
+                                showMore={true}
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <h4 className="text-xl font-semibold">Price</h4>
+                            <CustomRefinementList attribute="price" />
+                        </div>
+                        <div>
+                            <h4 className="text-xl font-semibold">Sleeve</h4>
+                            <CustomRefinementList attribute="sleeve" />
+                        </div>
+                    </div>
+                    <Hits
+                        hitComponent={SearchCard}
+                        classNames={{
+                            root: "w-full md:w-4/5",
+                            item: "bg-white dark:bg-stone-900",
+                        }}
+                    />
+                </div>
+                <Pagination
+                    classNames={{
+                        root: "flex justify-center mt-4 w-11/12",
+                        pageItem: "bg-black text-foreground",
+                    }}
+                />
+            </InstantSearch>
         </div>
-        <Pagination
-          classNames={{
-            root     : "flex justify-center mt-4 w-11/12",
-            pageItem : "bg-black text-foreground",
-          }}
-        />
-      </InstantSearch>
-    </div>
-  );
+    );
 }

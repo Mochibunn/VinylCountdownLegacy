@@ -24,13 +24,13 @@ export default function ThemeWrap() {
             setIsDarkMode(prefers);
     }, []);
 
-    const toggleDarkMode = () => {
-        setIsDarkMode(!isDarkMode);
-    };
-
     useEffect(() => {
         localStorage.setItem(`isDark`, isDarkMode);
     }, [isDarkMode]);
+
+    const toggleDarkMode = () => {
+        setIsDarkMode(!isDarkMode);
+    };
 
     return (
         <main
