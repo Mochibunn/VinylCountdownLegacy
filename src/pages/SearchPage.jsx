@@ -47,7 +47,7 @@ export function SearchCard({ hit }) {
 					<p className="text-xs italic">{hit.format}</p>
 					{/* {console.log(hit.genre)} */}
 					<div className="flex">
-					<p>{GenreMap(hit.genre)}</p>
+					<span>{GenreMap(hit.genre)}</span>
 					</div>
           <p className="text-base md:text-xl font-semibold">${hit.price}</p>
         </div>
@@ -111,7 +111,7 @@ export default function SearchPage() {
 						startContent={<FiFilter/>}
 						>Filters</Button>
 						
-					<Accordion selectedKeys={pressed && "1"} keepContentMounted hideIndicator className="px-3 overflow-visible md:hidden" aria-label="hidden"> 
+					<Accordion selectedKeys={pressed && "1"} keepContentMounted hideIndicator textValue="" className="px-3 overflow-visible md:hidden" aria-label="hidden"> 
 						<AccordionItem key="1" className="overflow-visible">
 							<Accordion
 								isCompact
