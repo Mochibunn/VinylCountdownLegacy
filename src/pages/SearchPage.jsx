@@ -19,6 +19,7 @@ import { Button, Card, CardHeader, Image, Accordion, AccordionItem } from "@next
 import { useState } from "react";
 import { FiFilter } from "react-icons/fi";
 import { GenreMap } from "../components/GenreMap";
+// import CustomPagination from "../components/CustomPagination";
 
 export function SearchCard({ hit }) {
   const navigate = useNavigate();
@@ -182,7 +183,8 @@ export default function SearchPage() {
                         root: "flex justify-center mt-4 w-11/12",
                         pageItem: "bg-black text-foreground",
                     }}
-                />
+                    />
+                    {/* <CustomPagination/> */}
             </InstantSearch>
         </div>
     );
