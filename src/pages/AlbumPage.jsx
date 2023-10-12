@@ -20,6 +20,9 @@ import RemoveWishBtn from "../components/RemoveWishBtn";
 export default function AlbumPage() {
     const [inWishlist, setInWishlist] = useState(false);
     const [singleAlbum, setSingleAlbum] = useState();
+    const [value, setValue] = useState(
+        singleAlbum ? singleAlbum.fields.comment : ""
+    );
     const { albumId } = useParams();
     const { user, setUser } = useContext(UserContext);
 
@@ -45,7 +48,10 @@ export default function AlbumPage() {
     useEffect(() => {
         //imported now :)
         getSingleAlbum(albumId)
-            .then((albumData) => setSingleAlbum(albumData))
+            .then((albumData) => {
+                setSingleAlbum(albumData);
+                setValue(albumData.fields.comment);
+            })
             .catch((error) => console.error(error));
     }, [albumId]);
 
@@ -132,8 +138,9 @@ export default function AlbumPage() {
                                 label="Additional notes"
                                 variant="bordered"
                                 labelPlacement="inside"
-                                // placeholder="Additional notes"
-                                defaultValue={singleAlbum.fields.comment}
+                                placeholder="Additional notes"
+                                // defaultValue={singleAlbum.fields.comment}
+                                value={value}
                             />
                             <div className="my-4 flex gap-4 justify-center">
                                 <Button
