@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { useState } from "react";
 
 import Layout from "./pages/Layout";
 import LandingPage from "./pages/LandingPage";
@@ -10,12 +11,25 @@ import Wishlist from "./pages/Wishlist";
 import NotFound from "./pages/NotFound";
 
 function App() {
+    const [searchValue, setSearchValue] = useState("");
+
     return (
         <Routes>
-            <Route path="/" element={<Layout />}>
+            <Route
+                path="/"
+                element={
+                    <Layout
+                        searchValue={searchValue}
+                        setSearchValue={setSearchValue}
+                    />
+                }
+            >
                 <Route index element={<LandingPage />} />
                 <Route path="album/:albumId" element={<AlbumPage />} />
-                <Route path="search" element={<SearchPage />} />
+                <Route
+                    path="search"
+                    element={<SearchPage searchValue={searchValue} />}
+                />
                 <Route path="signin" element={<SignIn />} />
                 <Route path="register" element={<Register />} />
                 <Route path="wishlist" element={<Wishlist />} />

@@ -75,7 +75,7 @@ export function SearchCard({ hit }) {
     );
 }
 
-export default function SearchPage() {
+export default function SearchPage({ searchValue }) {
     const [hits, setHits] = useState(10);
     setHits; //Purely so that VS Code shuts up about the function never getting called
     const [pressed, setPressed] = useState(false);
@@ -96,6 +96,11 @@ export default function SearchPage() {
                 classNames={{
                     root: "",
                 }}
+                initialUiState={{
+                    albums: {
+                        query: searchValue,
+                    },
+                }}
             >
                 <Configure hitsPerPage={hits} />
                 <Card
@@ -108,7 +113,7 @@ export default function SearchPage() {
                             classNames={{
                                 root: "w-11/12",
                                 // form  : "bg-default-400/20 dark:bg-slate-800 rounded-full",
-                                input: "font-normal text-default-500 bg-default-400/20 dark:bg-stone-900",
+                                input: "font-normal text-default-500 dark:text-white bg-default-400/20 dark:bg-stone-900",
                             }}
                         />
                     </CardHeader>

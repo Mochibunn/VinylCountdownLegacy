@@ -25,7 +25,9 @@ import { ThemeContext, UserContext } from "../Contexts.jsx";
 import NavSwitch from "./NavSwitch.jsx";
 import SignInModal from "./SignInModal.jsx";
 
-const Nav = () => {
+const Nav = ({ setSearchValue }) => {
+    const [localValue, setLocalValue] = useState("");
+
     const { user, setUser } = useContext(UserContext);
     const { isDarkMode } = useContext(ThemeContext);
 
@@ -44,6 +46,12 @@ const Nav = () => {
     const handleClick = () => {
         navigate("/");
         setUser(!user);
+    };
+    const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        setSearchValue(localValue);
+        setLocalValue("");
+        navigate("search");
     };
     useEffect(() => {
         localStorage.setItem("signedIn", JSON.stringify(user)); //Updated to something more real :)
@@ -113,19 +121,28 @@ const Nav = () => {
                 className="items-center max-w-full"
                 justify="end"
             >
-                <Input
-                    classNames={{
-                        base: "sm:max-w-[22rem] md:max-w-[12rem] lg:max-w-[20rem] h-10",
-                        mainWrapper: "h-full",
-                        input: "text-small",
-                        inputWrapper:
-                            "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+                <form
+                    onSubmit={(e) => {
+                        handleSearchSubmit(e);
                     }}
-                    placeholder="Search.."
-                    size="sm"
-                    startContent={<SearchIcon size={18} />}
-                    type="search"
-                />
+                    // className="sm:max-w-[22rem] md:max-w-[12rem] lg:max-w-[20rem] h-10"
+                >
+                    <Input
+                        classNames={{
+                            base: "sm:max-w-[22rem] md:max-w-[12rem] lg:max-w-[20rem] h-10",
+                            mainWrapper: "h-full",
+                            input: "text-small",
+                            inputWrapper:
+                                "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+                        }}
+                        placeholder="Search.."
+                        size="sm"
+                        startContent={<SearchIcon size={18} />}
+                        type="search"
+                        value={localValue}
+                        onValueChange={setLocalValue}
+                    />
+                </form>
                 <div className="hidden md:block">
                     <NavSwitch />
                 </div>
