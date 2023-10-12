@@ -25,7 +25,7 @@ export default function AlbumCarousel({ singleAlbum, albumId }) {
 
     const sliderSettings = {
         slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToScroll: 3,
         infinite: true,
         dots: false,
         arrows: false,
