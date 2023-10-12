@@ -22,7 +22,7 @@ export default function LandingPage() {
             {!isLoaded ? (
                 <LoadingPage />
             ) : (
-                <>
+                <>  
                     <Header />
                     <NewArrivals
                         // isLoaded={isLoaded}

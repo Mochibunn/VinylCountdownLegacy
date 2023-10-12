@@ -125,7 +125,7 @@ export default function AlbumPage() {
                             </i>
                         </h2>
                         {GenreMap(singleAlbum.fields.genre)}
-                        <h2 className="text-xl">
+                        <h2 className="text-xl mt-3">
                             Sleeve:{" "}
                             <b className="font-semibold">
                                 {singleAlbum.fields.sleeve}
@@ -147,7 +147,7 @@ export default function AlbumPage() {
                                 label="Additional notes"
                                 variant="bordered"
                                 labelPlacement="inside"
-                                placeholder="Additional notes"
+                                placeholder=""
                                 // defaultValue={singleAlbum.fields.comment}
                                 value={value}
                             />
