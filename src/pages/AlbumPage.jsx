@@ -16,6 +16,7 @@ import { getSingleAlbum } from "../lib/contentfulClient";
 import { addToWishlist } from "../lib/contentfulMngClient";
 import Tilt from "react-parallax-tilt";
 import RemoveWishBtn from "../components/RemoveWishBtn";
+import { GenreMap } from "../components/GenreMap";
 
 export default function AlbumPage() {
     const [inWishlist, setInWishlist] = useState(false);
@@ -109,7 +110,7 @@ export default function AlbumPage() {
                         <h2 className="text-3xl sm:text-xl md:text-2xl lg:text-3xl font-semibold mt-2">
                             {singleAlbum.fields.artist}
                         </h2>
-                        <h2 className="text-xl font-semibold mt-1 mb-2">
+                        <h2 className="text-xl font-semibold mt-1">
                             {singleAlbum.fields.year}
                         </h2>
                         <h2 className="text-l">
@@ -117,6 +118,7 @@ export default function AlbumPage() {
                                 {singleAlbum.fields.format}
                             </i>
                         </h2>
+                        {GenreMap(singleAlbum.fields.genre)}
                         <h2 className="text-xl">
                             Sleeve:{" "}
                             <b className="font-semibold">

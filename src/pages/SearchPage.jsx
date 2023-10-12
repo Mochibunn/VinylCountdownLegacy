@@ -15,23 +15,10 @@ import CustomRefinementList from "../components/CustomRefinementList";
 
 // import SearchCard from "../components/SearchCard";
 
-import { Button, Card, CardHeader, Image, Accordion, AccordionItem, Chip } from "@nextui-org/react";
+import { Button, Card, CardHeader, Image, Accordion, AccordionItem } from "@nextui-org/react";
 import { useState } from "react";
 import { FiFilter } from "react-icons/fi";
-
-const genreMap = (array) => {
-	const result = array.map((item) => {
-		return <Chip
-							className="mr-2 my-1"
-							isCompact
-							key={item}
-							size="sm"
-						>
-							{item}
-						</Chip>
-	})
-	return result;
-}
+import { GenreMap } from "../components/GenreMap";
 
 export function SearchCard({ hit }) {
   const navigate = useNavigate();
@@ -60,7 +47,7 @@ export function SearchCard({ hit }) {
 					<p className="text-xs italic">{hit.format}</p>
 					{/* {console.log(hit.genre)} */}
 					<div className="flex">
-					<p>{genreMap(hit.genre)}</p>
+					<p>{GenreMap(hit.genre)}</p>
 					</div>
           <p className="text-base md:text-xl font-semibold">${hit.price}</p>
         </div>
