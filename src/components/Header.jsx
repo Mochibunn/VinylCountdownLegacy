@@ -18,7 +18,6 @@ export default function Header() {
 				// fade
 				waitForAnimate={false}
 				centerMode
-				pauseOnHover
 				speed={2000}
 				className="pt-6 pb-1 px-0"
 			>

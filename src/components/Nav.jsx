@@ -79,7 +79,7 @@ const Nav = ({ setSearchValue }) => {
                     className="md:hidden"
                 />
 
-                <NavbarBrand className="mr-4">
+                <NavbarBrand className="m-0 md:mr-4 flex justify-center md:justify-start">
                     <NavLink
                         to="/"
                         aria-current="page"
@@ -173,6 +173,8 @@ const Nav = ({ setSearchValue }) => {
                             "forums",
                             "settings",
                             "help_and_feedback",
+                            "orders",
+                            "cart",
                         ]}
                     >
                         {/* {" "} */}
@@ -297,17 +299,17 @@ const Nav = ({ setSearchValue }) => {
                 <NavbarMenuItem>
                     <NavLink
                         color="foreground"
-                        className="w-full"
+                        className="w-full text-neutral-500"
                         size="lg"
                         href="#"
                     >
-                        Lists
+                        Wishlist
                     </NavLink>
                 </NavbarMenuItem>
                 <NavbarMenuItem>
                     <NavLink
                         color="foreground"
-                        className="w-full"
+                        className="w-full text-neutral-500"
                         size="lg"
                         href="#"
                     >
@@ -317,7 +319,7 @@ const Nav = ({ setSearchValue }) => {
                 <NavbarMenuItem>
                     <NavLink
                         color="foreground"
-                        className="w-full"
+                        className="w-full text-neutral-500"
                         size="lg"
                         href="#"
                     >
@@ -327,9 +329,10 @@ const Nav = ({ setSearchValue }) => {
                 <NavbarMenuItem>
                     <NavLink
                         color="foreground"
-                        className="w-full"
+                        className="w-full text-neutral-500"
                         size="lg"
                         href="#"
+                        target="blank"
                     >
                         {" "}
                         {/* //todo NavLink doesn't change the color but Link does, perhaps that's the active link fix */}
