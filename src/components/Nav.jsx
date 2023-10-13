@@ -92,7 +92,7 @@ const Nav = ({ setSearchValue }) => {
                         </p> */}
                     </NavLink>
                 </NavbarBrand>
-                <NavbarContent className="hidden md:flex md:gap-3 font-bold">
+                <NavbarContent className="hidden md:flex md:gap-3 font-bold place-items-center">
                     <NavbarItem>
                         <NavLink to="/" aria-current="page" color="foreground" className="text-lg">
                             {" "}
@@ -120,7 +120,7 @@ const Nav = ({ setSearchValue }) => {
             <NavbarContent
                 as="div"
                 className="items-center max-w-full hidden md:flex"
-                justify="end"
+                justify="center"
             >
                 <form
                     onSubmit={(e) => {
@@ -130,7 +130,7 @@ const Nav = ({ setSearchValue }) => {
                 >
                     <Input
                         classNames={{
-                            base: "hidden md:flex md:max-w-[12rem] lg:max-w-[20rem] h-10",
+                            base: "hidden md:flex md:min-w-[12rem] lg:min-w-[25rem] h-10",
                             mainWrapper: "h-full",
                             input: "text-small",
                             inputWrapper:
@@ -289,7 +289,7 @@ const Nav = ({ setSearchValue }) => {
                 <NavbarMenuItem>
                     <NavLink
                         color="foreground"
-                        className="w-full"
+                        className="w-full text-neutral-500"
                         size="lg"
                         href="#"
                     >
