@@ -12,10 +12,10 @@ export default function NotFound() {
     };
 
     return (
-        <main className="flex flex-col items-center h-screen">
-            <SiteLogo className="place-items-center h-[250px]" aria-label="vinyl countdown" key="website logo"/>
+        <main className="flex flex-col items-center h-screen px-6">
+            <SiteLogo className="my-12 place-items-center h-[250px] w-full" aria-label="vinyl countdown" key="website logo"/>
             <h1 className="text-7xl font-black mb-10">404</h1>
-            <p className="text-xl">
+            <p className="text-xl text-center">
                 {randomQuote()}
             </p>
             <Button

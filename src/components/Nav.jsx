@@ -112,7 +112,7 @@ const Nav = ({ setSearchValue }) => {
                         </p> */}
                     </NavLink>
                 </NavbarBrand>
-                <NavbarContent className="hidden md:flex md:gap-3 font-bold">
+                <NavbarContent className="hidden md:flex md:gap-3 font-bold place-items-center">
                     <NavbarItem>
                         <NavLink
                             to="/"
@@ -150,7 +150,7 @@ const Nav = ({ setSearchValue }) => {
             <NavbarContent
                 as="div"
                 className="items-center max-w-full hidden md:flex"
-                justify="end"
+                justify="center"
             >
                 {showNavSearch && (
                     <form
@@ -331,7 +331,7 @@ const Nav = ({ setSearchValue }) => {
                 <NavbarMenuItem>
                     <NavLink
                         color="foreground"
-                        className="w-full"
+                        className="w-full text-neutral-500"
                         size="lg"
                         href="#"
                     >
