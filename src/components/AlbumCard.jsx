@@ -31,7 +31,11 @@ export default function AlbumCard({
     setIsLoaded; //Purely so that VS Code shuts up about the function never getting called
     const handleClick = () => {
         navigate(`/album/${id}`);
-        window.scrollTo(0, 0);
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: "smooth",
+        });
     };
     return (
         <>
