@@ -36,7 +36,7 @@ export default function Header() {
                 centerMode
                 pauseOnHover
                 speed={3000}
-                className="pt-6 pb-1 px-0"
+                className="pt-6 pb-1 px-0 hover:cursor-pointer"
             >
                 {/* <div className="px-2">
 
