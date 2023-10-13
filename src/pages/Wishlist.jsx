@@ -7,15 +7,19 @@ import RemoveWishBtn from "../components/RemoveWishBtn";
 export default function Wishlist() {
     const { user } = useContext(UserContext);
 
-    console.log(user[0].fields.wishlist);
+    // console.log(user[0].fields.wishlist);
     return (
         <div className="p-8 min-h-screen">
-            <h3 className="text-white font-medium text-6xl mb-6">
-                My Wishlist
-            </h3>
+            <h3 className="font-medium text-6xl mb-6">My Wishlist</h3>
 
-            <div className="gap-4 grid grid-cols-2 sm:grid-cols-4">
-                {user &&
+            <div
+                className={
+                    user &&
+                    user[0].fields.wishlist &&
+                    `gap-4 grid grid-cols-2 sm:grid-cols-4`
+                }
+            >
+                {user && user[0].fields.wishlist ? (
                     user[0].fields.wishlist.map((item) => (
                         //wrapping in Card has much better results than wrapping in a div
                         // not sure quickly how to get rid if the new padding
@@ -27,7 +31,12 @@ export default function Wishlist() {
                             />
                             <RemoveWishBtn {...item.fields} id={item.sys.id} />
                         </Card>
-                    ))}
+                    ))
+                ) : (
+                    <h6 className="text-2xl w-full">
+                        Looks like you haven`t added anything yet...
+                    </h6>
+                )}
             </div>
         </div>
     );

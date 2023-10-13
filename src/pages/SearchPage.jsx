@@ -11,9 +11,6 @@ import "instantsearch.css/themes/satellite.css";
 import { useNavigate } from "react-router-dom";
 import { searchClient } from "../lib/algoliaClient";
 import CustomRefinementList from "../components/CustomRefinementList";
-
-// import SearchCard from "../components/SearchCard";
-
 import { Button, Card, CardHeader, Image, Accordion, AccordionItem } from "@nextui-org/react";
 import { useState } from "react";
 import { FiFilter } from "react-icons/fi";
@@ -56,7 +53,7 @@ export function SearchCard({ hit }) {
   );
 }
 
-export default function SearchPage() {
+export default function SearchPage({ searchValue }) {
     const [hits, setHits] = useState(10);
     setHits; //Purely so that VS Code shuts up about the function never getting called
     const [pressed, setPressed] = useState(false);
@@ -69,42 +66,51 @@ export default function SearchPage() {
     // 	setPressed(!pressed)
     // }, [pressed])
 
-  return (
-    <div className="">
-      <InstantSearch searchClient={searchClient} indexName="albums" classNames={{
-				root: ""
-			}}>
-        <Configure hitsPerPage={hits} />
-        <Card
-          isFooterBlurred
-          className="w-full h-[20vh] col-span-12 sm:col-span-7 relative"
-        >
-          <CardHeader className="absolute inset-0 flex justify-center">
-            <SearchBox
-              placeholder="Search.."
-              classNames={{
-                root  : "w-11/12",
-                // form  : "bg-default-400/20 dark:bg-slate-800 rounded-full",
-                input : "font-normal text-default-500 bg-default-400/20 dark:bg-stone-900",
-              }}
-            />
-          </CardHeader>
-          <Image
-            removeWrapper
-            alt="vinyl record player"
-            className="z-0 w-full h-full object-cover"
-            src="src/assets/vinylbg.jpg"
-          />
-        </Card>
-        <PoweredBy className="text-[8pt]" />
-				
-        <CurrentRefinements
-          includedAttributes={["format", "genre", "price", "sleeve"]}
-          classNames={{
-						root : "mt-2 mb-4",
-            item : "bg-white dark:bg-stone-800",
-          }}
-        />
+    return (
+        <div className="">
+            <InstantSearch
+                searchClient={searchClient}
+                indexName="albums"
+                classNames={{
+                    root: "",
+                }}
+                initialUiState={{
+                    albums: {
+                        query: searchValue,
+                    },
+                }}
+            >
+                <Configure hitsPerPage={hits} />
+                <Card
+                    isFooterBlurred
+                    className="w-full h-[20vh] col-span-12 sm:col-span-7 relative"
+                >
+                    <CardHeader className="absolute inset-0 flex justify-center">
+                        <SearchBox
+                            placeholder="Search.."
+                            classNames={{
+                                root: "w-11/12",
+                                // form  : "bg-default-400/20 dark:bg-slate-800 rounded-full",
+                                input: "font-normal text-default-500 dark:text-white bg-default-400/20 dark:bg-stone-900",
+                            }}
+                        />
+                    </CardHeader>
+                    <Image
+                        removeWrapper
+                        alt="vinyl record player"
+                        className="z-0 w-full h-full object-cover"
+                        src="src/assets/vinylbg.jpg"
+                    />
+                </Card>
+                <PoweredBy className="text-[8pt]" />
+
+                <CurrentRefinements
+                    includedAttributes={["format", "genre", "price", "sleeve"]}
+                    classNames={{
+                        root: "mt-2 mb-4",
+                        item: "bg-white dark:bg-stone-800",
+                    }}
+                />
 				{/* Mobile view filter drawer, for larger screens please scroll down */}
 						<Button
 						className="md:hidden mb-0 ml-3"
@@ -142,7 +148,6 @@ export default function SearchPage() {
 						
 							</AccordionItem>
 						</Accordion>
-
                 {/* Wider screen filters */}
                 <div className="flex flex-col md:flex-row justify-evenly">
                     <div className="hidden md:block md:flex-row lg:flex-col w-full md:w-1/5 mr-2 pl-4">
