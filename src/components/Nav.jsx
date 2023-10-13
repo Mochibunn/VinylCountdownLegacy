@@ -16,7 +16,6 @@ import {
     Divider,
     DropdownSection,
 } from "@nextui-org/react";
-import { AcmeLogo } from "../assets/AcmeLogo.jsx";
 import { SearchIcon } from "../assets/SearchIcon.jsx";
 import { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom/dist/index.js";
@@ -24,6 +23,7 @@ import { useNavigate } from "react-router-dom";
 import { ThemeContext, UserContext } from "../Contexts.jsx";
 import NavSwitch from "./NavSwitch.jsx";
 import SignInModal from "./SignInModal.jsx";
+import SiteLogo from "../assets/SiteLogo.jsx";
 
 const Nav = () => {
     const { user, setUser } = useContext(UserContext);
@@ -78,30 +78,31 @@ const Nav = () => {
                         color="foreground"
                         className="flex items-center"
                     >
-                        <AcmeLogo className="place-items-center" />
-                        <p className="hidden sm:block font-bold text-inherit">
+                        <SiteLogo className="place-items-center h-[50px]" aria-label="vinyl countdown" key="website logo"/>
+                        {/* <p className="hidden sm:block font-bold text-inherit">
                             VINYL COUNTDOWN
-                        </p>
+                        </p> */}
                     </NavLink>
                 </NavbarBrand>
-                <NavbarContent className="hidden md:flex md:gap-3">
+                <NavbarContent className="hidden md:flex md:gap-3 font-bold">
                     <NavbarItem>
-                        <NavLink to="/" aria-current="page" color="foreground">
+                        <NavLink to="/" aria-current="page" color="foreground" className="text-lg">
                             {" "}
                             {/*// {({isActive}) => isActive ? "secondary" : "foreground" } //? Not sure how to control color if link is the active one */}
                             Home
                         </NavLink>
                     </NavbarItem>
                     <NavbarItem>
-                        <Link color="foreground" href="#">
+                        <NavLink to="/" aria-current="page" color="foreground" className="text-lg">
                             New
-                        </Link>
+                        </NavLink>
                     </NavbarItem>
                     <NavbarItem>
                         <NavLink
                             to="/search"
                             aria-current="page"
                             color="foreground"
+                            className="text-lg"
                         >
                             Browse
                         </NavLink>
@@ -110,12 +111,12 @@ const Nav = () => {
             </NavbarContent>
             <NavbarContent
                 as="div"
-                className="items-center max-w-full"
+                className="items-center max-w-full hidden md:flex"
                 justify="end"
             >
                 <Input
                     classNames={{
-                        base: "sm:max-w-[22rem] md:max-w-[12rem] lg:max-w-[20rem] h-10",
+                        base: "hidden md:flex md:max-w-[12rem] lg:max-w-[20rem] h-10",
                         mainWrapper: "h-full",
                         input: "text-small",
                         inputWrapper:
@@ -142,7 +143,7 @@ const Nav = () => {
                             isBordered
                             as="button"
                             className="transition-transform"
-                            color="primary"
+                            color="secondary"
                             // name="John Madden"
                             size="sm"
                             src={user && user[0].fields.profilePic}

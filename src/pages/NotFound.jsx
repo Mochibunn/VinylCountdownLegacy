@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { notFoundQuotes } from "../assets/NotFoundQuotes";
+import SiteLogo from "../assets/SiteLogo";
+import { Button } from "@nextui-org/react";
 
 export default function NotFound() {
     const navigate = useNavigate();
@@ -10,17 +12,19 @@ export default function NotFound() {
     };
 
     return (
-        <main className="flex flex-col items-center h-screen -mt-20 -mb-14">
-            <h1 className="text-7xl mt-96 mb-10">404</h1>
+        <main className="flex flex-col items-center h-screen">
+            <SiteLogo className="place-items-center h-[250px]" aria-label="vinyl countdown" key="website logo"/>
+            <h1 className="text-7xl font-black mb-10">404</h1>
             <p className="text-xl">
                 {randomQuote()}
             </p>
-            <button
-                onClick={() => navigate(-1)}
-                className="btn btn-accent mt-10"
+            <Button
+                onPress={() => navigate(-1)}
+                color="secondary"
+                className="mt-10"
             >
                 Go back
-            </button>
+            </Button>
         </main>
     );
 }
