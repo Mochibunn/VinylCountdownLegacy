@@ -52,7 +52,7 @@ const getRecs = async (albumGenre, albumId) => {
     try {
         const getAlbumRecs = await client.getEntries({
             content_type: "album",
-            limit: 10,
+            limit: 12,
             "fields.genre[in]": genreString,
             "sys.id[ne]": albumId,
         });

@@ -15,11 +15,11 @@ export default function Wishlist() {
             <div
                 className={
                     user &&
-                    user[0].fields.wishlist &&
+                    user[0].fields.wishlist.length &&
                     `gap-4 grid grid-cols-2 sm:grid-cols-4`
                 }
             >
-                {user && user[0].fields.wishlist ? (
+                {user && user[0].fields.wishlist.length ? (
                     user[0].fields.wishlist.map((item) => (
                         //wrapping in Card has much better results than wrapping in a div
                         // not sure quickly how to get rid if the new padding

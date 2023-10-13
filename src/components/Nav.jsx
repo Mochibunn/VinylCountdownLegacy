@@ -19,7 +19,7 @@ import {
 import { SearchIcon } from "../assets/SearchIcon.jsx";
 import { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom/dist/index.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ThemeContext, UserContext } from "../Contexts.jsx";
 import NavSwitch from "./NavSwitch.jsx";
 import SignInModal from "./SignInModal.jsx";
@@ -42,6 +42,22 @@ const Nav = ({ setSearchValue }) => {
     // const [isSelected, setIsSelected] = useState(isDark);
 
     const navigate = useNavigate(); //todo add navigation to login and register pages
+
+    //to grab reference to current URL, and a state to reference if it should be shown
+    const [showNavSearch, setShowNavSearch] = useState(true);
+    const location = useLocation();
+    const currentPath = location.pathname;
+    console.log(location.pathname);
+
+    //custom styling to transition navsearch in/out
+    // const [isMounted, setIsMounted] = useState(false);
+    const mountedStyle = {
+        animation: "inAnimation 250ms ease-in",
+    };
+    const unmountedStyle = {
+        animation: "outAnimation 270ms ease-out",
+        animationFillMode: "forwards",
+    };
 
     const handleClick = () => {
         navigate("/");
@@ -86,7 +102,11 @@ const Nav = ({ setSearchValue }) => {
                         color="foreground"
                         className="flex items-center"
                     >
-                        <SiteLogo className="place-items-center h-[50px]" aria-label="vinyl countdown" key="website logo"/>
+                        <SiteLogo
+                            className="place-items-center h-[50px]"
+                            aria-label="vinyl countdown"
+                            key="website logo"
+                        />
                         {/* <p className="hidden sm:block font-bold text-inherit">
                             VINYL COUNTDOWN
                         </p> */}
@@ -94,14 +114,24 @@ const Nav = ({ setSearchValue }) => {
                 </NavbarBrand>
                 <NavbarContent className="hidden md:flex md:gap-3 font-bold place-items-center">
                     <NavbarItem>
-                        <NavLink to="/" aria-current="page" color="foreground" className="text-lg">
+                        <NavLink
+                            to="/"
+                            aria-current="page"
+                            color="foreground"
+                            className="text-lg"
+                        >
                             {" "}
                             {/*// {({isActive}) => isActive ? "secondary" : "foreground" } //? Not sure how to control color if link is the active one */}
                             Home
                         </NavLink>
                     </NavbarItem>
                     <NavbarItem>
-                        <NavLink to="/" aria-current="page" color="foreground" className="text-lg">
+                        <NavLink
+                            to="/"
+                            aria-current="page"
+                            color="foreground"
+                            className="text-lg"
+                        >
                             New
                         </NavLink>
                     </NavbarItem>
@@ -122,28 +152,40 @@ const Nav = ({ setSearchValue }) => {
                 className="items-center max-w-full hidden md:flex"
                 justify="center"
             >
-                <form
-                    onSubmit={(e) => {
-                        handleSearchSubmit(e);
-                    }}
-                    // className="sm:max-w-[22rem] md:max-w-[12rem] lg:max-w-[20rem] h-10"
-                >
-                    <Input
-                        classNames={{
-                            base: "hidden md:flex md:min-w-[12rem] lg:min-w-[25rem] h-10",
-                            mainWrapper: "h-full",
-                            input: "text-small",
-                            inputWrapper:
-                                "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+                {showNavSearch && (
+                    <form
+                        onSubmit={(e) => {
+                            handleSearchSubmit(e);
                         }}
-                        placeholder="Search.."
-                        size="sm"
-                        startContent={<SearchIcon size={18} />}
-                        type="search"
-                        value={localValue}
-                        onValueChange={setLocalValue}
-                    />
-                </form>
+                        // className="sm:max-w-[22rem] md:max-w-[12rem] lg:max-w-[20rem] h-10"
+                        style={
+                            currentPath === "/search"
+                                ? unmountedStyle
+                                : mountedStyle
+                        }
+                        // onAnimationEnd={() => {
+                        //     currentPath === "/search"
+                        //         && setShowNavSearch(false)
+                        //         : setShowNavSearch(true);
+                        // }}
+                    >
+                        <Input
+                            classNames={{
+                                base: "hidden md:flex md:max-w-[12rem] lg:max-w-[20rem] h-10",
+                                mainWrapper: "h-full",
+                                input: "text-small",
+                                inputWrapper:
+                                    "h-full font-normal text-default-500 bg-default-400/20 dark:bg-default-500/20",
+                            }}
+                            placeholder="Search.."
+                            size="sm"
+                            startContent={<SearchIcon size={18} />}
+                            type="search"
+                            value={localValue}
+                            onValueChange={setLocalValue}
+                        />
+                    </form>
+                )}
                 <div className="hidden md:block">
                     <NavSwitch />
                 </div>
