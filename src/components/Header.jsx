@@ -20,8 +20,6 @@ export default function Header() {
             sliderRef?.slickPlay();
             setPaused(false);
         }
-
-        // setPause(false); //! Temporary solution
     };
 
     return (
@@ -34,12 +32,10 @@ export default function Header() {
                 // fade
                 waitForAnimate={false}
                 centerMode
-                pauseOnHover
                 speed={3000}
                 className="pt-6 pb-1 px-0 hover:cursor-pointer"
             >
                 {/* <div className="px-2">
-
 				<Card className="h-full col-span-12 sm:col-span-7 relative">
 				<CardHeader className="absolute inset-0 flex-col justify-center">
 					<h4 className="text-white font-medium text-6xl mb-2">
