@@ -25,11 +25,12 @@ export default function AlbumCarousel({ singleAlbum, albumId }) {
 
     const sliderSettings = {
         slidesToShow: 4,
-        slidesToScroll: 3,
+        slidesToScroll: 4,
         infinite: true,
         dots: false,
         arrows: false,
         lazyLoad: "ondemand",
+        speed: 2000,
         responsive: [
             {
                 breakpoint: 1280,
