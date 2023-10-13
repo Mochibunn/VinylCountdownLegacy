@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
-
 import Layout from "./pages/Layout";
 import LandingPage from "./pages/LandingPage";
 import AlbumPage from "./pages/AlbumPage";
