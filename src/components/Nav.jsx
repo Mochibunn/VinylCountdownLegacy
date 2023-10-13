@@ -45,6 +45,7 @@ const Nav = ({ setSearchValue }) => {
 
     //to grab reference to current URL, and a state to reference if it should be shown
     const [showNavSearch, setShowNavSearch] = useState(true);
+    setShowNavSearch; //to make VS Code shutup ;)
     const location = useLocation();
     const currentPath = location.pathname;
     console.log(location.pathname);
@@ -164,8 +165,8 @@ const Nav = ({ setSearchValue }) => {
                                 : mountedStyle
                         }
                         // onAnimationEnd={() => {
-                        //     currentPath === "/search"
-                        //         && setShowNavSearch(false)
+                        //     currentPath !== "/search"
+                        //         ? setShowNavSearch(false)
                         //         : setShowNavSearch(true);
                         // }}
                     >
