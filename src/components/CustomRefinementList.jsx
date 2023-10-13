@@ -28,21 +28,26 @@ export default function CustomRefinementList(props) {
           <li key={item.label}>
             <label>
               <Checkbox
-                isSelected={item.isRefined}
-                onValueChange={() => refine(item.value)}
+                isSelected    = {item.isRefined}
+                onValueChange = {() => refine(item.value)}
+                color         = "secondary"
               />
-              <Chip size='sm' className='text-[10px]'>{item.count}</Chip>
-              <span className=' text-sm'>&nbsp;&nbsp;{item.label}</span>
+              <Chip
+                size      = 'sm'
+                className = 'text-[10px]'>
+                  {item.count}
+                </Chip>
+              <span className='text-sm'>&nbsp;&nbsp;{item.label}</span>
             </label>
           </li>
         ))}
       </ul>
       <Button
-        className='my-2'
-        color='primary'
-        onPress={toggleShowMore}
-        disabled={!canToggleShowMore}
-        startContent={isShowingMore ? <FiChevronUp/> : <FiChevronDown/>}
+        className    = 'my-2'
+        color        = 'secondary'
+        onPress      = {toggleShowMore}
+        disabled     = {!canToggleShowMore}
+        startContent = {isShowingMore ? <FiChevronUp/> : <FiChevronDown/>}
         >
         {isShowingMore ? 'Show less' : 'Show more'}
       </Button>

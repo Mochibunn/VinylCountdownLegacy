@@ -23,13 +23,14 @@ export default function CustomPagination(props) {
         });
     }, [currentPage, refine]);
 
-    return (
-        <Pagination
-            size="lg"
-            total={nbPages}
-            page={currentPage}
-            className="flex justify-center mt-1 mx-0"
-            onChange={setCurrentPage}
-        ></Pagination>
-    );
+  return(
+    <Pagination
+      color     = "secondary"
+      size      = "lg"
+      total     = {nbPages}
+      page      = {currentPage}
+      className = "flex justify-center mt-1 mx-0"
+      onChange  = {setCurrentPage}>
+    </Pagination>
+  )
 }
