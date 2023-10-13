@@ -99,7 +99,7 @@ export default function SearchPage({ searchValue }) {
                         removeWrapper
                         alt="vinyl record player"
                         className="z-0 w-full h-full object-cover"
-                        src="src/assets/vinylbg.jpg"
+                        src="https://cdn.discordapp.com/attachments/199274450011553792/1162324637288517674/vinylbg.jpg"
                     />
                 </Card>
                 <PoweredBy className="text-[8pt]" />

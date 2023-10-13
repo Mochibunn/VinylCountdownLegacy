@@ -52,36 +52,40 @@ export default function Header() {
 					/>
 				</Card>
 					</div> */}
-                <div className="px-2 w-full rounded-3xl h-full my-0 select-none	">
+                <div className="px-2 rounded-3xl h-full my-0 select-none	">
                     <Image
                         removeWrapper
                         alt       = "carousel banner"
-                        src       = "src/assets/slide0.png"
+                        src       = "https://cdn.discordapp.com/attachments/199274450011553792/1162324634826440744/slide0.png"
                         draggable = "false"
+												className = "mx-auto"
                     />
                 </div>
-                <div className="px-2 w-full rounded-3xl h-full my-0 select-none	">
+                <div className="px-2 rounded-3xl h-full my-0 select-none	">
                     <Image
                         removeWrapper
                         alt       = "carousel banner"
-                        src       = "src/assets/slide1.png"
+                        src       = "https://cdn.discordapp.com/attachments/199274450011553792/1162324635203936277/slide1.png"
                         draggable = "false"
+												className = "mx-auto"
                     />
                 </div>
-                <div className="px-2 w-full rounded-3xl h-full my-0 select-none	">
+                <div className="px-2 rounded-3xl h-full my-0 select-none">
                     <Image
                         removeWrapper
                         alt       = "carousel banner"
-                        src       = "src/assets/slide2.png"
+                        src       = "https://cdn.discordapp.com/attachments/199274450011553792/1162324635719827456/slide2.png"
                         draggable = "false"
+												className = "mx-auto"
                     />
                 </div>
-                <div className="px-2 w-full rounded-3xl h-full my-0 select-none	">
+                <div className="px-2 rounded-3xl h-full my-0 select-none	">
                     <Image
                         removeWrapper
                         alt       = "carousel banner"
-                        src       = "src/assets/slide3.png"
+                        src       = "https://cdn.discordapp.com/attachments/199274450011553792/1162324636705497199/slide3.png"
                         draggable = "false"
+												className = "mx-auto"
                     />
                 </div>
             </Slider>
