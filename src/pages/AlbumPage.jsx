@@ -84,7 +84,7 @@ export default function AlbumPage() {
                         isPressable
                         disableRipple
                         onPress={() => console.log("item pressed")}
-                        className="mb-8 h-full sm:sticky sm:top-20 overflow-visible shadow-none bg-transparent"
+                        className="mb-0 h-full sm:sticky sm:top-20 overflow-visible shadow-none bg-transparent"
                     >
                         <Tilt
                             glareEnable
