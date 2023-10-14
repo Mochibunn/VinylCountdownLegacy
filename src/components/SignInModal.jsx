@@ -129,7 +129,7 @@ export default function SignInModal() {
                                                 type="button"
                                                 onClick={toggleVisibility}
                                             >
-                                                {isVisible ? (
+                                                {!isVisible ? (
                                                     <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
                                                 ) : (
                                                     <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />

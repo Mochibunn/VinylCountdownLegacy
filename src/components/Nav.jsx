@@ -342,9 +342,9 @@ const Nav = ({ setSearchValue }) => {
                 <NavbarMenuItem>
                     <NavLink
                         color="foreground"
-                        className="w-full text-neutral-500"
+                        className="w-full"
                         size="lg"
-                        href="#"
+                        to="/wishlist"
                     >
                         Wishlist
                     </NavLink>
@@ -380,6 +380,16 @@ const Nav = ({ setSearchValue }) => {
                         {" "}
                         {/* //todo NavLink doesn't change the color but Link does, perhaps that's the active link fix */}
                         Help & Feedback
+                    </NavLink>
+                </NavbarMenuItem>
+                <NavbarMenuItem>
+                    <NavLink
+                        color="foreground"
+                        className="w-full"
+                        size="lg"
+                        to="/register"
+                    >
+                        Register
                     </NavLink>
                 </NavbarMenuItem>
                 <Divider />

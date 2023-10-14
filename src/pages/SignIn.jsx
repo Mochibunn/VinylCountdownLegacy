@@ -2,6 +2,10 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUser } from "../lib/contentfulClient";
 import { UserContext } from "../Contexts";
+import { Input, Button } from "@nextui-org/react";
+import { MailIcon } from "../assets/MailIcon.jsx";
+import { EyeFilledIcon } from "../assets/EyeFilledIcon.jsx";
+import { EyeSlashFilledIcon } from "../assets/EyeSlashFilledIcon.jsx";
 //! If you are changing any code in this block, please let Mochi know!
 const SignIn = () => {
     const [form, setForm] = useState({
@@ -9,6 +13,10 @@ const SignIn = () => {
         password: "",
     });
     const { setUser } = useContext(UserContext);
+
+    //state and function for toggling password visibility
+    const [isVisible, setIsVisible] = useState(false);
+    const toggleVisibility = () => setIsVisible(!isVisible);
 
     const navigate = useNavigate();
 
@@ -19,14 +27,37 @@ const SignIn = () => {
 
     const handleSubmit = () => {
         //imported now :)
+        //old logic
+        // getUser(form)
+        //     .then(({ userData }) => setUser({ ...userData }))
+        //     .catch((error) => console.error(error));
+        // setForm({
+        //     email: "",
+        //     password: "",
+        // });
+        // navigate("/");
+
+        //updated logic from sign in modal with checks
         getUser(form)
-            .then(({ userData }) => setUser({ ...userData }))
+            .then((userData) => {
+                let test = userData;
+                if (userData.length) {
+                    setUser(userData);
+                } else {
+                    setUser(false);
+                }
+                return test;
+                // userData.length ? setUser(userData) : setUser(false);
+            })
+            .then((test) => {
+                if (!test.length) return alert("Invalid email or password!");
+                setForm({
+                    email: "",
+                    password: "",
+                });
+                navigate("/");
+            })
             .catch((error) => console.error(error));
-        setForm({
-            email: "",
-            password: "",
-        });
-        navigate("/");
     };
     //! End of code block
     return (
@@ -43,34 +74,54 @@ const SignIn = () => {
                     Sign In
                 </h1>
                 <div className="flex flex-col items-center justify-around h-1/2 w-full text-white">
-                    <input
+                    <Input
+                        isRequired
                         type="text"
-                        placeholder="E-mail"
+                        label="E-mail"
+                        labelPlacement="outside"
                         name="email"
                         value={form.email}
                         onChange={handleChange}
-                        className="w-3/5 mb-8 p-2 outline-none border-b border-transparent focus:border-slate-100 bg-slate-500 rounded transition-all"
+                        className="w-full mb-4 p-2"
+                        endContent={
+                            <MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />
+                        }
                     />
-                    <input
-                        type="password"
-                        placeholder="Password"
+                    <Input
+                        isRequired
+                        type={isVisible ? "text" : "password"}
+                        label="Password"
+                        labelPlacement="outside"
                         name="password"
                         value={form.password}
                         onChange={handleChange}
-                        className="w-3/5 mb-8 p-2 outline-none border-b border-transparent focus:border-slate-100 bg-slate-500 rounded transition-all"
+                        className="w-full mb-1 p-2"
+                        endContent={
+                            <button
+                                className="focus:outline-none"
+                                type="button"
+                                onClick={toggleVisibility}
+                            >
+                                {!isVisible ? (
+                                    <EyeSlashFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                                ) : (
+                                    <EyeFilledIcon className="text-2xl text-default-400 pointer-events-none" />
+                                )}
+                            </button>
+                        }
                     />
                 </div>
                 <br />
                 <div className="flex w-full">
-                    <button className="w-1/2 bg-accent hover:bg-info-content hover:border-info-content rounded-none text-white font-normal text-lg p-4 transition-none uppercase">
+                    <Button className="w-1/2 bg-accent hover:bg-info-content hover:border-info-content rounded-none text-white font-normal text-lg p-4 transition-none uppercase">
                         Register
-                    </button>
-                    <button
+                    </Button>
+                    <Button
                         type="submit"
                         className="w-1/2 bg-success hover:bg-success-content hover:border-success-content rounded-none text-white font-normal text-lg py-4 transition-none uppercase"
                     >
                         Sign In
-                    </button>
+                    </Button>
                 </div>
             </form>
         </div>
