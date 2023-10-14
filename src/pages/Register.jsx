@@ -81,7 +81,7 @@ const Register = () => {
                             name="firstName"
                             value={form.firstName}
                             onChange={handleChange}
-                            className="w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2"
+                            className="w-full md:w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2"
                         />
                         <Input
                             isRequired
@@ -91,7 +91,7 @@ const Register = () => {
                             name="lastName"
                             value={form.lastName}
                             onChange={handleChange}
-                            className="w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2 "
+                            className="w-full md:w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2 "
                         />
                         <Input
                             isRequired
@@ -106,7 +106,7 @@ const Register = () => {
                             }
                             value={form.email}
                             onChange={handleChange}
-                            className="w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2"
+                            className="w-full md:w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2"
                         />
                         <Input
                             isRequired
@@ -117,7 +117,7 @@ const Register = () => {
                             name="password"
                             value={form.password}
                             onChange={handleChange}
-                            className="w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2"
+                            className="w-full md:w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2"
                         />
                         <Input
                             type="text"
@@ -127,7 +127,7 @@ const Register = () => {
                             name="profilePic"
                             value={form.profilePic}
                             onChange={handleChange}
-                            className="w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2"
+                            className="w-full md:w-3/5 mb-1 sm:mb-2 lg:mb-4 p-2"
                         />
                     </div>
                     <br />
