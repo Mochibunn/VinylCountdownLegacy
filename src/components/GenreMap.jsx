@@ -1,7 +1,7 @@
 import { Chip } from "@nextui-org/react";
 
 export const GenreMap = (array) => {
-    if (!array || !array.length) return;
+    if (!array || !array.length) return; //added this line here
     const result = array.map((item) => {
         return (
             <Chip

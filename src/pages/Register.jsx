@@ -136,7 +136,7 @@ const Register = () => {
                             onClick={(e) => {
                                 e.preventDefault();
                             }}
-                            className="w-1/2 bg-accent hover:bg-info-content hover:border-info-content rounded-none text-white font-normal text-lg p-4 transition-none uppercase"
+                            className="w-1/2 bg-accent hover:bg-info-content hover:border-info-content rounded-none text-black dark:text-white font-normal text-lg p-4 transition-none uppercase"
                         >
                             <SignInModal />
                         </Button>
