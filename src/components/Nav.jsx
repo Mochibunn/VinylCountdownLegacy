@@ -206,7 +206,7 @@ const Nav = ({ setSearchValue }) => {
                             color="secondary"
                             // name="John Madden"
                             size="sm"
-                            src={user && user[0].fields.profilePic}
+                            src={user && user["profile_Pic"]}
                         />
                     </DropdownTrigger>
                     <DropdownMenu
@@ -229,8 +229,8 @@ const Nav = ({ setSearchValue }) => {
                                             Signed in as:
                                         </p>
                                         <p className="font-normal">
-                                            {user && user[0].fields.firstName}{" "}
-                                            {user && user[0].fields.lastName}
+                                            {user && user["first_Name"]}
+                                            {user && user["last_Name"]}
                                         </p>
                                     </>
                                 ) : (

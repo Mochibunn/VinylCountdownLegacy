@@ -13,7 +13,7 @@ import { MailIcon } from "../assets/MailIcon.jsx";
 // import { LockIcon } from "../assets/LockIcon.jsx";
 import { EyeFilledIcon } from "../assets/EyeFilledIcon.jsx";
 import { EyeSlashFilledIcon } from "../assets/EyeSlashFilledIcon.jsx";
-import { getUser } from "../lib/contentfulClient";
+import { signInUser } from "../lib/dbClient.js";
 import { SignInModalContext, UserContext } from "../Contexts";
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
@@ -50,10 +50,10 @@ export default function SignInModal() {
         if (!form.email || !form.password)
             return alert("Please enter a valid email and password!");
         //imported now-expects object as argument
-        getUser(form)
+        signInUser(form)
             .then((userData) => {
                 let test = userData;
-                if (userData.length) {
+                if (userData) {
                     setUser(userData);
                 } else {
                     setUser(false);
@@ -62,7 +62,7 @@ export default function SignInModal() {
                 // userData.length ? setUser(userData) : setUser(false);
             })
             .then((test) => {
-                if (!test.length) return alert("Invalid email or password!");
+                if (!test) return alert("Invalid email or password!");
                 setForm({
                     email: "",
                     password: "",

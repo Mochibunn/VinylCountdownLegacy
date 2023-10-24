@@ -13,8 +13,8 @@ import {
 import AlbumCarousel from "../components/AlbumCarousel";
 import LoadingPage from "./LoadingPage";
 import { Spotify } from "react-spotify-embed";
-import { getSingleAlbum } from "../lib/contentfulClient";
-import { addToWishlist } from "../lib/contentfulMngClient";
+// import { getSingleAlbum } from "../lib/contentfulClient";
+// import { addToWishlist } from "../lib/contentfulMngClient";
 import Tilt from "react-parallax-tilt";
 import RemoveWishBtn from "../components/RemoveWishBtn";
 import { GenreMap } from "../components/GenreMap";
@@ -38,7 +38,7 @@ export default function AlbumPage() {
             ...(user[0].fields.wishlist || []),
             singleAlbum,
         ];
-        addToWishlist(user[0].sys.id, albumId);
+        // addToWishlist(user[0].sys.id, albumId);
         setUser((prev) =>
             prev.map((user) => ({
                 ...user,
@@ -50,14 +50,14 @@ export default function AlbumPage() {
     // singleAlbum && console.log(singleAlbum.sys.id);
     useEffect(() => {
         //imported now :)
-        setIsLoaded(false);
-        getSingleAlbum(albumId)
-            .then((albumData) => {
-                setSingleAlbum(albumData);
-                setValue(albumData.fields.comment);
-                setIsLoaded(true);
-            })
-            .catch((error) => console.error(error));
+        // setIsLoaded(false);
+        // getSingleAlbum(albumId)
+        //     .then((albumData) => {
+        //         setSingleAlbum(albumData);
+        //         setValue(albumData.fields.comment);
+        //         setIsLoaded(true);
+        //     })
+        //     .catch((error) => console.error(error));
         // window.scrollTo(0, 0);
     }, [albumId]);
 

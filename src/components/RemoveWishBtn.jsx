@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { UserContext } from "../Contexts";
-import { removeFromWishlist } from "../lib/contentfulMngClient";
+// import { removeFromWishlist } from "../lib/contentfulMngClient";
 import { Button } from "@nextui-org/react";
 import { FiMinus } from "react-icons/fi";
 
@@ -8,7 +8,7 @@ export default function RemoveWishBtn({ id }) {
     const { user, setUser } = useContext(UserContext);
 
     const handleRemoveFromWishlist = (albumId) => {
-        removeFromWishlist(user[0], id);
+        // removeFromWishlist(user[0], id);
         setUser((prev) =>
             prev.map((user) => {
                 const updatedWishlist = user.fields.wishlist.filter(

@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { getUser } from "../lib/contentfulClient";
+import { signInUser } from "../lib/dbClient";
 import { UserContext } from "../Contexts";
 import { Input, Button } from "@nextui-org/react";
 import { MailIcon } from "../assets/MailIcon.jsx";
@@ -38,7 +38,7 @@ const SignIn = () => {
         // navigate("/");
 
         //updated logic from sign in modal with checks
-        getUser(form)
+        signInUser(form)
             .then((userData) => {
                 let test = userData;
                 if (userData.length) {
