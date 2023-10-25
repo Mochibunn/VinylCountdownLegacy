@@ -1,3 +1,4 @@
+import { user } from "@nextui-org/react";
 import axios from "axios";
 
 const signInUser = async (form) => {
@@ -31,6 +32,24 @@ const makeNewUser = (newUser) => {
         });
 };
 
+const editUser = async (userId, userInfo) => {
+    try {
+        const userData = await axios.patch(
+            `http://localhost:24601/users/${userId}`,
+            {
+                first_name: userInfo.firstName,
+                last_name: userInfo.lastName,
+                email: userInfo.email,
+                password: userInfo.password,
+                profile_pic: userInfo.profilePic,
+            }
+        );
+        return userData.data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 const addToWishlist = (userId, albumId) => {
     axios
         .post(`http://localhost:24601/wishlist/${userId}/${albumId}`)
@@ -53,4 +72,4 @@ const removeFromWishlist = (userId, albumId) => {
         });
 };
 
-export { signInUser, makeNewUser, addToWishlist, removeFromWishlist };
+export { signInUser, makeNewUser, editUser, addToWishlist, removeFromWishlist };
