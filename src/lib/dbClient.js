@@ -5,7 +5,7 @@ const signInUser = async (form) => {
         if (!form.email || !form.password)
             throw new Error(alert("Please enter a valid email and password!"));
         const userData = await axios.get(
-            `//localhost:24601/users?email=${form.email}&password=${form.password}`
+            `http://localhost:24601/users?email=${form.email}&password=${form.password}`
         );
         console.log(userData.data);
         return userData.data;
@@ -14,4 +14,21 @@ const signInUser = async (form) => {
     }
 };
 
-export { signInUser };
+const makeNewUser = (newUser) => {
+    axios
+        .post("http://localhost:24601/users", {
+            first_name: newUser.firstName,
+            last_name: newUser.lastName,
+            email: newUser.email,
+            password: newUser.password,
+            profile_pic: newUser.profilePic,
+        })
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+};
+
+export { signInUser, makeNewUser };

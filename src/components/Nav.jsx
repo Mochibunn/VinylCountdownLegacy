@@ -30,6 +30,7 @@ const Nav = ({ setSearchValue }) => {
 
     const { user, setUser } = useContext(UserContext);
     const { isDarkMode } = useContext(ThemeContext);
+    // console.log(user["first_name"]);
 
     //Moved to ThemeWrap
     // const isSignedIn = JSON.parse(localStorage.getItem("signedIn"));
@@ -48,7 +49,7 @@ const Nav = ({ setSearchValue }) => {
     setShowNavSearch; //to make VS Code shutup ;)
     const location = useLocation();
     const currentPath = location.pathname;
-    console.log(location.pathname);
+    // console.log(location.pathname);
 
     //custom styling to transition navsearch in/out
     // const [isMounted, setIsMounted] = useState(false);
@@ -206,7 +207,7 @@ const Nav = ({ setSearchValue }) => {
                             color="secondary"
                             // name="John Madden"
                             size="sm"
-                            src={user && user["profile_Pic"]}
+                            src={user && user[0].profile_pic}
                         />
                     </DropdownTrigger>
                     <DropdownMenu
@@ -229,8 +230,8 @@ const Nav = ({ setSearchValue }) => {
                                             Signed in as:
                                         </p>
                                         <p className="font-normal">
-                                            {user && user["first_Name"]}
-                                            {user && user["last_Name"]}
+                                            {user && user[0].first_name}{" "}
+                                            {user && user[0].last_name}
                                         </p>
                                     </>
                                 ) : (

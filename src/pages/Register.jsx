@@ -2,7 +2,7 @@
 import { useState, useContext, useMemo } from "react";
 import { UserContext } from "../Contexts";
 import { signInUser } from "../lib/dbClient";
-// import { makeNewUser } from "../lib/contentfulMngClient";
+import { makeNewUser } from "../lib/dbClient";
 import { useNavigate } from "react-router-dom";
 import { Input, Button } from "@nextui-org/react";
 import SignInModal from "../components/SignInModal";

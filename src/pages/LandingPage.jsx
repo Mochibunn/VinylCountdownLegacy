@@ -6,9 +6,9 @@ import { useState, useEffect } from "react";
 
 export default function LandingPage() {
     const [newArrivals, setNewArrivals] = useState([]);
-    const [isLoaded, setIsLoaded] = useState(true); //change this back to false later
+    const [isLoaded, setIsLoaded] = useState(false);
     useEffect(() => {
-        setIsLoaded(false);
+        setIsLoaded(true); //change this back to false later
         // getNewArrivals()
         //     .then((albumData) => {
         //         setNewArrivals(albumData);

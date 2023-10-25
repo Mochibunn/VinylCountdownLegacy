@@ -53,7 +53,7 @@ export default function SignInModal() {
         signInUser(form)
             .then((userData) => {
                 let test = userData;
-                if (userData) {
+                if (userData.length) {
                     setUser(userData);
                 } else {
                     setUser(false);
@@ -62,7 +62,7 @@ export default function SignInModal() {
                 // userData.length ? setUser(userData) : setUser(false);
             })
             .then((test) => {
-                if (!test) return alert("Invalid email or password!");
+                if (!test.length) return alert("Invalid email or password!");
                 setForm({
                     email: "",
                     password: "",
