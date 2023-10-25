@@ -1,4 +1,3 @@
-import { user } from "@nextui-org/react";
 import axios from "axios";
 
 const signInUser = async (form) => {
