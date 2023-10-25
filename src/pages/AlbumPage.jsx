@@ -34,15 +34,12 @@ export default function AlbumPage() {
 
     const handleAddToWishlist = () => {
         if (!user) return;
-        const updatedWishlist = [
-            ...(user[0].fields.wishlist || []),
-            singleAlbum,
-        ];
+        const updatedWishlist = [...(user[0].wishlist || []), singleAlbum];
         // addToWishlist(user[0].sys.id, albumId);
         setUser((prev) =>
             prev.map((user) => ({
                 ...user,
-                fields: { ...user.fields, wishlist: updatedWishlist },
+                wishlist: updatedWishlist,
             }))
         );
         // setInWishlist(true);
