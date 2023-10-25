@@ -31,4 +31,26 @@ const makeNewUser = (newUser) => {
         });
 };
 
-export { signInUser, makeNewUser };
+const addToWishlist = (userId, albumId) => {
+    axios
+        .post(`http://localhost:24601/wishlist/${userId}/${albumId}`)
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+};
+
+const removeFromWishlist = (userId, albumId) => {
+    axios
+        .delete(`http://localhost:24601/wishlist/${userId}/${albumId}`)
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+};
+
+export { signInUser, makeNewUser, addToWishlist, removeFromWishlist };
