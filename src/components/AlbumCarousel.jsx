@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Slider from "react-slick";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { getRecs } from "../lib/contentfulClient";
+// import { getRecs } from "../lib/contentfulClient";
 import AlbumCard from "./AlbumCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -18,9 +18,9 @@ export default function AlbumCarousel({ singleAlbum, albumId }) {
         //     })
         //     .catch((error) => console.error(error));
         if (!singleAlbum) return;
-        getRecs(singleAlbum.fields.genre, albumId)
-            .then((albumData) => setAlbumRecs(albumData))
-            .catch((error) => console.error(error));
+        // getRecs(singleAlbum.fields.genre, albumId)
+        //     .then((albumData) => setAlbumRecs(albumData))
+        //     .catch((error) => console.error(error));
     }, [singleAlbum, albumId]);
 
     const sliderSettings = {

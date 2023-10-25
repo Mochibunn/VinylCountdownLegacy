@@ -1,8 +1,8 @@
 // import { createClient } from "contentful-management";
 import { useState, useContext, useMemo } from "react";
 import { UserContext } from "../Contexts";
-import { getUser } from "../lib/contentfulClient";
-import { makeNewUser } from "../lib/contentfulMngClient";
+import { signInUser } from "../lib/dbClient";
+import { makeNewUser } from "../lib/dbClient";
 import { useNavigate } from "react-router-dom";
 import { Input, Button } from "@nextui-org/react";
 import SignInModal from "../components/SignInModal";
@@ -26,7 +26,7 @@ const Register = () => {
 
     const handleHomeClick = () => {
         //imported now :)
-        getUser(form)
+        signInUser(form)
             .then((userData) => {
                 if (!userData.length)
                     return alert("Sorry, an error occurred while logging in");
