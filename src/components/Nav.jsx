@@ -215,7 +215,6 @@ const Nav = ({ setSearchValue }) => {
                         variant="flat"
                         disabledKeys={[
                             "forums",
-                            "settings",
                             "help_and_feedback",
                             "orders",
                             "cart",
@@ -256,7 +255,14 @@ const Nav = ({ setSearchValue }) => {
                             )}
 
                             <DropdownItem key="forums">Forums</DropdownItem>
-                            <DropdownItem key="settings">Settings</DropdownItem>
+                            {user && (
+                                <DropdownItem
+                                    onClick={() => navigate("settings")}
+                                    key="settings"
+                                >
+                                    Settings
+                                </DropdownItem>
+                            )}
                             <DropdownItem key="help_and_feedback">
                                 Help & Feedback
                             </DropdownItem>
