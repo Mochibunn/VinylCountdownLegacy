@@ -87,4 +87,13 @@ const getSingleAlbum = async (id) => {
 	return data;
 };
 
-export { signInUser, makeNewUser, editUser, addToWishlist, removeFromWishlist, getAllAlbums, getSingleAlbum };
+/**
+ * function for getting relevant recs based on genre
+ * @param  genre should be an array
+ * @param id keeps the album on the page from the rec list, should be the sys id of the album
+ */
+const getRecs = async (genre, id) => {
+
+};
+
+export { signInUser, makeNewUser, editUser, addToWishlist, removeFromWishlist, getAllAlbums, getSingleAlbum, getRecs };
