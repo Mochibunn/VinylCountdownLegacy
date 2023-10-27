@@ -93,15 +93,15 @@ const getSingleAlbum = async (id) => {
 };
 
 /**
- * function for getting relevant recs based on genre
- * @param  genre should be an array
- * @param id keeps the album on the page from the rec list, should be the sys id of the album
+ * Function for getting relevant recommendations based on the genre of the album with a specific ID.
+ * @param id Provides the album ID to base recommendations on.
+ * Can only be a number
  */
 const getRecs = async (id) => {
 try {
     const { data } = await axios
       .get(`${backend}/albums/${id}/recommendations`);
-    console.log(data);
+    console.log("Recommendation matches: ", data.length);
     return data;
 } catch (error) {
   return ("🛑🐰 Ack! An error! ", error);
