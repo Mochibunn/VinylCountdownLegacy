@@ -75,7 +75,6 @@ export default function AlbumCarousel({ singleAlbum, albumId }) {
     infinite: true,
     dots: false,
     arrows: false,
-    lazyLoad: "ondemand",
     speed: 2000,
     responsive: [
       {
