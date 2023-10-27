@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../Contexts";
 import { FiPlus, FiShoppingCart } from "react-icons/fi";
@@ -27,18 +27,28 @@ export default function AlbumPage() {
   const [value, setValue] = useState("");
   const { albumId } = useParams();
   const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   // console.log(singleAlbum);
   // console.log(user[0]);
 	useEffect(() => {
-		getSingleAlbum(albumId)
+    try {
+      if (!+albumId) throw new Error(500);
+      getSingleAlbum(albumId)
 			.then((albumData) => {
-				setSingleAlbum(albumData);
+        // console.log(albumData.response.status);
+        // if (typeof albumData.response.status !== `undefined` || albumData.response.status !== null) throw new Error(albumData.response.status);
+        setSingleAlbum(albumData);
 				(!albumData.comment) ? "" :
 				setValue(albumData.comment);
 				setIsLoaded(true);
 			})
-	}, []);
+    } catch (error) {
+        console.error("🛑🐰 Oops, that's an error!\n", error);
+        setIsLoaded(true);
+        navigate("/error", { state: error });
+    }
+	}, [albumId]);
 
   // const handleAddToWishlist = () => {
   //   if (!user) return;

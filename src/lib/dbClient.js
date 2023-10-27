@@ -1,6 +1,6 @@
 import axios from "axios";
-const backend = "http://localhost:24601"; //! Temp
-// const backend = import.meta.env.VITE_BACKEND_URL_DEPLOY; //! Uncomment
+//const backend = "http://localhost:24601"; //! Temp
+const backend = import.meta.env.VITE_BACKEND_URL_DEPLOY; //! Uncomment
 
 //User functionality
 const signInUser = async (form) => {
@@ -82,9 +82,14 @@ const getAllAlbums = async () => {
 };
 
 const getSingleAlbum = async (id) => {
-	const { data } = await axios
-		.get(`${backend}/albums/${id}`);
-	return data;
+  try {    
+    if (!+id) throw new Error(`err`);
+    const { data } = await axios
+      .get(`${backend}/albums/${id}`);
+    return data;
+  } catch (error) {
+    return ("🛑🐰 Ack! An error! ", error);
+  }
 };
 
 /**
@@ -92,8 +97,30 @@ const getSingleAlbum = async (id) => {
  * @param  genre should be an array
  * @param id keeps the album on the page from the rec list, should be the sys id of the album
  */
-const getRecs = async (genre, id) => {
-
+const getRecs = async (id) => {
+try {
+    const { data } = await axios
+      .get(`${backend}/albums/${id}/recommendations`);
+    console.log(data);
+    return data;
+} catch (error) {
+  return ("🛑🐰 Ack! An error! ", error);
+}
 };
+
+// const getRecs = async (genre, id) => {
+// 	console.log("Hello! :) ", genre.genre);
+// 	console.log("Hello! :o ", id);
+
+// 	const { data } = await axios
+// 	.get(`${backend}/albums`);
+
+// 	// const albums = await getAllAlbums();
+// 	const s = await data
+// 	.filter((album) => album.genre == genre.genre)
+// 	.slice(0, 12);
+// 	console.log(data);
+// 	return s;
+// };
 
 export { signInUser, makeNewUser, editUser, addToWishlist, removeFromWishlist, getAllAlbums, getSingleAlbum, getRecs };

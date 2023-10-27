@@ -11,19 +11,39 @@ import { getAllAlbums } from "../lib/dbClient";
 export default function AlbumCarousel({ singleAlbum, albumId }) {
 	const [sliderRef, setSliderRef] = useState(null);
 	const [albumRecs, setAlbumRecs] = useState();
+	// useEffect(() => {
+	// 	getAllAlbums()
+	// 			.then((albumData) => {
+	// 					// console.log("singleAlbum", singleAlbum.fields.genre);
+	// 					console.log("arrivalsdata", albumData);
+	// 					setAlbumRecs(albumData);
+	// 			})
+	// 			.catch((error) => console.error(error));
+	// 	if (!singleAlbum) return;
+	// 	getRecs(singleAlbum.fields.genre, albumId)
+	// 			.then((albumData) => setAlbumRecs(albumData))
+	// 			.catch((error) => console.error(error));
+	// }, [singleAlbum, albumId]);
+
 	useEffect(() => {
-		getRecs()
-				.then((albumData) => {
-						// console.log("singleAlbum", singleAlbum.fields.genre);
-						console.log("arrivalsdata", albumData);
-						setAlbumRecs(albumData);
-				})
-				.catch((error) => console.error(error));
-		if (!singleAlbum) return;
-		getRecs(singleAlbum.genre, albumId)
-				.then((albumData) => setAlbumRecs(albumData))
-				.catch((error) => console.error(error));
-	}, [singleAlbum, albumId]);
+		getRecs(albumId)
+			.then((recData) => {
+				setAlbumRecs(recData);
+				console.info("🟢🐰 Recommendations set!\n", recData);
+			})
+			.catch((error) => console.log("🛑🐰 Uh oh, error!" + error));
+	}, [albumId]);
+
+	// useEffect(() => {
+	// 	try {
+	// 		const recWrap = async () => {
+	// 			const recs = await getRecs(singleAlbum, albumId);
+	// 		}
+	// 		recWrap();
+	// 	} catch (error) {
+	// 		console.log("🛑🐰 Error! ", error);
+	// 	}
+	// 	}, [singleAlbum, albumId]);
 
 	// useEffect(() => {
 	// 	getAllAlbums()
@@ -94,8 +114,9 @@ export default function AlbumCarousel({ singleAlbum, albumId }) {
 						albumRecs.map((rec) => (
 							<AlbumCard
 								key={crypto.randomUUID()}
-								{...rec.fields}
-								id={rec.sys.id}
+								{...rec}
+								imgUrl={rec.img_url}
+								// id={rec.id}
 							/>
 						))}
 				</Slider>
